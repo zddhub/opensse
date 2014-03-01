@@ -1,4 +1,4 @@
-opensse
+OpenSSE
 =======
 
 Open sketch search engine
