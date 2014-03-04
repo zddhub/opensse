@@ -26,7 +26,7 @@ void GridDetector::detect(const cv::Mat &image, KeyPoints_t &keypoints) const
         uint posX = x*stepX;
         for(uint y = 1; y <= numSample1D; y++) {
             uint posY = y*stepY;
-            vec_f32_t p(2);
+            Vec_f32_t p(2);
             p[0] = posX;
             p[1] = posY;
             keypoints.push_back(p);

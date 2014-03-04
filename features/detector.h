@@ -12,7 +12,7 @@ namespace sse {
 class Detector
 {
 public:
-    virtual void detect(const cv::Mat& image, KeyPoints_t& keypoints) const = 0;
+    virtual void detect(const cv::Mat &image, KeyPoints_t &keypoints) const = 0;
 };
 
 class GridDetector : public Detector {

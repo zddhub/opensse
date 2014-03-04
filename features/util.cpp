@@ -5,7 +5,7 @@ namespace sse {
 
 void normalizeKeypoints(const KeyPoints_t &keypoints, const cv::Size &imageSize, KeyPoints_t &keypointsNormalized)
 {
-    vec_f32_t p(2);
+    Vec_f32_t p(2);
     for (size_t i = 0; i < keypoints.size(); i++) {
         p[0] = keypoints[i][0] / imageSize.width;
         p[1] = keypoints[i][1] / imageSize.height;

@@ -10,26 +10,18 @@ int main()
 {
     cout << "Test galif: " << endl;
 
-//    Galif(uint width, uint numOrients, uint tiles,
-//          double peakFrequency, double lineWidth, double lambda,
-//          double featureSize, bool isSmoothHist,
-//          const std::string& normalizeHist,
-//          const std::string& detectorName,
-//          uint numOfSamples);
 
-    //make_shared limited your to a maximux of 9 arguments
-    boost::shared_ptr<sse::Galif> galif = boost::make_shared< sse::Galif >(
-                256, 4, 4,
-                0.1, 0.02, 0.3,
-                0.1, true,
-                "l2");
+    //    sse::Galif *galif = new sse::Galif(
+    //                256, 4, 4,
+    //                0.1, 0.02, 0.3,
+    //                0.1, true,
+    //                "l2", "grid",
+    //                625);
 
-//    sse::Galif *galif = new sse::Galif(
-//                256, 4, 4,
-//                0.1, 0.02, 0.3,
-//                0.1, true,
-//                "l2", "grid",
-//                625);
+    //Notice: make_shared limited your to a maximux of 9 arguments,
+    //so using ptree transfer parameters
+    sse::PropertyTree_t params;
+    boost::shared_ptr<sse::Galif> galif = boost::make_shared<sse::Galif>(params);
 
     sse::KeyPoints_t keypoints;
     sse::Features_t features;

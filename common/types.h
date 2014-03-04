@@ -31,11 +31,21 @@ typedef unsigned int uint;
 typedef int64_t Index_t;
 typedef std::vector<Index_t> Vec_Index_t;
 
-typedef std::vector<float> vec_f32_t;
-typedef std::vector<vec_f32_t> KeyPoints_t;
-typedef std::vector<vec_f32_t> Features_t;
+typedef std::vector<float> Vec_f32_t;
+typedef std::vector<Vec_f32_t> KeyPoints_t;
+typedef std::vector<Vec_f32_t> Features_t;
 
 typedef boost::property_tree::ptree PropertyTree_t;
+
+
+// Returns the value that is stored in the property_tree under path.
+// If path does not exist, the default value is returned.
+template<class T>
+inline T parse(const PropertyTree_t &p, const std::string &path, const T &defaultValue)
+{
+    T value = p.get(path, defaultValue);
+    return value;
+}
 
 } //namespace sse
 
