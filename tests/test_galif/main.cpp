@@ -10,7 +10,6 @@ int main()
 {
     cout << "Test galif: " << endl;
 
-
     //    sse::Galif *galif = new sse::Galif(
     //                256, 4, 4,
     //                0.1, 0.02, 0.3,
