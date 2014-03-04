@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    opensse.pri
+    #opensse.pri \
+    tests/test_galif

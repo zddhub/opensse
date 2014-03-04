@@ -1,5 +1,7 @@
 #include "galif.h"
 
+#include "util.h"
+
 namespace sse {
 
 template <class T>
@@ -50,7 +52,7 @@ Galif::Galif(uint width, uint numOrients, uint tiles,
     , _featureSize(featureSize), _isSmoothHist(isSmoothHist)
     , _normalizeHist(normalizeHist), _detectorName(detectorName)
 {
-    _detector = boost::make_shared<GridDetector>();
+    _detector = boost::make_shared<GridDetector>(numOfSamples);
 
     double sigmaX = _lineWidth * _width;
     double sigmaY = _lambda * sigmaX;
@@ -91,6 +93,59 @@ Galif::Galif(uint width, uint numOrients, uint tiles,
         cv::imwrite(filename, mag);
     }
 #endif
+}
+
+/**
+ * @brief Galif::compute
+ * @param image : input image (3-channel image, make sure  image.type() == CV_8UC3)
+ * @param keypoints : output, has been normalized in range [0,1]x[0,1], so that they are independent of image size
+ * @param features : output, Galif features
+ */
+void Galif::compute(const cv::Mat &image, KeyPoints_t &keypoints, Features_t &features) const
+{
+    // --------------------------------------------------------------
+    // prerequisites:
+    //
+    // this generator expects a 3-channel image, with
+    // each channel containing exactly the same pixel values
+    //
+    // the image must have a white background with black sketch lines
+    // --------------------------------------------------------------
+    assert(image.type() == CV_8UC3);
+
+    cv::Mat gray;
+    cv::cvtColor(image, gray, CV_RGB2GRAY);
+
+    assert(gray.type() == CV_8UC1);
+
+    // scale image to desired size
+    cv::Mat scaled;
+    scale(gray, scaled);
+
+    // detect keypoints on the scaled image
+    // the keypoint cooredinates lie in the domain defined by
+    // the scaled image size, i.e. if the image has been scaled
+    // to 256x256, keypoint coordinates lie in [0,255]x[0,255]
+    KeyPoints_t _keypoints;
+    detect(scaled, _keypoints);
+
+    //extract local features at the given keypoints
+    Features_t _features;
+    std::vector<Index_t> emptyFeatures;
+    extract(scaled, _keypoints, _features, emptyFeatures);
+
+    assert(_features.size() == _keypoints.size());
+    assert(emptyFeatures.size() == _keypoints.size());
+
+    // normalize keypoints to range [0,1]x[0,1] so they are
+    // independent of image size
+    KeyPoints_t keypointsNormalized;
+    normalizeKeypoints(_keypoints, scaled.size(), keypointsNormalized);
+
+    // remove features that are empty, i.e. that contain
+    // no sketch stroke within their area
+    filterEmptyFeatures(_features, keypointsNormalized, emptyFeatures, features, keypoints);
+    assert(features.size() == keypoints.size());
 }
 
 double Galif::scale(const cv::Mat &image, cv::Mat &scaled) const

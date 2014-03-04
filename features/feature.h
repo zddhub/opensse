@@ -12,6 +12,9 @@ namespace sse {
 class Feature
 {
 public:
+    virtual void compute(const cv::Mat& image,
+                         sse::KeyPoints_t& keypoints,
+                         sse::Features_t& features) const = 0;
     /**
      * @brief scale: scale image as a suitable size
      *
