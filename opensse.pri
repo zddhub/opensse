@@ -4,7 +4,9 @@ INCLUDEPATH += $$PWD \
     /home/opencv-2.4.8/include \
 
 LIBS += -L/home/opencv-2.4.8/ \
-            -lopencv_core -lopencv_imgproc -lopencv_highgui
+            -lopencv_core -lopencv_imgproc -lopencv_highgui \
+        -L/home/zdd/boost_1_55_0/stage/lib/ \
+            -lboost_thread -lboost_system
 
 #start with $$PWD, so that they will appear in included project
 HEADERS += \
@@ -15,7 +17,10 @@ HEADERS += \
     $$PWD/features/generator.h \
     $$PWD/features/util.h \
     $$PWD/io/filelist.h \
-    ../../io/reader_writer.h
+    $$PWD/io/reader_writer.h \
+    $$PWD/common/distance.h \
+    $$PWD/vocabulary/kmeans.h \
+    $$PWD/vocabulary/kmeans_init.h
 
 SOURCES += \
     $$PWD/features/galif.cpp \
@@ -23,4 +28,4 @@ SOURCES += \
     $$PWD/features/generator.cpp \
     $$PWD/features/util.cpp \
     $$PWD/io/filelist.cpp \
-    ../../io/reader_writer.cpp
+    $$PWD/io/reader_writer.cpp
