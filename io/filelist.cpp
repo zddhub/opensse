@@ -107,9 +107,10 @@ void FileList::load(const std::string &filename)
 
     std::vector<std::string> files;
     std::string line;
-    while(in >> line) {
+    while(getline(in, line)) {
         files.push_back(line);
     }
+    in.close();
     _files = files;
 }
 

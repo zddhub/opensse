@@ -116,7 +116,7 @@ Galif::Galif(const PropertyTree_t &parameters)
     // pad the image by 3*sigma_max, this avoids any boundary effects
     // afterwards increase size to something that fft is working efficiently on
     int paddedSize = cv::getOptimalDFTSize(_width + 3*std::max(sigmaX, sigmaY));
-    std::cout << "galo padded size: " << paddedSize << std::endl;
+    //std::cout << "galo padded size: " << paddedSize << std::endl;
 
     _filterSize = cv::Size(paddedSize, paddedSize);
 

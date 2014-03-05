@@ -14,11 +14,13 @@ HEADERS += \
     $$PWD/features/detector.h \
     $$PWD/features/generator.h \
     $$PWD/features/util.h \
-    $$PWD/io/filelist.h
+    $$PWD/io/filelist.h \
+    ../../io/reader_writer.h
 
 SOURCES += \
     $$PWD/features/galif.cpp \
     $$PWD/features/detector.cpp \
     $$PWD/features/generator.cpp \
     $$PWD/features/util.cpp \
-    $$PWD/io/filelist.cpp
+    $$PWD/io/filelist.cpp \
+    ../../io/reader_writer.cpp

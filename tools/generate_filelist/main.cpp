@@ -23,10 +23,10 @@ int main(int argc, char *argv[])
     //check input
     //check_input_valid(argv);
 
-    sse::FileList lists(argv[2]);
+    sse::FileList files(argv[2]);
     std::vector<std::string> filters;
     filters.push_back(argv[4]);
-    lists.lookupDir(filters);
+    files.lookupDir(filters);
 
     if(argc == 9) {
         uint value;
@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
             std::cerr << "bad parameter value: "<< argv[8] <<endl;
         }
 
-        lists.randomSample(value, time(0));
+        files.randomSample(value, time(0));
     }
 
-    lists.store(argv[6]);
+    files.store(argv[6]);
 
     return 0;
 }
