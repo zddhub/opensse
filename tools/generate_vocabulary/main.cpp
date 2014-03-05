@@ -20,22 +20,6 @@ void usages()
          << "  output: \t output file" <<endl;
 }
 
-void readSamples(int index, int total)
-{
-    if(index +1 != total)
-        cout << "Read Samples " << index+1 << "/" << total <<"\r"<<std::flush;
-    else
-        cout << "Read Samples " << index+1 << "/" << total <<"."<<std::endl;
-}
-
-void writeVocabulary(int index, int total)
-{
-    if(index +1 != total)
-        cout << "Write Vocabulary " << index+1 << "/" << total <<"\r"<<std::flush;
-    else
-        cout << "Write Vocabulary " << index+1 << "/" << total <<"."<<std::endl;
-}
-
 int main(int argc, char* argv[])
 {
     if(argc != 7) {
@@ -54,16 +38,17 @@ int main(int argc, char* argv[])
     }
 
     Features_t samples;
-    readSamplesForCluster(argv[2], samples, readSamples);
+    readSamplesForCluster(argv[2], samples, boost::bind(&print, _1, _2, "read samples"));
 
     typedef Kmeans<Features_t, L2norm_squared<Vec_f32_t> > Cluster;
 
+    cout << "cluster ..." << "\r";
     Vocabularys_t centers;
     Cluster cluster(samples, numclusters);
     cluster.run(maxiter, minChangesfraction);
     centers = cluster.centers();
 
-    write(centers, argv[6], writeVocabulary);
+    write(centers, argv[6], boost::bind(&print, _1, _2, "write vocabulary"));
 
     return 0;
 }

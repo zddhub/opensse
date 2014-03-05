@@ -5,7 +5,10 @@
 
 namespace sse {
 
-typedef boost::function<void (int, int)> Callback_fn;
+typedef boost::function<void (int, int, const std::string&)> Callback_fn;
+
+//Callback function, show read or write progress
+void print(int index, int total, const std::string& info);
 
 void write(const std::vector<std::vector<Vec_f32_t> > &data, const std::string &filename,
            Callback_fn callback = Callback_fn());

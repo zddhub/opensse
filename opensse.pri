@@ -20,7 +20,8 @@ HEADERS += \
     $$PWD/io/reader_writer.h \
     $$PWD/common/distance.h \
     $$PWD/vocabulary/kmeans.h \
-    $$PWD/vocabulary/kmeans_init.h
+    $$PWD/vocabulary/kmeans_init.h \
+    $$PWD/quantize/quantizer.h
 
 SOURCES += \
     $$PWD/features/galif.cpp \
@@ -28,4 +29,5 @@ SOURCES += \
     $$PWD/features/generator.cpp \
     $$PWD/features/util.cpp \
     $$PWD/io/filelist.cpp \
-    $$PWD/io/reader_writer.cpp
+    $$PWD/io/reader_writer.cpp \
+    $$PWD/quantize/quantizer.cpp

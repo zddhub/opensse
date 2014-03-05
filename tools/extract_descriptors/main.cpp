@@ -17,22 +17,6 @@ void usages() {
          << "  output: \t output prefix" <<endl;
 }
 
-void writeKeypoints(int index, int total)
-{
-    if(index +1 != total)
-        cout << "Save keypoints " << index+1 << "/" << total <<"\r"<<std::flush;
-    else
-        cout << "Save keypoints " << index+1 << "/" << total <<"."<<std::endl;
-}
-
-void writeFeatures(int index, int total)
-{
-    if(index +1 != total)
-        cout << "Save Features " << index+1 << "/" << total <<"\r"<<std::flush;
-    else
-        cout << "Save Features " << index+1 << "/" << total <<"."<<std::endl;
-}
-
 int main(int argc, char *argv[])
 {
     if(argc != 7) {
@@ -61,8 +45,8 @@ int main(int argc, char *argv[])
     }
     cout << "Extract descriptors "<< files.size() << "/" << files.size() <<  "." <<endl;
 
-    write(vecKeypoints, std::string(argv[6]) + "keypoints", writeKeypoints);
-    write(vecFeatures, std::string(argv[6]) + "features", writeFeatures);
+    write(vecKeypoints, std::string(argv[6]) + "keypoints", boost::bind(&print, _1, _2, "save keypoints"));
+    write(vecFeatures, std::string(argv[6]) + "features", boost::bind(&print, _1, _2, "save features"));
 
     return 0;
 }

@@ -4,6 +4,14 @@
 
 namespace sse {
 
+void print(int index, int total, const std::string& info)
+{
+    if(index +1 != total)
+        std::cout << info.c_str() << " " << index+1 << "/" << total <<"\r"<<std::flush;
+    else
+        std::cout << info.c_str() << " " << index+1 << "/" << total <<"."<<std::endl;
+}
+
 void write(const std::vector<std::vector<Vec_f32_t> > &data, const std::string &filename, Callback_fn callback)
 {
     std::ofstream out(filename.c_str());
@@ -20,7 +28,7 @@ void write(const std::vector<std::vector<Vec_f32_t> > &data, const std::string &
         }
 
         if(callback)
-            callback(n, data.size());
+            callback(n, data.size(), "");
     }
     out.close();
 }
@@ -51,7 +59,7 @@ void read(const std::string &filename, std::vector<std::vector<Vec_f32_t> > &dat
         data.push_back(vv);
 
         if(callback)
-            callback(n, size);
+            callback(n, size, "");
     }
 
     in.close();
@@ -81,7 +89,7 @@ void readSamplesForCluster(const std::string &filename, Features_t &samples, Cal
         }
 
         if(callback)
-            callback(n, size);
+            callback(n, size, "");
     }
 
     in.close();
@@ -101,7 +109,7 @@ void write(const std::vector<Vec_f32_t> &vv, const std::string &filename, Callba
         }
         out << std::endl;
         if(callback)
-            callback(i, row);
+            callback(i, row, "");
     }
     out.close();
 }
@@ -124,7 +132,7 @@ void read(const std::string &filename, std::vector<Vec_f32_t> &vv, Callback_fn c
         vv.push_back(vf);
 
         if(callback)
-            callback(i, row);
+            callback(i, row, "");
     }
 
     in.close();
