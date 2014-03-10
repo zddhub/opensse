@@ -83,7 +83,7 @@ void InvertedIndex::load(const std::string &filename)
 {
     std::ifstream in(filename.c_str());
     in >> _numOfWords;
-    init();
+    init(_numOfWords);
 
     in >> _numOfDocuments;
 

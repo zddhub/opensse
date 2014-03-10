@@ -9,7 +9,7 @@ namespace sse {
 class InvertedIndex
 {
 public:
-    InvertedIndex(uint vocabularySize);
+    InvertedIndex(uint vocabularySize = 0);
     void addSample(const Vec_f32_t &sample);
     void createIndex(const TF_interface &tf, const IDF_interface &idf);
     void save(const std::string& filename);
