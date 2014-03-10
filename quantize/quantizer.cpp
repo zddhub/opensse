@@ -2,6 +2,16 @@
 
 namespace sse {
 
+//Quantize one image
+void quantize(const Features_t &features, const Vocabularys_t &vocabulary,
+              Vec_f32_t &vf, Quantizer_fn &quantizer)
+{
+    Vocabularys_t quantized_samples;
+    quantize_samples_parallel(features, vocabulary, quantized_samples, quantizer);
+
+    build_histvw(quantized_samples, vocabulary.size(), vf, false);
+}
+
 void quantize_samples_parallel(const Features_t &samples, const Vocabularys_t &vocabulary,
                                Vocabularys_t &quantized_samples, Quantizer_fn &quantizer)
 {

@@ -39,6 +39,8 @@ typedef std::vector<Vec_f32_t> Features_t;
 typedef std::vector<Vec_f32_t> Vocabularys_t;
 typedef std::vector<Vec_f32_t> Samples_t; //files has been quantized.
 
+typedef std::pair<float, Index_t> ResultItem_t;
+
 typedef boost::property_tree::ptree PropertyTree_t;
 
 

@@ -13,7 +13,7 @@ float TF_simple::operator() (const InvertedIndex &index, uint termId) const
 
 float IDF_simple::operator() (const InvertedIndex &index, uint termId, uint listId, uint /*docId*/) const
 {
-    float f_dt = index.invertList()[termId][listId].second;
+    float f_dt = index.invertedList()[termId][listId].second;
     return 1 + std::log(f_dt);
 }
 

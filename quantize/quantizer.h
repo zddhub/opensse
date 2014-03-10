@@ -124,8 +124,9 @@ void quantize_samples_parallel(const Features_t &samples, const Vocabularys_t &v
 void build_histvw(const Vocabularys_t &quantized_samples, uint vocabulary_size, Vec_f32_t &histvw,
                   bool normalize, const KeyPoints_t &kepoints = KeyPoints_t(), int res = 1);
 
-
-
+//Quantize one image with some default parameters
+void quantize(const Features_t &features, const Vocabularys_t &vocabulary,
+              Vec_f32_t &vf, Quantizer_fn &quantizer);
 } //namespace sse
 
 

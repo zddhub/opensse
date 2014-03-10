@@ -8,5 +8,6 @@ SUBDIRS += \
     tools/generate_filelist \
     tools/generate_vocabulary \
     tools/quantize \
-    tools/create_index
+    tools/create_index \
+    tools/sketch_search
 

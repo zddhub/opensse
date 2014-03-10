@@ -12,11 +12,15 @@ public:
     InvertedIndex(uint vocabularySize = 0);
     void addSample(const Vec_f32_t &sample);
     void createIndex(const TF_interface &tf, const IDF_interface &idf);
+    void query(const Vec_f32_t &sample, const TF_interface &tf, const IDF_interface &idf,
+               uint numOfResults, std::vector<ResultItem_t> &results);
     void save(const std::string& filename);
     void load(const std::string& filename);
 
     inline const std::vector<uint>& ft() const { return _ft; }
-    inline const std::vector<std::vector<std::pair<uint, float> > >& invertList() const { return _invertedList; }
+    inline const std::vector<std::vector<std::pair<uint, float> > >& invertedList() const { return _invertedList; }
+    inline const std::vector<std::vector<float> >& weightList() const { return _weightList; }
+    inline const std::set<uint>& uniqueTerms() const { return _uniqueTerms; }
     inline uint numOfDocuments() const { return _numOfDocuments; }
 private:
     void init(uint numOfWords = 0);
@@ -33,6 +37,9 @@ private:
     // tf-idf weights
     //_weightList[term_id][list_id] = tf-idf(_invertedList[term_id][list_id])
     std::vector<std::vector<float> > _weightList;
+
+    //record index when
+    std::set<uint> _uniqueTerms;
 
     uint _numOfDocuments;
 };
