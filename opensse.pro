@@ -7,5 +7,6 @@ SUBDIRS += \
     tools/extract_descriptors \
     tools/generate_filelist \
     tools/generate_vocabulary \
-    tools/quantize
+    tools/quantize \
+    tools/create_index
 
