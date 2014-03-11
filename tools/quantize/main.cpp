@@ -47,10 +47,10 @@ int main(int argc, char *argv[])
     Quantizer_fn quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
     Vocabularys_t samples;
+    samples.resize(vecFeatures.size());
     for(Index_t i = 0; i < vecFeatures.size(); i++) {
         Vec_f32_t vf;
-        quantize(vecFeatures[i], vocabulary, vf, quantizer);
-        samples.push_back(vf);
+        quantize(vecFeatures[i], vocabulary, samples[i], quantizer);
         cout << "quantize " << i+1 << "/" << vecFeatures.size() <<"\r"<<flush;
     }
     cout << "quantize " << vecFeatures.size() << "/" << vecFeatures.size() <<"."<<endl;
