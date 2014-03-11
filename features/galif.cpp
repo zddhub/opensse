@@ -73,7 +73,7 @@ Galif::Galif(uint width, uint numOrients, uint tiles,
         filter(0, 0) = 0;
         _gaborFilter.push_back(filter);
     }
-
+//#define __DEBUG__
 #ifdef __DEBUG__
     //output the filters
     for(uint i = 0; i < _numOrients; i++) {

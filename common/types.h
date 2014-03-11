@@ -1,8 +1,6 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define __DEBUG__
-
 #include <vector>
 #include <string>
 #include <cmath>

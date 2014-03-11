@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <fstream>
 using namespace std;
 
 #include "common/types.h"
@@ -25,7 +25,20 @@ int main(int argc, char *argv[])
     }
 
     std::vector<Features_t> vecFeatures;
-    read(argv[4], vecFeatures, boost::bind(&print, _1, _2, "read features"));
+
+    ifstream ft_in(argv[4]);
+    uint filesize = 0;
+    ft_in >> filesize;
+
+    vecFeatures.resize(filesize);
+    for(int i = 0; i < filesize; i++) {
+        read(ft_in, vecFeatures[i]);
+        cout << "read features " << i+1 << "/" << filesize <<"\r"<<flush;
+    }
+    cout << "read features " << filesize << "/" << filesize <<"."<<endl;
+    ft_in.close();
+
+    //read(argv[4], vecFeatures, boost::bind(&print, _1, _2, "read features"));
 
     Vocabularys_t vocabulary;
     read(argv[2], vocabulary, boost::bind(&print, _1, _2, "read vocabulary"));

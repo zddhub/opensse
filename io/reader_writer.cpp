@@ -69,6 +69,13 @@ void readSamplesForCluster(const std::string &filename, Features_t &samples, Cal
 {
     std::ifstream in(filename.c_str());
 
+    //See: read below function in reader_writer.cpp
+    //void write(const std::vector<Vec_f32_t> &vv, std::ofstream &out,
+    //Callback_fn callback = Callback_fn());
+    //
+    uint filesize  = 0;
+    in >> filesize;
+
     uint size = 0;
     in >> size;
 
@@ -136,6 +143,44 @@ void read(const std::string &filename, std::vector<Vec_f32_t> &vv, Callback_fn c
     }
 
     in.close();
+}
+
+void write(const std::vector<Vec_f32_t> &vv, std::ofstream &out, Callback_fn callback)
+{
+    out << vv.size() <<std::endl;
+    out << vv[0].size() <<std::endl;
+
+    uint row = vv.size();
+    uint col = vv[0].size();
+    for(uint i = 0; i < row; i++) {
+        for(uint j = 0; j < col; j++) {
+            out << vv[i][j] << " ";
+        }
+        out << std::endl;
+        if(callback)
+            callback(i, row, "");
+    }
+}
+
+void read(std::ifstream &in, std::vector<Vec_f32_t> &vv, Callback_fn callback)
+{
+    uint row = 0;
+    uint col = 0;
+    in >> row;
+    in >> col;
+
+    for(uint i = 0; i < row; i++) {
+        Vec_f32_t vf;
+        for(uint j = 0; j < col; j++) {
+            float temp;
+            in >> temp;
+            vf.push_back(temp);
+        }
+        vv.push_back(vf);
+
+        if(callback)
+            callback(i, row, "");
+    }
 }
 
 } //namespace sse
