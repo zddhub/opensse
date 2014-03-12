@@ -9,5 +9,6 @@ SUBDIRS += \
     tools/generate_vocabulary \
     tools/quantize \
     tools/create_index \
-    tools/sketch_search
+    tools/sketch_search \
+    gui/SketchSearchDemo
 
