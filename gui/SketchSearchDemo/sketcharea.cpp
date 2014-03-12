@@ -47,7 +47,10 @@ bool SketchArea::openImage(const QString &fileName)
     else
         newSize = loadedImage.size().expandedTo(size());
     resizeImage(&loadedImage, newSize);
-    image = loadedImage;
+
+    //Form Indexed8 to Format_RGB32
+    image = loadedImage.convertToFormat(QImage::Format_ARGB32);
+
     modified = false;
 
     emit newSketchDone(fileName);
@@ -210,6 +213,7 @@ void SketchArea::resizeImage(QImage *image, const QSize &newSize)
     QPainter painter(&newImage);
     painter.drawImage(QPoint(0, 0), *image);
     *image = newImage;
+    painter.end();
 }
 
 void SketchArea::print()

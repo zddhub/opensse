@@ -100,10 +100,10 @@ void MainWindow::showLineDrawing(QTableWidgetItem *item)
     QString modelFileName = fileName.left(fileName.lastIndexOf("view")) + ".off";
 
     //qDebug(fileName.toStdString().c_str());
-
+/*
     triMeshView->readMesh(modelFileName.toStdString().c_str(),
                                 fileName.replace(".jpg", ".xf").toStdString().c_str());
-
+*/
     //qDebug(fileName.toStdString().c_str());
 
 }

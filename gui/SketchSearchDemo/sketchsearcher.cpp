@@ -8,7 +8,7 @@ SketchSearcher::SketchSearcher(const PropertyTree_t &parameters)
     , _vocabularyFile(parse<std::string>(parameters, "searcher.vocabulary", "./data/vocabulary"))
     , _rootdir(parse<std::string>(parameters, "searcher.rootdir", "/home/zdd/Database/sketches"))
     , _fileList(parse<std::string>(parameters, "searcher.filelist", "./data/filelist"))
-    , _numOfResults(parse<uint>(parameters, "searcher.results_num", 20))
+    , _numOfResults(parse<uint>(parameters, "searcher.results_num", 25))
 {
     index = boost::make_shared<InvertedIndex>();
     index->load(_indexFile);
