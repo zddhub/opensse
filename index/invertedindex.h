@@ -14,6 +14,8 @@ public:
     void createIndex(const TF_interface &tf, const IDF_interface &idf);
     void query(const Vec_f32_t &sample, const TF_interface &tf, const IDF_interface &idf,
                uint numOfResults, std::vector<ResultItem_t> &results);
+    void query(const Vec_f32_t &sample, const TF_interface &tf, const IDF_interface &idf,
+               uint numOfResults, uint numOfViews, std::vector<ResultItem_t> &results);
     void save(const std::string& filename);
     void load(const std::string& filename);
 

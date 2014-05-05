@@ -6,9 +6,13 @@ using namespace std;
 #include "features/galif.h"
 #include <boost/shared_ptr.hpp>
 
-int main()
+void usage() {
+    cout << "test_galif image keypoints features"<<endl;
+}
+
+int main(int argc, char**argv)
 {
-    cout << "Test galif: " << endl;
+    cout << "Test galif: ";
 
     //    sse::Galif *galif = new sse::Galif(
     //                256, 4, 4,
@@ -19,16 +23,24 @@ int main()
 
     //Notice: make_shared limited your to a maximux of 9 arguments,
     //so using ptree transfer parameters
+
+    if(argc < 3)
+    {
+        usage();
+        exit(1);
+    }
+
     sse::PropertyTree_t params;
+    boost::property_tree::read_json("params.json", params);
     boost::shared_ptr<sse::Galif> galif = boost::make_shared<sse::Galif>(params);
 
     sse::KeyPoints_t keypoints;
     sse::Features_t features;
-    cv::Mat image = cv::imread("sketch.png");
+    cv::Mat image = cv::imread(argv[1]);
 
     galif->compute(image, keypoints, features);
 
-    ofstream ko("keypoints");
+    ofstream ko(argv[2]);
     ko << keypoints.size() <<endl;
     for(uint i = 0; i < keypoints.size(); i++) {
         for(uint j = 0; j < keypoints[i].size(); j++) {
@@ -38,7 +50,7 @@ int main()
     }
     ko.close();
 
-    ofstream kf("features");
+    ofstream kf(argv[3]);
     kf << features.size() <<endl;
     kf << features[0].size() <<endl;
     for(uint i = 0; i < features.size(); i++) {
@@ -48,6 +60,8 @@ int main()
         kf << endl << endl;
     }
     kf.close();
+
+    cout << "Done."<<endl;
 
     return 0;
 }

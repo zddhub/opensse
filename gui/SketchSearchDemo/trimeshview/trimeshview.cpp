@@ -102,8 +102,8 @@ void TriMeshView::closeAllDrawings()
     isDrawBoundaries = false;
 
     isDrawSilhouette = false;
-    isDrawOccludingContours = false;
-    isDrawSuggestiveContours = false;
+    isDrawOccludingContours = true;
+    isDrawSuggestiveContours = true;
 
     isDrawIsophotes = false;
     isDrawTopolines = false;
@@ -146,6 +146,10 @@ bool TriMeshView::readMesh(const char *filename, const char *xffilename)
     if(!xf.read(xffilename))
         xf = xform::trans(0, 0, -3.5f / 0.7 * triMesh->bsphere.r) *
                              xform::trans(-triMesh->bsphere.center);
+    else {
+        xf = xform::trans(0, 0, -3.5f / 0.7 * triMesh->bsphere.r) *
+                xform::trans(-triMesh->bsphere.center) *xf;
+    }
 
     camera.stopspin();
 

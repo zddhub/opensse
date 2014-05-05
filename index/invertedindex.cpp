@@ -1,6 +1,7 @@
 #include "invertedindex.h"
 
 #include <queue>
+#include <stack>
 
 namespace sse {
 
@@ -131,6 +132,71 @@ void InvertedIndex::query(const Vec_f32_t &sample, const TF_interface &tf, const
     }
 
     std::reverse(results.begin(), results.end());
+}
+
+//many views
+void InvertedIndex::query(const Vec_f32_t &sample, const TF_interface &tf, const IDF_interface &idf,
+                          uint numOfResults, uint numOfViews, std::vector<ResultItem_t> &results)
+{
+    uint _numOfResults = std::min(numOfResults*numOfViews, _numOfDocuments);
+
+    results.clear();
+    results.reserve(numOfResults);
+
+    // get query tf-idf weight
+    InvertedIndex indexSample(_numOfWords);
+    indexSample.addSample(sample);
+    indexSample.createIndex(tf, idf);
+
+    // accumulators A
+    std::vector<float> A(_numOfDocuments, 0);
+    const std::set<uint>& uniqueTerms = indexSample.uniqueTerms();
+    std::set<uint>::const_iterator it = uniqueTerms.begin();
+    for(; it != uniqueTerms.end(); ++it) {
+        uint termId = *it;
+        float wqt = indexSample.weightList()[termId][0];
+
+        const std::vector<std::pair<uint, float> > &term_list = _invertedList[termId];
+        const std::vector<float> &weight_list = _weightList[termId];
+
+        for(uint listId = 0; listId < term_list.size(); listId++) {
+            uint docId = term_list[listId].first;
+            float wdt = weight_list[listId];
+            A[docId] += wdt * wqt;
+        }
+    }
+
+    std::priority_queue<ResultItem_t, std::vector<ResultItem_t>, std::greater<ResultItem_t> > queue;
+
+    for(uint i = 0; i < _numOfDocuments; i++) {
+        queue.push(ResultItem_t(A[i], i));
+        if(queue.size() > _numOfResults) {
+            queue.pop();
+        }
+    }
+
+    assert(queue.size() <= _numOfResults);
+    assert(numOfViews > 0);
+
+    std::vector<uint> flags(_numOfDocuments);
+    uint index = 0;
+
+    std::stack<ResultItem_t> stack;
+    for(uint i = 0; i < _numOfResults; i++) {
+        stack.push(queue.top());
+        queue.pop();
+    }
+
+    for(uint i = 0; i < _numOfResults; i++) {
+        if(!flags[stack.top().second / numOfViews]) {
+            results.push_back(stack.top());
+            flags[stack.top().second / numOfViews] = 1;
+            index ++;
+            if(index == numOfResults)
+                break;
+        }
+        stack.pop();
+    }
 }
 
 void InvertedIndex::load(const std::string &filename)

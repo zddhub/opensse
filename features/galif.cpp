@@ -60,7 +60,7 @@ Galif::Galif(uint width, uint numOrients, uint tiles,
     // pad the image by 3*sigma_max, this avoids any boundary effects
     // afterwards increase size to something that fft is working efficiently on
     int paddedSize = cv::getOptimalDFTSize(_width + 3*std::max(sigmaX, sigmaY));
-    std::cout << "galo padded size: " << paddedSize << std::endl;
+    //std::cout << "galo padded size: " << paddedSize << std::endl;
 
     _filterSize = cv::Size(paddedSize, paddedSize);
 
@@ -83,11 +83,13 @@ Galif::Galif(uint width, uint numOrients, uint tiles,
 
         //compute magnitude of response
         cv::Mat mag(filter.size(), CV_32FC1);
+
         for(int r = 0; r < mag.rows; r++) {
             for(int c = 0; c < mag.cols; c++) {
                 const std::complex<double>& v = filter(r, c);
                 float m = std::sqrt(v.real() * v.real() + v.imag() * v.imag());
                 mag.at<float>(r, c) = m * 255;
+
             }
         }
         cv::imwrite(filename, mag);
@@ -139,14 +141,27 @@ Galif::Galif(const PropertyTree_t &parameters)
 
         //compute magnitude of response
         cv::Mat mag(filter.size(), CV_32FC1);
+        cv::Mat mag_c3(filter.size(), CV_32FC3);
         for(int r = 0; r < mag.rows; r++) {
             for(int c = 0; c < mag.cols; c++) {
                 const std::complex<double>& v = filter(r, c);
                 float m = std::sqrt(v.real() * v.real() + v.imag() * v.imag());
                 mag.at<float>(r, c) = m * 255;
+
+                cv::Vec3f &bgr = mag_c3.at<cv::Vec3f>(r,c);
+                bgr.val[0] = 255-m*255;
+                bgr.val[1] = 255;
+                bgr.val[2] = 255-m*255;
+//                bgr.val[0] = m*255;
+//                bgr.val[1] = 255;
+//                bgr.val[2] = m*255;
             }
         }
         cv::imwrite(filename, mag);
+
+        char filename_color[64];
+        sprintf(filename_color, "filter_%d_color.png", i);
+        cv::imwrite(filename_color, mag_c3);
     }
 #endif
 }
@@ -202,6 +217,14 @@ void Galif::compute(const cv::Mat &image, KeyPoints_t &keypoints, Features_t &fe
     // no sketch stroke within their area
     filterEmptyFeatures(_features, keypointsNormalized, emptyFeatures, features, keypoints);
     assert(features.size() == keypoints.size());
+
+    //if no sketch stroke in image, set one feature histogram all [0].
+    if(features.size() == 0) {
+        Vec_f32_t histogram(_tiles * _tiles * _numOrients, 0.0f);
+        Vec_f32_t zero(2, 0.0f);
+        features.push_back(histogram);
+        keypoints.push_back(zero);
+    }
 }
 
 double Galif::scale(const cv::Mat &image, cv::Mat &scaled) const
@@ -277,10 +300,16 @@ void Galif::extract(const cv::Mat &image, const KeyPoints_t &keypoints, Features
                 const std::complex<double>& v = dst(r, c);
                 float m = std::sqrt(v.real() * v.real() + v.imag() * v.imag());
                 mag.at<float>(r, c) = m;
+#ifdef __DEBUG__
+                mag.at<float>(r, c) = 1.0-m;
+#endif //__DEBUG__
             }
         }
-
-        //cv::imwrite("mag.png", mag*255);
+#ifdef __DEBUG__
+        char filename[64];
+        sprintf(filename, "reponse_%d.png", i);
+        cv::imwrite(filename, mag*255);
+#endif //__DEBUG__
 
         responses.push_back(mag);
     }

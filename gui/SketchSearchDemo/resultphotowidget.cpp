@@ -57,7 +57,7 @@ void ResultPhotoWidget::updateResults(QueryResults &res)
         QTableWidgetItem *item = new QTableWidgetItem();
         item->setWhatsThis(QString(results[i].imageName.c_str()));
         item->setIcon(QIcon(QString(results[i].imageName.c_str())));
-        QString rank = tr("%1").arg(results[i].ratio);
+        QString rank = tr("%1 %2").arg(results[i].ratio).arg(QString(results[i].imageName.c_str()));
         item->setToolTip(rank);
         item->setText(rank);
         item->setTextAlignment(Qt::AlignBottom);

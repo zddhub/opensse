@@ -23,6 +23,7 @@ using namespace std;
 
 //ÌáÇ°ÉùÃ÷
 static bool read_obj(FILE *f, TriangleMesh *mesh);
+static bool read_off(FILE *f, TriangleMesh *mesh);
 
 static void check_ind_range(TriangleMesh *mesh);
 static void skip_comments(FILE *f);
@@ -85,6 +86,15 @@ bool TriangleMesh::read_helper(const char *filename, TriangleMesh *mesh)
     {
         ungetc(c, f);
         ok = read_obj(f, mesh);
+    } else if(c == 'O') {
+        //Assume an OFF file
+        char buf[3];
+        if(!fgets(buf, 3, f)) {
+            eprintf("Can't read header.\n");
+            goto out;
+        }
+        if(strncmp(buf, "FF", 2) == 0)
+            ok = read_off(f, mesh);
     }
 
 
@@ -152,6 +162,115 @@ static bool read_obj(FILE *f, TriangleMesh *mesh)
     // handle it.
     if (mesh->vertices.size() != mesh->normals.size())
             mesh->normals.clear();
+
+    return true;
+}
+
+// Read a bunch of vertices from an ASCII file.
+// Parameters are as in read_verts_bin, but offsets are in
+// (white-space-separated) words, rather than in bytes
+static bool read_verts_asc(FILE *f, TriangleMesh *mesh,
+                           int nverts, int vert_len, int vert_pos, int vert_norm,
+                           int vert_color, bool float_color, int vert_conf)
+{
+    if (nverts <= 0 || vert_len < 3 || vert_pos < 0)
+        return false;
+    int old_nverts = mesh->vertices.size();
+    int new_nverts = old_nverts + nverts;
+    mesh->vertices.resize(new_nverts);
+    if (vert_norm > 0)
+        mesh->normals.resize(new_nverts);
+    if (vert_color > 0)
+        mesh->colors.resize(new_nverts);
+
+    char buf[1024];
+    skip_comments(f);
+    dprintf("\n  Reading %d vertices... ", nverts);
+    for (int i = old_nverts; i < new_nverts; i++) {
+        for (int j = 0; j < vert_len; j++) {
+            if (j == vert_pos) {
+            if (fscanf(f, "%f %f %f",
+                &mesh->vertices[i][0],
+                &mesh->vertices[i][1],
+                &mesh->vertices[i][2]) != 3)
+                return false;
+                j += 2;
+            } else if (j == vert_norm) {
+                if (fscanf(f, "%f %f %f",
+                &mesh->normals[i][0],
+                &mesh->normals[i][1],
+                &mesh->normals[i][2]) != 3)
+                return false;
+                j += 2;
+            } else {
+                fscanf(f, " %1024s", buf);
+            }
+        }
+    }
+    return true;
+}
+
+
+// Read a bunch of faces from an ASCII file
+static bool read_faces_asc(FILE *f, TriangleMesh *mesh, int nfaces,
+int face_len, int face_count, int face_idx, bool read_to_eol /* = false */)
+{
+    if (nfaces < 0 || face_idx < 0)
+        return false;
+    if (nfaces == 0)
+        return true;
+    int old_nfaces = mesh->faces.size();
+    int new_nfaces = old_nfaces + nfaces;
+    mesh->faces.reserve(new_nfaces);
+    char buf[1024];
+    skip_comments(f);
+    dprintf("\n  Reading %d faces... ", nfaces);
+    vector<int> thisface;
+    for (int i = 0; i < nfaces; i++) {
+        thisface.clear();
+        int this_face_count = 3;
+        for (int j = 0; j < face_len + this_face_count; j++) {
+            if (j >= face_idx && j < face_idx + this_face_count) {
+                thisface.push_back(0);
+                if (!fscanf(f, " %d", &(thisface.back()))) {
+                    dprintf("Couldn't read vertex index %d for face %d\n",
+                        j - face_idx, i);
+                    return false;
+                }
+            } else if (j == face_count) {
+                if (!fscanf(f, " %d", &this_face_count)) {
+                dprintf("Couldn't read vertex count for face %d\n", i);
+                return false;
+                }
+            } else {
+                fscanf(f, " %s", buf);
+            }
+        }
+        tess(mesh->vertices, thisface, mesh->faces);
+        if (read_to_eol) {
+            while (1) {
+                int c = fgetc(f);
+                if (c == EOF || c == '\n')
+                    break;
+            }
+        }
+    }
+    return true;
+}
+
+//Read an off file
+static bool read_off(FILE *f, TriangleMesh *mesh)
+{
+    skip_comments(f);
+    char buf[1024];
+    GET_LINE();
+    int nverts, nfaces, unused;
+    if (sscanf(buf, "%d %d %d", &nverts, &nfaces, &unused) < 2)
+        return false;
+    if(!read_verts_asc(f, mesh, nverts, 3, 0, -1, -1, false, -1))
+        return false;
+    if(!read_faces_asc(f, mesh, nfaces, 1, 0, 1, true))
+        return false;
 
     return true;
 }

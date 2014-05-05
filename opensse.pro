@@ -10,5 +10,8 @@ SUBDIRS += \
     tools/quantize \
     tools/create_index \
     tools/sketch_search \
-    gui/SketchSearchDemo
+    gui/SketchSearchDemo \
+    tests/test_similarity \
+    tests/stat_vocab \
+    tests/test_search
 

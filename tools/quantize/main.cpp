@@ -30,13 +30,12 @@ int main(int argc, char *argv[])
     uint filesize = 0;
     ft_in >> filesize;
 
-    vecFeatures.resize(filesize);
-    for(int i = 0; i < filesize; i++) {
-        read(ft_in, vecFeatures[i]);
-        cout << "read features " << i+1 << "/" << filesize <<"\r"<<flush;
-    }
-    cout << "read features " << filesize << "/" << filesize <<"."<<endl;
-    ft_in.close();
+//    vecFeatures.resize(filesize);
+//    for(int i = 0; i < filesize; i++) {
+//        read(ft_in, vecFeatures[i]);
+//        cout << "read features " << i+1 << "/" << filesize <<"\r"<<flush;
+//    }
+//    cout << "read features " << filesize << "/" << filesize <<"."<<endl;
 
     //read(argv[4], vecFeatures, boost::bind(&print, _1, _2, "read features"));
 
@@ -46,17 +45,29 @@ int main(int argc, char *argv[])
     //QuantizerHard
     Quantizer_fn quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
-    Vocabularys_t samples;
-    samples.resize(vecFeatures.size());
-    for(Index_t i = 0; i < vecFeatures.size(); i++) {
-        Vec_f32_t vf;
-        quantize(vecFeatures[i], vocabulary, samples[i], quantizer);
-        cout << "quantize " << i+1 << "/" << vecFeatures.size() <<"\r"<<flush;
+    ofstream fout(argv[6]);
+    fout << filesize <<endl;
+    fout << vocabulary.size() <<endl;
+    //Vocabularys_t samples;
+    //samples.resize(vecFeatures.size());
+    for(Index_t i = 0; i < filesize; i++) {
+        //Vec_f32_t vf;
+        Features_t feature;
+        Vec_f32_t sample;
+        read(ft_in, feature);
+        quantize(feature, vocabulary, sample, quantizer);
+        for(Index_t j = 0; j < sample.size(); j++) {
+            fout << sample[j] << " ";
+        }
+        fout << endl;
+        //quantize(vecFeatures[i], vocabulary, samples[i], quantizer);
+        cout << "quantize " << i+1 << "/" << filesize <<"\r"<<flush;
     }
-    cout << "quantize " << vecFeatures.size() << "/" << vecFeatures.size() <<"."<<endl;
+    cout << "quantize " << filesize << "/" << filesize <<"."<<endl;
 
-    write(samples, argv[6], boost::bind(&print, _1, _2, "save representation"));
-
+    //write(samples, argv[6], boost::bind(&print, _1, _2, "save representation"));
+    fout.close();
+    ft_in.close();
     return 0;
 }
 

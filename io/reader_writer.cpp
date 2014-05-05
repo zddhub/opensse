@@ -106,6 +106,7 @@ void write(const std::vector<Vec_f32_t> &vv, const std::string &filename, Callba
 {
     std::ofstream out(filename.c_str());
     out << vv.size() <<std::endl;
+    assert(vv.size() > 0);
     out << vv[0].size() <<std::endl;
 
     uint row = vv.size();
@@ -148,6 +149,7 @@ void read(const std::string &filename, std::vector<Vec_f32_t> &vv, Callback_fn c
 void write(const std::vector<Vec_f32_t> &vv, std::ofstream &out, Callback_fn callback)
 {
     out << vv.size() <<std::endl;
+    assert(vv.size() > 0);
     out << vv[0].size() <<std::endl;
 
     uint row = vv.size();

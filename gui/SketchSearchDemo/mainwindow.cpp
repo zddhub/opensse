@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     sse::PropertyTree_t params;
+    //boost::property_tree::read_json("/home/zdd/Database/suggestive/params.json", params);
+    boost::property_tree::read_json("/home/zdd/DataSet/Watertight_dataset/params_all.json", params);
     searchEngine = new SketchSearcher(params);
 
     setupMenuBar();
@@ -45,6 +47,11 @@ MainWindow::MainWindow(QWidget *parent)
     mainSplitter->setSizes(mainList);
 
     this->setCentralWidget(mainSplitter);
+
+    this->setMinimumSize(800, 600);
+
+    //auto search
+    connect(sketchArea, SIGNAL(newSketchDone(QString)), this, SLOT(search(QString)));
 
     connect(sketchArea, SIGNAL(clearSketchDone()), this, SLOT(clearResults()));
     connect(resultPhotoWidget, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(showLineDrawing(QTableWidgetItem*)));
@@ -99,12 +106,18 @@ void MainWindow::showLineDrawing(QTableWidgetItem *item)
     QString fileName = item->whatsThis();
     QString modelFileName = fileName.left(fileName.lastIndexOf("view")) + ".off";
 
-    //qDebug(fileName.toStdString().c_str());
-/*
+//    std::cout << "fileName:" << fileName.toStdString()<<endl;
+
+//    qDebug(fileName.toStdString().c_str());
+
+    QString xfFileName = fileName.right(fileName.length() - fileName.lastIndexOf("view"));
+
+   // std::cout << "xffilename:" << xfFileName.replace(".jpg", ".xf").toStdString()<<endl;
+
     triMeshView->readMesh(modelFileName.toStdString().c_str(),
-                                fileName.replace(".jpg", ".xf").toStdString().c_str());
-*/
-    //qDebug(fileName.toStdString().c_str());
+                                xfFileName.replace(".jpg", ".xf").toStdString().c_str());
+
+ //   qDebug(fileName.toStdString().c_str());
 
 }
 
