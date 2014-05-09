@@ -330,6 +330,16 @@ void TriMeshView::keyPressEvent(QKeyEvent *e)
     case Qt::Key_Control:
         isCtrlPressed = true;
         break;
+    case Qt::Key_N:
+        isDrawNormalColors = !isDrawNormalColors;
+        break;
+    case Qt::Key_E:
+        isDrawEdges = !isDrawEdges;
+        break;
+    case Qt::Key_L:
+        isDrawOccludingContours = !isDrawOccludingContours;
+        isDrawSuggestiveContours = !isDrawSuggestiveContours;
+        break;
     default:
         QGLWidget::keyPressEvent(e);
     }

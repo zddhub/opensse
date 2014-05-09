@@ -26,10 +26,10 @@ void writeResults(const std::string &queryfile, const std::string &resultdir, co
     for(uint i = 0; i < results.size(); i++) {
         //2012 use is
         //cout << "cmp: " << (results[i].imageName.find("Extended") == std::string::npos ? 1 : 0) <<" " <<results[i].imageName<<endl;
-        if(results[i].imageName.find("Extended") == std::string::npos)
-        {
-            continue;
-        }
+//        if(results[i].imageName.find("Extended") == std::string::npos)
+//        {
+//            continue;
+//        }
         //cout << results[i].imageName<<endl;
         int st = results[i].imageName.rfind('/') < 0 ? 0 : results[i].imageName.rfind('/');
         int ed = results[i].imageName.rfind("view");

@@ -13,5 +13,6 @@ SUBDIRS += \
     gui/SketchSearchDemo \
     tests/test_similarity \
     tests/stat_vocab \
-    tests/test_search
+    tests/test_search \
+    tools/extract_and_quantize
 
