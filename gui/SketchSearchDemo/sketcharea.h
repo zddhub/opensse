@@ -8,6 +8,7 @@
 #include <QPoint>
 #include <QWidget>
 #include <QMouseEvent>
+#include <QKeyEvent>
 
 /**
  * @brief The SketchArea class
@@ -48,6 +49,8 @@ public slots:
     void print();
 
 protected:
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);

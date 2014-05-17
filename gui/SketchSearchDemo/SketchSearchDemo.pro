@@ -29,3 +29,5 @@ HEADERS  += mainwindow.h \
     searchengine.h \
     resultphotowidget.h \
     sketchsearcher.h \
+
+macx: CONFIG += app_bundle

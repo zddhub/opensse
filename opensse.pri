@@ -1,4 +1,6 @@
 
+unix:!macx {
+#I use Ubuntu
 INCLUDEPATH += $$PWD \
     /home/zdd/boost_1_55_0 \
     /home/opencv-2.4.8/include \
@@ -7,6 +9,27 @@ LIBS += -L/home/opencv-2.4.8/ \
             -lopencv_core -lopencv_imgproc -lopencv_highgui \
         -L/home/zdd/boost_1_55_0/stage/lib/ \
             -lboost_thread -lboost_system
+}
+
+macx {
+
+INCLUDEPATH += $$PWD \
+    /opt/local/include
+
+LIBS += -L/opt/local/lib/ \
+            -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d\
+            -lboost_thread-mt -lboost_system-mt
+
+#for commind line
+CONFIG -= app_bundle
+
+#change clang version for you mac
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+QMAKE_MAC_SDK = macosx10.9
+
+#message("QMAKE_MAC_SDK:" $$QMAKE_MAC_SDK)
+}
+
 
 #start with $$PWD, so that they will appear in included project
 HEADERS += \

@@ -87,7 +87,7 @@ public:
             mutex_t mtx;
             for (std::size_t i = 0; i < thread::hardware_concurrency(); i++)
             {
-                pool.create_thread(bind(&Kmeans::distribute_samples, this, ref(idx), ref(changes), ref(mtx)));
+                pool.create_thread(bind(&Kmeans::distribute_samples, this, boost::ref(idx), boost::ref(changes), boost::ref(mtx)));
             }
             pool.join_all();
 

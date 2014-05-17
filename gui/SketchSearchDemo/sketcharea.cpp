@@ -14,6 +14,8 @@ SketchArea::SketchArea(QWidget *parent) :
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     this->setSizePolicy(sizePolicy);
 
+    this->setFocusPolicy(Qt::StrongFocus);
+
     modified = false;
 
     scribbling = false;
@@ -103,6 +105,32 @@ void SketchArea::clearImage()
     modified = true;
     update();
     emit clearSketchDone();
+}
+
+void SketchArea::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key()) {
+    case Qt::Key_C:
+        clearImage();
+        break;
+    case Qt::Key_E:
+        erasing = true;
+        break;
+    default:
+        QWidget::keyPressEvent(event);
+    }
+}
+
+void SketchArea::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_E:
+        erasing = false;
+        break;
+    default:
+        QWidget::keyPressEvent(event);
+        break;
+    }
 }
 
 void SketchArea::mousePressEvent(QMouseEvent *event)

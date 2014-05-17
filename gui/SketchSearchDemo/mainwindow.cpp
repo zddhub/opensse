@@ -14,10 +14,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     sse::PropertyTree_t params;
-    //boost::property_tree::read_json("/home/zdd/Database/suggestive/params.json", params);
-    //boost::property_tree::read_json("/home/zdd/DataSet/Watertight_dataset/params_all.json", params); //SHREC2012
-//    boost::property_tree::read_json("/home/zdd/DataSet/SHREC13_SBR_TARGET_MODELS/params.json", params); //SHREC2013
-    boost::property_tree::read_json("/home/zdd/DataSet/2014/params.json", params); //SHREC2014
+//    boost::property_tree::read_json("/home/zdd/Database/suggestive/params.json", params);
+ //   boost::property_tree::read_json("/home/zdd/DataSet/Watertight_dataset/params_all.json", params); //SHREC2012
+ //   boost::property_tree::read_json("/home/zdd/DataSet/SHREC13_SBR_TARGET_MODELS/params.json", params); //SHREC2013
+//    boost::property_tree::read_json("/home/zdd/DataSet/2014/params.json", params); //SHREC2014
+
+    boost::property_tree::read_json("/Users/zdd/Database/SHREC12/params.json", params); //
     searchEngine = new SketchSearcher(params);
 
     setupMenuBar();
@@ -114,7 +116,7 @@ void MainWindow::showLineDrawing(QTableWidgetItem *item)
 
     QString xfFileName = fileName.right(fileName.length() - fileName.lastIndexOf("view"));
 
-   // std::cout << "xffilename:" << xfFileName.replace(".jpg", ".xf").toStdString()<<endl;
+    //std::cout << "xffilename:" << xfFileName.replace(".jpg", ".xf").toStdString()<<endl;
 
     triMeshView->readMesh(modelFileName.toStdString().c_str(),
                                 xfFileName.replace(".jpg", ".xf").toStdString().c_str());

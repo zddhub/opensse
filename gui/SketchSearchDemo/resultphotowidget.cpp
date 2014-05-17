@@ -44,10 +44,11 @@ void ResultPhotoWidget::updateResults(QueryResults &res)
     results.clear();
     results = res;
 
+    int columnCount = 4;
     this->clear();
 //    this->setColumnCount(results.size());
-    this->setRowCount(results.size()/5 +1);
-    this->setColumnCount(5);
+    this->setRowCount(results.size()/columnCount +1);
+    this->setColumnCount(columnCount);
 
     for(int i = 0; i < results.size();i++)
     {
@@ -63,13 +64,13 @@ void ResultPhotoWidget::updateResults(QueryResults &res)
         item->setTextAlignment(Qt::AlignBottom);
         item->setTextColor(Qt::black);
 
-        setItem(i/5, i%5, item);
+        setItem(i/columnCount, i%columnCount, item);
 //        setColumnWidth(i, 200);
        // setItem(i, 0, item);
 
         item->setTextAlignment(Qt::AlignCenter);
 
-        setRowHeight(i/5, 200);
-        setColumnWidth(i%5, 207);
+        setRowHeight(i/columnCount, 212);
+        setColumnWidth(i%columnCount, 207);
     }
 }

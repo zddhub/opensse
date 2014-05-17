@@ -60,15 +60,12 @@ void SketchSearcher::query(const std::string &fileName, QueryResults &results)
         index->query(query, tf, idf, _numOfResults, _numOfViews, _results);
     }
 
-    //
-
     results.resize(_results.size());
 
     for(uint i = 0; i < _results.size(); i++) {
+
         results[i].ratio = _results[i].first;
         results[i].imageIndex = _results[i].second;
         results[i].imageName = files->getFilename(_results[i].second);
     }
-
-
 }
