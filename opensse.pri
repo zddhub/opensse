@@ -6,7 +6,7 @@ INCLUDEPATH += $$PWD \
     /home/opencv-2.4.8/include \
 
 LIBS += -L/home/opencv-2.4.8/ \
-            -lopencv_core -lopencv_imgproc -lopencv_highgui \
+            -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d -lopencv_ml\
         -L/home/zdd/boost_1_55_0/stage/lib/ \
             -lboost_thread -lboost_system
 }
@@ -17,7 +17,7 @@ INCLUDEPATH += $$PWD \
     /opt/local/include
 
 LIBS += -L/opt/local/lib/ \
-            -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d\
+            -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d -lopencv_ml\
             -lboost_thread-mt -lboost_system-mt
 
 #for commind line
@@ -46,7 +46,8 @@ HEADERS += \
     $$PWD/vocabulary/kmeans_init.h \
     $$PWD/quantize/quantizer.h \
     $$PWD/index/invertedindex.h \
-    $$PWD/index/tfidf.h
+    $$PWD/index/tfidf.h \
+    $$PWD/recognize/sketchrecognizer.h
 
 SOURCES += \
     $$PWD/features/galif.cpp \
@@ -57,4 +58,5 @@ SOURCES += \
     $$PWD/io/reader_writer.cpp \
     $$PWD/quantize/quantizer.cpp \
     $$PWD/index/invertedindex.cpp \
-    $$PWD/index/tfidf.cpp
+    $$PWD/index/tfidf.cpp \
+    $$PWD/recognize/sketchrecognizer.cpp
