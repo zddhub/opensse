@@ -89,8 +89,8 @@ void readSamplesForCluster(const std::string &filename, Features_t &samples, Cal
     //void write(const std::vector<Vec_f32_t> &vv, std::ofstream &out,
     //Callback_fn callback = Callback_fn());
     //
-    uint filesize  = 0;
-    in >> filesize;
+    //uint filesize  = 0;
+    //in >> filesize;
 
     uint size = 0;
     in >> size;
