@@ -16,7 +16,7 @@ Demo - SketchSearchDemo
 
 This demo deals with mesh models. See more search results, click [demo videos](http://opensse.com).
 
-![Sketch search demo](./data/opensse.gif "Sketch search demo")
+![Sketch search demo](http://img.blog.csdn.net/20140515204902125 "Sketch search demo")
 
 How to compile
 ==============
@@ -57,7 +57,7 @@ $ mv ~/Download/Watertight_dataset/Extended ~/Database/SHREC12/
 
 ### Get line drawing views
 
-Using my another project.
+Using my [another project](https://github.com/zddhub/trianglemesh),you will get 102 views for each model.
 
 ### Generate vocabulary
 
@@ -74,7 +74,7 @@ you will gain two files: `2012_features` and `2012_keypoints`.
 ```shell
 $ ./generate_vocabulary -f ~/Database/SHREC12/2012_features -n 1000 -o ~/Database/SHREC12/vocabulary
 ```
-It will take you some times, but only need run once. or download my [vocabulary](./data/vocabulary).
+It will take you some times, but only need run once. or use my vocabulary under `../opensse/data/`.
 
 ### Create inverted index file 
 
@@ -123,7 +123,7 @@ You will get a interactive interface, like:
 ```
 
 ### Gui Demo - SketchSearchDemo
-You must write `params.json` file using your data path, like:
+You must config `params.json` file using your data path, like:
 ```json
 {
     "searcher":
@@ -143,6 +143,8 @@ boost::property_tree::read_json("/Users/zdd/Database/SHREC12/params.json", param
 ```
 
 Compiled and You will get [my demo](http://opensse.com). Good luck!
+
+Notice: To make sure line drawing images correspond to 3d models, please copy `../opensse/data/view/` to you execute file path.
 
 Evaluation
 ==========
@@ -170,7 +172,9 @@ Code is under the [Apache License, Version 2.0](http://www.apache.org/licenses/L
 Donations
 =========
 
-I accept tips through [Alipay](./data/zddhub.png).
+I accept tips through [Alipay](http://img.blog.csdn.net/20140506233949640). Scan below qr code to donate:
+
+![Alipay](http://img.blog.csdn.net/20140506233949640 "Donation").
 
 Contact me
 ==========
