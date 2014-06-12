@@ -57,7 +57,7 @@ $ mv ~/Download/Watertight_dataset/Extended ~/Database/SHREC12/
 
 ### Get line drawing views
 
-Using my [another project](https://github.com/zddhub/trianglemesh),you will get 102 views for each model.
+Using my [another project](https://github.com/zddhub/trianglemesh), you will get 102 views for each model.
 
 ### Generate vocabulary
 
