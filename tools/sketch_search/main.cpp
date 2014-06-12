@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     }
 
     cout << ">> open sketch search :"<<endl;
-    cout << ">> input absolute path, like \"/home/zdd/zddhub.png\""<<endl;
+    cout << ">> input absolute path, like \"/Users/zdd/zddhub.png\""<<endl;
     cout << ">> input q exit"<<endl;
     cout << ">> good luck!"<<endl;
     char filename[100];
