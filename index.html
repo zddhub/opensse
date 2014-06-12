@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Opensse by zddhub</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Opensse</h1>
+          <h2>Open sketch search engine</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/zddhub/opensse/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/zddhub/opensse/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/zddhub/opensse" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="opensse-open-sketch-search-engine" class="anchor" href="#opensse-open-sketch-search-engine"><span class="octicon octicon-link"></span></a>OpenSSE: Open Sketch Search Engine</h1>
+
+<p>Hello, everybody! </p>
+
+<p>I'm very interested in <a href="http://cybertron.cg.tu-berlin.de/eitz/projects/sbsr/">Mathias Eitz's works</a> on SIGGRAPH 2012, so I developed OpenSSE, Just for fun.</p>
+
+<p>This is a open source sketch search engine for 3D object retrieval based on sketch image as input. In fact, it can retrieve more, such as images, videos, point cloud models and volume models, you just need get their line drawing images than I know you can. </p>
+
+<p>In order to clearly show how to work, I used single thread and ascii encoding for file storage. </p>
+
+<p>Zhang Dongdong</p>
+
+<h1>
+<a name="demo---sketchsearchdemo" class="anchor" href="#demo---sketchsearchdemo"><span class="octicon octicon-link"></span></a>Demo - SketchSearchDemo</h1>
+
+<p>This demo deals with mesh models. See more search results, click <a href="http://opensse.com">demo videos</a>.</p>
+
+<p><img src="http://img.blog.csdn.net/20140515204902125" alt="Sketch search demo" title="Sketch search demo"></p>
+
+<h1>
+<a name="how-to-compile" class="anchor" href="#how-to-compile"><span class="octicon octicon-link"></span></a>How to compile</h1>
+
+<p>OpenSSE uses <a href="http://qt-project.org/">Qt 5.1+</a>, <a href="http://opencv.org/">OpenCV 2.4.7+</a> and <a href="http://www.boost.org/">boost 1.55.0</a>, it's a cross-platform library. </p>
+
+<p>You need config <code>INCLUDEPATH</code> and <code>LIBS</code> in <code>../opensse/opensse.pri</code> file related your path. </p>
+
+<p>Now compile it, so easy!</p>
+
+<h1>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h1>
+
+<h3>
+<a name="use-opensse-library" class="anchor" href="#use-opensse-library"><span class="octicon octicon-link"></span></a>Use OpenSSE library</h3>
+
+<p>You just need include one line in your <code>.pro</code> file.</p>
+
+<div class="highlight highlight-cpp"><pre><span class="n">include</span><span class="p">(..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">opensse</span><span class="p">.</span><span class="n">pri</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="use-tools" class="anchor" href="#use-tools"><span class="octicon octicon-link"></span></a>Use tools</h3>
+
+<p>There are a series of tools for you under <code>opensse/tools/</code>. When compiled, those tools are under <code>build-xxx-Release/bin</code>.</p>
+
+<h3>
+<a name="use-gui" class="anchor" href="#use-gui"><span class="octicon octicon-link"></span></a>Use gui</h3>
+
+<p>This is gui demo for you under <code>opensse/gui</code>.</p>
+
+<h1>
+<a name="how-to-train-data" class="anchor" href="#how-to-train-data"><span class="octicon octicon-link"></span></a>How to train data</h1>
+
+<h3>
+<a name="database" class="anchor" href="#database"><span class="octicon octicon-link"></span></a>Database</h3>
+
+<p>Database in <a href="http://opensse.com">my demo</a> comes from <a href="http://www.itl.nist.gov/iad/vug/sharp/contest/2012/SBR/data.html">SHREC 2012</a>, download <a href="http://www.itl.nist.gov/iad/vug/sharp/contest/2012/SBR/Watertight_dataset.zip">3D target dataset</a>(~112MB). We use models under directory <code>Watertight_dataset/Extended</code>.</p>
+
+<pre lang="shell"><code>$ mv ~/Download/Watertight_dataset/Extended ~/Database/SHREC12/
+</code></pre>
+
+<h3>
+<a name="get-line-drawing-views" class="anchor" href="#get-line-drawing-views"><span class="octicon octicon-link"></span></a>Get line drawing views</h3>
+
+<p>Using my <a href="https://github.com/zddhub/trianglemesh">another project</a>,you will get 102 views for each model.</p>
+
+<h3>
+<a name="generate-vocabulary" class="anchor" href="#generate-vocabulary"><span class="octicon octicon-link"></span></a>Generate vocabulary</h3>
+
+<ul>
+<li>Step 1: Generate line draing images filelist</li>
+</ul><pre lang="shell"><code>$ ./generate_filelist -d ~/Database/SHREC12/ -f "*.jpg" -o ~/Database/SHREC12/2012_filelist
+</code></pre>
+
+<ul>
+<li>Step 2: Extract descriptors</li>
+</ul><pre lang="shell"><code>$ ./extract_descriptors -d ~/Database/SHREC12/ -f ~/Database/SHREC12/2012_filelist -o ~/Database/SHREC12/2012_
+</code></pre>
+
+<p>you will gain two files: <code>2012_features</code> and <code>2012_keypoints</code>.</p>
+
+<ul>
+<li>Step 3: Generate vocabulary (optional)</li>
+</ul><pre lang="shell"><code>$ ./generate_vocabulary -f ~/Database/SHREC12/2012_features -n 1000 -o ~/Database/SHREC12/vocabulary
+</code></pre>
+
+<p>It will take you some times, but only need run once. or use my vocabulary under <code>../opensse/data/</code>.</p>
+
+<h3>
+<a name="create-inverted-index-file" class="anchor" href="#create-inverted-index-file"><span class="octicon octicon-link"></span></a>Create inverted index file</h3>
+
+<ul>
+<li>Step 4: Quantize feature</li>
+</ul><pre lang="shell"><code>$ ./quantize -v ~/Database/SHREC12/vocabulary -f ~/Database/SHREC12/2012_features -o ~/Database/SHREC12/2012_samples
+</code></pre>
+
+<p>When dealing with large scale database, we can directly generate samples using extract_quantize tool to reduce disk usage without feature files.</p>
+
+<pre lang="shell"><code>$ ./extract_and_quantize -d ~/Database/SHREC12/ -f ~/Database/SHREC12/2012_filelist -v ~/Database/SHREC12/2012_filelist -v ~/Database/SHREC12/vocabulary -o ~/Database/SHREC12/2012_samples
+</code></pre>
+
+<ul>
+<li>Step 5: Create inverted index file</li>
+</ul><pre lang="shell"><code>$ ./create_index -s ~/Database/SHREC12/2012_samples -o ~/Database/SHREC12/2012_index_file
+</code></pre>
+
+<p>Now all data are ready.</p>
+
+<h1>
+<a name="test-opensse" class="anchor" href="#test-opensse"><span class="octicon octicon-link"></span></a>Test OpenSSE</h1>
+
+<h3>
+<a name="command-line" class="anchor" href="#command-line"><span class="octicon octicon-link"></span></a>Command line</h3>
+
+<p>You can test opensse through command line</p>
+
+<pre lang="shell"><code>$ ./sketch_search -i ~/Database/SHREC12/2012_index_file -v ~/Database/SHREC12/vocabulary -d ~/Database/SHREC12/ -f ~/Database/SHREC12/2012_filelist -n 10 -o output
+</code></pre>
+
+<p>You will get a interactive interface, like:</p>
+
+<pre lang="shell"><code>&gt;&gt; open sketch search :
+&gt;&gt; input absolute path, like "/Users/zdd/zddhub.png"
+&gt;&gt; input q exit
+&gt;&gt; good luck!
+&gt;&gt; /Users/zdd/Database/SHREC12/Extended/D00057view/1.jpg
+0.985509 /Users/zdd/Database/SHREC12/Extended/D00057view/1.jpg
+0.953196 /Users/zdd/Database/SHREC12/Extended/D00050view/1.jpg
+0.938705 /Users/zdd/Database/SHREC12/Extended/D00041view/1.jpg
+0.856004 /Users/zdd/Database/SHREC12/Extended/D00050view/2.jpg
+0.852683 /Users/zdd/Database/SHREC12/Extended/D00057view/2.jpg
+0.849087 /Users/zdd/Database/SHREC12/Extended/D00041view/2.jpg
+0.823276 /Users/zdd/Database/SHREC12/Extended/D00041view/0.jpg
+0.821133 /Users/zdd/Database/SHREC12/Extended/D00050view/10.jpg
+0.811917 /Users/zdd/Database/SHREC12/Extended/D00057view/10.jpg
+0.810096 /Users/zdd/Database/SHREC12/Extended/D00050view/0.jpg
+&gt;&gt; q
+</code></pre>
+
+<h3>
+<a name="gui-demo---sketchsearchdemo" class="anchor" href="#gui-demo---sketchsearchdemo"><span class="octicon octicon-link"></span></a>Gui Demo - SketchSearchDemo</h3>
+
+<p>You must config <code>params.json</code> file using your data path, like:</p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"searcher"</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">"indexfile"</span><span class="p">:</span> <span class="s2">"/Users/zdd/Database/SHREC12/2012_index_file"</span><span class="p">,</span>
+        <span class="nt">"filelist"</span><span class="p">:</span> <span class="s2">"/Users/zdd/Database/SHREC12/2012_filelist"</span><span class="p">,</span>
+        <span class="nt">"vocabulary"</span><span class="p">:</span> <span class="s2">"/Users/zdd/Database/SHREC12/vocabulary"</span><span class="p">,</span>
+        <span class="nt">"rootdir"</span><span class="p">:</span> <span class="s2">"/Users/zdd/Database/SHREC12"</span><span class="p">,</span>
+        <span class="nt">"results_num"</span><span class="p">:</span> <span class="s2">"12"</span><span class="p">,</span>
+        <span class="nt">"views_num"</span><span class="p">:</span> <span class="s2">"102"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>You'd better to use the absolute path. And then, set <code>params.json</code> in <code>../opensse/gui/SketchSearchDemo/mainwindow.cpp</code>:</p>
+
+<div class="highlight highlight-cpp"><pre><span class="n">boost</span><span class="o">::</span><span class="n">property_tree</span><span class="o">::</span><span class="n">read_json</span><span class="p">(</span><span class="s">"/Users/zdd/Database/SHREC12/params.json"</span><span class="p">,</span> <span class="n">params</span><span class="p">);</span> 
+</pre></div>
+
+<p>Compiled and You will get <a href="http://opensse.com">my demo</a>. Good luck!</p>
+
+<p>Notice: To make sure line drawing images correspond to 3d models, please copy <code>../opensse/data/view/</code> to you execute file path.</p>
+
+<h1>
+<a name="evaluation" class="anchor" href="#evaluation"><span class="octicon octicon-link"></span></a>Evaluation</h1>
+
+<p>You can use dataset and evaluation methodology to evaluate opensse on <a href="http://www.itl.nist.gov/iad/vug/sharp/contest/2012/SBR/index.html">SHREC 2012</a>, <a href="http://www.itl.nist.gov/iad/vug/sharp/contest/2013/SBR/index.html">SHREC 2013</a>, <a href="http://www.itl.nist.gov/iad/vug/sharp/contest/2014/SBR/index.html">SHREC 2014</a>.</p>
+
+<p>You can generate data use <code>test_search</code> tool in <code>tests/test_search</code>.</p>
+
+<pre lang="shell"><code>Usage:
+test_search -p paramsfile -i searchfilelist -r searchfileroot -o resultdir
+</code></pre>
+
+<h1>
+<a name="thanks" class="anchor" href="#thanks"><span class="octicon octicon-link"></span></a>Thanks</h1>
+
+<ul>
+<li><a href="http://cybertron.cg.tu-berlin.de/eitz/">Mathias Eitz</a></li>
+<li><a href="http://www.cs.princeton.edu/%7Esmr/">Szymon Rusinkiewicz</a></li>
+<li><a href="http://www.itl.nist.gov/iad/vug/sharp/contest/2014/Generic3D/index.html">SHREC 2012 - 2014</a></li>
+<li><a href="http://people.csail.mit.edu/tjudd/">Tilke Judd</a></li>
+</ul><h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>Code is under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
+
+<h1>
+<a name="donations" class="anchor" href="#donations"><span class="octicon octicon-link"></span></a>Donations</h1>
+
+<p>I accept tips through <a href="http://img.blog.csdn.net/20140506233949640">Alipay</a>. Scan below qr code to donate:</p>
+
+<p><img src="http://img.blog.csdn.net/20140506233949640" alt="Alipay" title="Donation">.</p>
+
+<h1>
+<a name="contact-me" class="anchor" href="#contact-me"><span class="octicon octicon-link"></span></a>Contact me</h1>
+
+<p>If you have any question or idea, please <a href="mailto:zddhub@gmail.com">email to me</a>.</p>
+        </section>
+
+        <footer>
+          Opensse is maintained by <a href="https://github.com/zddhub">zddhub</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+                  <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-48441839-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+      </div>
+    </div>
+  </body>
+</html>
