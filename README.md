@@ -169,8 +169,8 @@ License
 
 Code is under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-Donations
-=========
+Donate
+======
 
 I accept tips through [Alipay](http://img.blog.csdn.net/20140506233949640). Scan below qr code to donate:
 
