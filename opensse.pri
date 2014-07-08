@@ -17,15 +17,22 @@
 
 unix:!macx {
 #I use Ubuntu
-# opencv 2.4.7 - 2.4.9 can work well.
 INCLUDEPATH += $$PWD \
-    /home/zdd/boost_1_55_0 \
-    /home/opencv-2.4.8/include \
+    /usr/include
 
-LIBS += -L/home/opencv-2.4.8/ \
-            -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d -lopencv_ml\
-        -L/home/zdd/boost_1_55_0/stage/lib/ \
-            -lboost_thread -lboost_system
+LIBS += -L/usr/lib/ \
+    -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d -lopencv_ml \
+    -lboost_thread-mt -lboost_system-mt
+
+# opencv 2.4.7 - 2.4.9 can work well.
+#INCLUDEPATH += $$PWD \
+#    /home/zdd/boost_1_55_0 \
+#    /home/opencv-2.4.8/include \
+
+#LIBS += -L/home/opencv-2.4.8/ \
+#            -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d -lopencv_ml\
+#        -L/home/zdd/boost_1_55_0/stage/lib/ \
+#            -lboost_thread -lboost_system
 }
 
 macx {

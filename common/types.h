@@ -19,6 +19,7 @@
 
 #include <vector>
 #include <string>
+#include <set>
 #include <cmath>
 
 #include <opencv2/core/core.hpp>
@@ -37,6 +38,7 @@ namespace sse {
 
 using std::vector;
 using std::string;
+using std::set;
 
 using cv::Mat;
 
