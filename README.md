@@ -5,7 +5,7 @@ Hello, everybody!
 
 I'm very interested in [Mathias Eitz's works](http://cybertron.cg.tu-berlin.de/eitz/projects/sbsr/) on SIGGRAPH 2012, so I developed OpenSSE, Just for fun.
 
-This is a open source sketch search engine for 3D object retrieval based on sketch image as input. In fact, it can retrieve more, such as images, videos, point cloud models and volume models, you just need get their line drawing images than I know you can. 
+This is an open source sketch search engine for 3D object retrieval based on sketch image as input. In fact, it can retrieve more, such as images, videos, point cloud models and volume models, you just need get their line drawing images than I know you can. 
 
 In order to clearly show how to work, I used single thread and ascii encoding for file storage. 
 
@@ -180,3 +180,4 @@ Contact me
 ==========
 
 If you have any question or idea, please [email to me](mailto:zddhub@gmail.com).
+Or search 'zddhub' to find me in social networking platform.
