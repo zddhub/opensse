@@ -18,8 +18,8 @@
 
 #include <fstream>
 
-#include <QDir>
-#include <QDirIterator>
+//#include <QDir>
+//#include <QDirIterator>
 
 #include <boost/random.hpp>
 
@@ -32,6 +32,7 @@ FileList::FileList(const std::string &rootDir)
     setRootDir(rootDir);
 }
 
+/*
 void FileList::lookupDir(const std::vector<std::string> &nameFilters, callback_fn callback)
 {
     QStringList filters;
@@ -58,6 +59,7 @@ void FileList::lookupDir(const std::vector<std::string> &nameFilters, callback_f
 
     _files = files;
 }
+*/
 
 void FileList::randomSample(uint numOfSamples, uint seed)
 {
@@ -107,15 +109,19 @@ const std::string& FileList::getRootDir() const
     return _rootDir;
 }
 
+
 void FileList::setRootDir(const std::string &rootDir)
 {
+    /*
     QDir dir(QString::fromStdString(rootDir));
     if(!dir.exists())
     {
         throw std::runtime_error("FileList rootdir <" + rootDir + "> does not exist.");
     }
+    */
     _rootDir = rootDir;
 }
+
 
 void FileList::load(const std::string &filename)
 {
