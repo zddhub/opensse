@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# -------------------------------------------------------------------------
+# Print image file list
+# -------------------------------------------------------------------------
+
+usage() {
+    echo "Usage: `basename $0` -d rootdir -f filter -o filelist"
+    echo "  rootdir:\t file root directory"
+    echo "  filter:\t file name filter, eg: \"*.png\" "
+    echo "  filelist:\t output file name"
+    exit 1
+}
+
+if [ $# -ne 6 ]; then
+    usage;
+fi
+
+while getopts "d:f:o:" arg; do
+    case $arg in
+        d)
+            rootdir=$OPTARG
+            ;;
+        f)
+            filter=$OPTARG
+            ;;
+        o)
+            filelist=$OPTARG
+            ;;
+        ?)
+            usage;
+            ;;
+    esac
+done
+
+cd $rootdir
+find . -name $filter | sed 's/^\.\///' > $filelist
