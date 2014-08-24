@@ -1,4 +1,4 @@
-OpenSSE: Open Sketch Search Engine [![Build Status](https://travis-ci.org/zddhub/opensse.svg?branch=master)](https://travis-ci.org/zddhub/opensse)
+OpenSSE: Open Sketch Search Engine [![Build Status](https://travis-ci.org/zddhub/opensse.svg?branch=zdd)](https://travis-ci.org/zddhub/opensse)
 ==================================
 
 Hello, everybody! 
