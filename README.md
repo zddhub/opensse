@@ -18,6 +18,15 @@ This demo deals with mesh models. See more search results, click [demo videos](h
 
 ![Sketch search demo](http://img.blog.csdn.net/20140515204902125 "Sketch search demo")
 
+Demo - SketchRecognize
+======================
+
+[Try via web](http://online.opensse.com)
+
+See more search results, click [demo videos](http://sr.opensse.com).
+
+![demo video](http://img.blog.csdn.net/20140520195606468 "Sketch recognize demo")
+
 How to compile
 ==============
 
