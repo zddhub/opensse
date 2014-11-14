@@ -166,6 +166,12 @@ Usage:
 test_search -p paramsfile -i searchfilelist -r searchfileroot -o resultdir
 ```
 
+To do list
+==========
+- A sketch collect, share and evaluate platform
+- A better search framework
+- A new rank algorithm
+
 Thanks
 ======
 - [Mathias Eitz](http://cybertron.cg.tu-berlin.de/eitz/)
