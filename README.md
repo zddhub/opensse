@@ -48,6 +48,12 @@ OpenSSE Wiki
 More detail info, go to [OpenSSE Wiki](https://github.com/zddhub/opensse/wiki)
 
 
+To do list
+==========
+- A sketch collect, share and evaluate platform
+- A better search framework
+- A new rank algorithm
+
 Thanks
 ======
 - [Mathias Eitz](http://cybertron.cg.tu-berlin.de/eitz/)
