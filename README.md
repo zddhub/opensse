@@ -171,9 +171,11 @@ test_search -p paramsfile -i searchfilelist -r searchfileroot -o resultdir
 Troubleshooting
 ===============
 - Could not resolve SDK path for 'macosx10.9'
+
   There is a workaround:
   Navigate to where you installed Qt (default /Users/your username/Qt) using finder
   Go to the subdirectory `.../5.3/clang_64/mkspecs` directory
+
   Open the file called qdevice.pri with a text editor
   Change the line !host_build:QMAKE_MAC_SDK = macosx10.9 to:
   * !host_build:QMAKE_MAC_SDK
