@@ -38,9 +38,6 @@ LIBS += -L/usr/local/lib/ \
 CONFIG -= app_bundle
 
 #change clang version for you mac
-#QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
-#QMAKE_MAC_SDK = macosx10.9
-
 #message("QMAKE_MAC_SDK:" $$QMAKE_MAC_SDK)
 }
 
