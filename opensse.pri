@@ -18,11 +18,11 @@
 unix:!macx {
 #I use Ubuntu
 INCLUDEPATH += $$PWD \
-    /usr/include
+    /usr/local/include
 
-LIBS += -L/usr/lib/ \
+LIBS += -L/usr/local/lib/ \
     -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d -lopencv_ml \
-    -lboost_thread-mt -lboost_system-mt
+    -lboost_thread -lboost_system
 
 # opencv 2.4.7 - 2.4.9 can work well.
 #INCLUDEPATH += $$PWD \
