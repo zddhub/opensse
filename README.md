@@ -3,7 +3,7 @@ OpenSSE: Open Sketch Search Engine [![Build Status](https://travis-ci.org/zddhub
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/zddhub/opensse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Hello, everybody!
+Hello everybody!
 
 I'm very interested in [Mathias Eitz's works](http://cybertron.cg.tu-berlin.de/eitz/projects/sbsr/) on SIGGRAPH 2012, so I developed OpenSSE, Just for fun.
 
@@ -29,7 +29,6 @@ Recognize input sketch image, you can try it via [web version](http://online.ope
 
 ![Sketch recognize demo](data/opensr.gif "Sketch recognize demo")
 
-
 How to install
 ==============
 
@@ -48,7 +47,6 @@ OpenSSE Wiki
 ============
 
 More detail info, go to [OpenSSE Wiki](https://github.com/zddhub/opensse/wiki)
-
 
 Troubleshooting
 ===============
