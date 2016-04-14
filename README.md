@@ -3,13 +3,13 @@ OpenSSE: Open Sketch Search Engine [![Build Status](https://travis-ci.org/zddhub
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/zddhub/opensse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Hello, everybody! 
+Hello everybody!
 
 I'm very interested in [Mathias Eitz's works](http://cybertron.cg.tu-berlin.de/eitz/projects/sbsr/) on SIGGRAPH 2012, so I developed OpenSSE, Just for fun.
 
-This is an open source sketch search engine for 3D object retrieval based on sketch image as input. In fact, it can retrieve more, such as images, videos, point cloud models and volume models, you just need get their line drawing images than I know you can. 
+This is an open source sketch search engine for 3D object retrieval based on sketch image as input. In fact, it can retrieve more, such as images, videos, point cloud models and volume models, you just need get their line drawing images than I know you can.
 
-In order to clearly show how to work, I used single thread and ascii encoding for file storage. 
+In order to clearly show how to work, I used single thread and ascii encoding for file storage.
 
 Zhang Dongdong
 
@@ -28,15 +28,6 @@ Demo - SketchRecognize
 See more search results, click [demo videos](http://sr.opensse.com).
 
 ![demo video](http://img.blog.csdn.net/20140520195606468 "Sketch recognize demo")
-
-How to compile
-==============
-
-OpenSSE uses [Qt 5.1+](http://qt-project.org/), [OpenCV 2.4.7+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library. 
-
-You need config `INCLUDEPATH` and `LIBS` in `../opensse/opensse.pri` file related your path. 
-
-Now compile it, so easy!
 
 How to use
 ==========
@@ -156,6 +147,52 @@ boost::property_tree::read_json("/Users/zdd/Database/SHREC12/params.json", param
 Compiled and You will get [my demo](http://opensse.com). Good luck!
 
 Notice: To make sure line drawing images correspond to 3d models, please copy `../opensse/data/view/` to you execute file path.
+
+
+How to compile
+==============
+
+OpenSSE uses [Qt 5.1+](http://qt-project.org/), [OpenCV 2.4.7+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library.
+
+You need config `INCLUDEPATH` and `LIBS` in `../opensse/opensse.pri` file related your path. 
+
+Now compile it, so easy!
+
+
+Docker support
+==============
+
+Someone still meets compile issue, so I add docker support. Please compare your environment with docker when you meet compile issue.
+
+Run on mac:
+
+```shell
+# Install socat and xquartz if you want to run GUI demo.
+brew install socat
+brew cask install xquartz
+
+# Start XQuartz
+open -a XQuartz
+
+# Expose local xquartz socket via socat on a TCP port
+socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
+
+# in another window under our opensse repo folder.
+docker build -t opensse .  # will takes ~15 minutes to build
+docker run -it opensse
+
+# # or use inet ip, like:
+# docker run -it -e DISPLAY=$(ipconfig getifaddr en0):0 opensse
+
+# Run command lind demo
+docker run -it opensse /bin/bash
+cd ~/opensse/build/tools/bin
+# You will find all opensse tools
+
+# If you don't want to compile code, You can use zddhub/opensse-demo to run demo:
+docker pull zddhub/opensse-demo
+docker run -it opensse-demo
+```
 
 Evaluation
 ==========
