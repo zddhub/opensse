@@ -8,6 +8,7 @@
 *.so
 *.dll
 *.dylib
+bin
 
 # Qt-es
 

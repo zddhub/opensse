@@ -191,8 +191,11 @@ cd ~/opensse/build/tools/bin
 
 # If you don't want to compile code, You can use zddhub/opensse-demo to run demo:
 docker pull zddhub/opensse-demo
-docker run -it opensse-demo
+docker run -it zddhub/opensse-demo
 ```
+
+Docker images: [zddhub/opensse-demo](https://hub.docker.com/r/zddhub/opensse-demo/)
+
 
 Evaluation
 ==========
