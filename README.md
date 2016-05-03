@@ -29,6 +29,7 @@ Recognize input sketch image, you can try it via [web version](http://online.ope
 
 ![Sketch recognize demo](data/opensr.gif "Sketch recognize demo")
 
+
 How to install
 ==============
 
