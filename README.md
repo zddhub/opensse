@@ -54,7 +54,7 @@ How to train data
 
 Database in [my demo](http://opensse.com) comes from [SHREC 2012](http://www.itl.nist.gov/iad/vug/sharp/contest/2012/SBR/data.html), download [3D target dataset](http://www.itl.nist.gov/iad/vug/sharp/contest/2012/SBR/Watertight_dataset.zip)(~112MB). We use models under directory `Watertight_dataset/Extended`.
 ```shell
-$ mv ~/Download/Watertight_dataset/Extended ~/Database/SHREC12/
+$ mv /Users/zdd/Download/Watertight_dataset/Extended /Users/zdd/Database/SHREC12/
 ```
 
 ### Get line drawing views
@@ -65,16 +65,16 @@ Using my [another project](https://github.com/zddhub/trianglemesh), you will get
 
 - Step 1: Generate line draing images filelist
 ```shell
-$ ./generate_filelist -d ~/Database/SHREC12/ -f "*.jpg" -o ~/Database/SHREC12/2012_filelist
+$ ./generate_filelist -d /Users/zdd/Database/SHREC12/ -f "*.jpg" -o /Users/zdd/Database/SHREC12/2012_filelist
 ```
 - Step 2: Extract descriptors
 ```shell
-$ ./extract_descriptors -d ~/Database/SHREC12/ -f ~/Database/SHREC12/2012_filelist -o ~/Database/SHREC12/2012_
+$ ./extract_descriptors -d /Users/zdd/Database/SHREC12/ -f /Users/zdd/Database/SHREC12/2012_filelist -o /Users/zdd/Database/SHREC12/2012_
 ```
 you will gain two files: `2012_features` and `2012_keypoints`.
 - Step 3: Generate vocabulary (optional)
 ```shell
-$ ./generate_vocabulary -f ~/Database/SHREC12/2012_features -n 1000 -o ~/Database/SHREC12/vocabulary
+$ ./generate_vocabulary -f /Users/zdd/Database/SHREC12/2012_features -n 1000 -o /Users/zdd/Database/SHREC12/vocabulary
 ```
 It will take you some times, but only need run once. or use my vocabulary under `../opensse/data/`.
 
@@ -82,17 +82,17 @@ It will take you some times, but only need run once. or use my vocabulary under 
 
 - Step 4: Quantize feature
 ```shell
-$ ./quantize -v ~/Database/SHREC12/vocabulary -f ~/Database/SHREC12/2012_features -o ~/Database/SHREC12/2012_samples
+$ ./quantize -v /Users/zdd/Database/SHREC12/vocabulary -f /Users/zdd/Database/SHREC12/2012_features -o /Users/zdd/Database/SHREC12/2012_samples
 ```
 
 When dealing with large scale database, we can directly generate samples using extract_quantize tool to reduce disk usage without feature files.
 ```shell
-$ ./extract_and_quantize -d ~/Database/SHREC12/ -f ~/Database/SHREC12/2012_filelist -v ~/Database/SHREC12/2012_filelist -v ~/Database/SHREC12/vocabulary -o ~/Database/SHREC12/2012_samples
+$ ./extract_and_quantize -d /Users/zdd/Database/SHREC12/ -f /Users/zdd/Database/SHREC12/2012_filelist -v /Users/zdd/Database/SHREC12/2012_filelist -v /Users/zdd/Database/SHREC12/vocabulary -o /Users/zdd/Database/SHREC12/2012_samples
 ```
 
 - Step 5: Create inverted index file
 ```shell
-$ ./create_index -s ~/Database/SHREC12/2012_samples -o ~/Database/SHREC12/2012_index_file
+$ ./create_index -s /Users/zdd/Database/SHREC12/2012_samples -o /Users/zdd/Database/SHREC12/2012_index_file
 ```
 Now all data are ready.
 
@@ -102,7 +102,7 @@ Test OpenSSE
 ### Command line
 You can test opensse through command line
 ```shell
-$ ./sketch_search -i ~/Database/SHREC12/2012_index_file -v ~/Database/SHREC12/vocabulary -d ~/Database/SHREC12/ -f ~/Database/SHREC12/2012_filelist -n 10 -o output
+$ ./sketch_search -i /Users/zdd/Database/SHREC12/2012_index_file -v /Users/zdd/Database/SHREC12/vocabulary -d /Users/zdd/Database/SHREC12/ -f /Users/zdd/Database/SHREC12/2012_filelist -n 10 -o output
 ```
 You will get a interactive interface, like:
 ```shell
