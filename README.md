@@ -148,6 +148,7 @@ Compiled and You will get [my demo](http://opensse.com). Good luck!
 
 Notice: To make sure line drawing images correspond to 3d models, please copy `../opensse/data/view/` to you execute file path.
 
+By the way, press 'C' in sketch pad, You will clear the sketch and draw next one.
 
 How to compile
 ==============
