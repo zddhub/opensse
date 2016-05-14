@@ -48,27 +48,6 @@ OpenSSE Wiki
 ============
 More detail info, go to [OpenSSE Wiki](https://github.com/zddhub/opensse/wiki)
 
-Troubleshooting
-===============
-- Could not resolve SDK path for 'macosx10.9'
-
-  There is a workaround:
-  Navigate to where you installed Qt (default /Users/your username/Qt) using finder
-  Go to the subdirectory `.../5.3/clang_64/mkspecs` directory
-
-  Open the file called qdevice.pri with a text editor
-  Change the line !host_build:QMAKE_MAC_SDK = macosx10.9 to:
-  * !host_build:QMAKE_MAC_SDK
-    = macosx10.10 if you are on OS X 10.10 (Yosemit
-  * !host_build:QMAKE_MAC_SDK
-    = macosx10.11 if you are on OS X 10.11 (EI Captian))
-
-To do list
-==========
-- A sketch collect, share and evaluate platform
-- A better search framework
-- A new rank algorithm
-
 Thanks
 ======
 - [Mathias Eitz](http://cybertron.cg.tu-berlin.de/eitz/)
