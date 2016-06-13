@@ -372,7 +372,7 @@ void Galif::extract(const cv::Mat &image, const KeyPoints_t &keypoints, Features
 
     // will contain a 1 at each index where the underlying patch in the
     // sketch is completely empty, i.e. contains no stroke, 0 at all other
-    // indices. Therefore it is essentail that this vector has the same size
+    // indices. Therefore it is essential that this vector has the same size
     // as the keypoints and features vector
     emptyFeatures.resize(keypoints.size(), 0);
 
