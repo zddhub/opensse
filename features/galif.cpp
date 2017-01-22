@@ -408,7 +408,7 @@ void Galif::extract(const cv::Mat &image, const KeyPoints_t &keypoints, Features
             continue;
         }
 
-        const int ndims[3] = { _tiles, _tiles, _numOrients };
+        const int ndims[3] = { (int)_tiles, (int)_tiles, (int)_numOrients };
         cv::Mat_<float> hist(3, ndims, 0.0f);
 
         for (uint k = 0; k < responses.size(); k++) {
