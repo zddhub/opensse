@@ -31,7 +31,7 @@ public:
     void load(const std::string &svmfile, const std::string &labels, const std::string &vocabulary);
 
 protected:
-    boost::shared_ptr<cv::SVM> _svm;
+    cv::Ptr<cv::ml::SVM> _svm;
     std::vector<std::string> _labels;
     Vocabularys_t _vocabulary;
 

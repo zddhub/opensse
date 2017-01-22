@@ -21,7 +21,7 @@ This demo deals with mesh models. See more search results, click [demo videos](h
 How to compile
 ==============
 
-OpenSSE uses [Qt 5.1+](http://qt-project.org/), [OpenCV 2.4.7+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library. 
+OpenSSE uses [Qt 5.1+](http://qt-project.org/), [OpenCV 3.0.0+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library. 
 
 You need config `INCLUDEPATH` and `LIBS` in `../opensse/opensse.pri` file related your path. 
 

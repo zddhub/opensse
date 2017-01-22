@@ -25,7 +25,7 @@ namespace sse {
 
 SketchRecognizer::SketchRecognizer()
 {
-    _svm = boost::make_shared<cv::SVM>();
+    _svm = cv::ml::SVM::create();
 }
 
 void SketchRecognizer::readSketchsMat(const std::string &sketchs, cv::Mat &sketchsMat)
@@ -87,15 +87,16 @@ void SketchRecognizer::train(const std::string &sketchs, const std::string &labe
     cv::Mat labelsMat;
     readLabelsMat(labels, labelsMat);
 
-    cv::SVMParams params;
-    params.svm_type = cv::SVM::C_SVC;
-    params.C = 0.1;
-    params.kernel_type = cv::SVM::RBF;
-    params.term_crit = cv::TermCriteria(CV_TERMCRIT_ITER, (int)1e7, 1e-6);
+    _svm->setType(cv::ml::SVM::C_SVC);
+    _svm->setC(0.1);
+    _svm->setKernel(cv::ml::SVM::RBF);
+    _svm->setTermCriteria(cv::TermCriteria(CV_TERMCRIT_ITER, (int)1e7, 1e-6));
     //params.gamma = 0.125;
 
     std::cout << "start training ..." <<std::endl;
-    _svm->train(sketchsMat, labelsMat, cv::Mat(), cv::Mat(), params);
+    cv::Ptr<cv::ml::TrainData> tdata = cv::ml::TrainData::create(sketchsMat, cv::ml::ROW_SAMPLE, labelsMat);
+    _svm->train(tdata);
+//    _svm->train(sketchsMat);
     _svm->save(svmfile.c_str());
     std::cout << "done" <<std::endl;
 }
