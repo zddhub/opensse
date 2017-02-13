@@ -17,7 +17,7 @@
 #ifndef DETECTOR_H
 #define DETECTOR_H
 
-#include "common/types.h"
+#include "../common/types.h"
 
 namespace sse {
 

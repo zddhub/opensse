@@ -17,8 +17,8 @@
 #ifndef KMEANS_INIT_H
 #define KMEANS_INIT_H
 
-#include "common/types.h"
-#include "common/distance.h"
+#include "../common/types.h"
+#include "../common/distance.h"
 
 #include <boost/random.hpp>
 

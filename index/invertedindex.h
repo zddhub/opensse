@@ -17,7 +17,7 @@
 #ifndef INVERTEDINDEX_H
 #define INVERTEDINDEX_H
 
-#include "common/types.h"
+#include "../common/types.h"
 #include "tfidf.h"
 
 namespace sse {

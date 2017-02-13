@@ -16,7 +16,6 @@
 **************************************************************************/
 #include "tfidf.h"
 
-#include "common/types.h"
 #include "invertedindex.h"
 
 namespace sse {

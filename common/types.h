@@ -42,7 +42,6 @@ using std::string;
 using std::set;
 
 using cv::Mat;
-
 using boost::property_tree::ptree;
 
 typedef unsigned int uint;

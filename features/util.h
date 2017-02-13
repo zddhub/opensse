@@ -17,7 +17,7 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include "common/types.h"
+#include "../common/types.h"
 
 namespace sse {
 

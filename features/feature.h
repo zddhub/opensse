@@ -17,7 +17,7 @@
 #ifndef FEATURE_H
 #define FEATURE_H
 
-#include "common/types.h"
+#include "../common/types.h"
 
 namespace sse {
 

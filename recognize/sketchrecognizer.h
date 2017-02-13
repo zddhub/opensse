@@ -17,7 +17,7 @@
 #ifndef SKETCHRECOGNIZER_H
 #define SKETCHRECOGNIZER_H
 
-#include "common/types.h"
+#include "../common/types.h"
 #include "opencv2/ml/ml.hpp"
 
 namespace sse {

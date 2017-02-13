@@ -17,7 +17,7 @@
 #ifndef QUANTIZER_H
 #define QUANTIZER_H
 
-#include "common/types.h"
+#include "../common/types.h"
 
 namespace sse {
 
