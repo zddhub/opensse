@@ -16,8 +16,9 @@ set(
     io/filelist.cpp
     io/reader_writer.cpp
     features/util.cpp
-    features/detector.cpp
     features/generator.cpp
+    features/detector.cpp
+    features/galif.cpp
     quantize/quantizer.cpp
     index/tfidf.cpp
     index/invertedindex.cpp
@@ -41,3 +42,11 @@ install_head(index)
 install_head(search)
 install_head(vocabulary)
 install_head(.)
+
+# install lib
+macro (install_lib)
+    file(GLOB LIBS ${opensse_BINARY_DIR}/lib/*)
+    install(FILES ${LIBS} DESTINATION /usr/local/lib)
+endmacro (install_lib)
+
+install_lib()
