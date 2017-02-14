@@ -21,11 +21,34 @@ This demo deals with mesh models. See more search results, click [demo videos](h
 How to compile
 ==============
 
+### Use Qt Creator
+
 OpenSSE uses [Qt 5.1+](http://qt-project.org/), [OpenCV 3.0.0+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library. 
 
 You need config `INCLUDEPATH` and `LIBS` in `../opensse/opensse.pri` file related your path. 
 
 Now compile it, so easy!
+
+### Use cmake tools
+
+compile and install OpenSSE core library:
+
+```sh
+mkdir release
+cd release
+cmake ..
+make
+make install
+```
+
+compile gui demo:
+
+```sh
+cd gui/SketchSearchDemo
+mkdir release
+qmake -o Makefile ../SketchSearchDemo.pro
+make
+```
 
 How to use
 ==========
