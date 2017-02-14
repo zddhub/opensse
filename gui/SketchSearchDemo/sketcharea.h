@@ -49,7 +49,7 @@ public:
      * @param save is true, when you want to save sketch,else false;
      * @param fileName
      */
-    void setAutoSaveSketch(bool save, const QString &fileName = "temp.jpg");
+    void setAutoSaveSketch(bool save, const QString &fileName = "/tmp/temp.jpg");
 
     QString sketchPath() const { return saveSketchFileName; }
     bool isModified() const { return modified; }

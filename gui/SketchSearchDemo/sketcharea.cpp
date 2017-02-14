@@ -43,7 +43,7 @@ SketchArea::SketchArea(QWidget *parent) :
     myEraserColor = Qt::white;
 
     autoSaveSketch = false;
-    saveSketchFileName = "temp.jpg";
+    saveSketchFileName = "/tmp/temp.jpg";
 }
 
 bool SketchArea::openImage(const QString &fileName)
