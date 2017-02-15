@@ -22,8 +22,6 @@
 #include <iostream>
 #include <set>
 
-#include <QTime>
-
 #include "common/distance.h"
 #include "common/types.h"
 
@@ -93,8 +91,6 @@ public:
         {
             if (maxiteration > 0 && iteration == maxiteration) break;
 
-            QTime time;
-            time.start();
             std::size_t changes = 0;
 
             // distribute items on clusters in parallel
@@ -109,7 +105,7 @@ public:
 
             iteration++;
 
-            std::cout << "changes: " << changes << " distribution time: " << time.elapsed() << std::endl;
+            std::cout << "changes: " << changes << std::endl;
 
             if (changes <= std::ceil(_collection.size() * minchangesfraction)) break;
 
@@ -186,7 +182,7 @@ std::cout << "reassign " << current << " to sample " << farthest[c] << " of clus
                 invalid.pop_back();
             }
 
-std::cout << "iteration " << iteration << " time: " << time.elapsed() << std::endl;
+std::cout << "iteration " << iteration << std::endl;
         }
 
 std::cout << "kmeans iterations: " << iteration << std::endl;

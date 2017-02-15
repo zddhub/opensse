@@ -1,9 +1,3 @@
-include_directories(${PROJECT_SOURCE_DIR}/sse)
-include_directories(/usr/local/include)
-
-link_directories(/usr/local/lib)
-set(REQUIRED_LIB opencv_core opencv_imgproc opencv_imgcodecs opencv_highgui opencv_features2d opencv_ml boost_thread boost_system)
-
 set(
     SOURCES
     io/filelist.cpp
