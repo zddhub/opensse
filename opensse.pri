@@ -47,30 +47,28 @@ CONFIG -= app_bundle
 
 #start with $$PWD, so that they will appear in included project
 HEADERS += \
-    $$PWD/common/types.h \
-    $$PWD/features/feature.h \
-    $$PWD/features/galif.h \
-    $$PWD/features/detector.h \
-    $$PWD/features/generator.h \
-    $$PWD/features/util.h \
-    $$PWD/io/filelist.h \
-    $$PWD/io/reader_writer.h \
-    $$PWD/common/distance.h \
-    $$PWD/vocabulary/kmeans.h \
-    $$PWD/vocabulary/kmeans_init.h \
-    $$PWD/quantize/quantizer.h \
-    $$PWD/index/invertedindex.h \
-    $$PWD/index/tfidf.h \
-    $$PWD/recognize/sketchrecognizer.h
+    $$PWD/sse/common/types.h \
+    $$PWD/sse/features/feature.h \
+    $$PWD/sse/features/galif.h \
+    $$PWD/sse/features/detector.h \
+    $$PWD/sse/features/generator.h \
+    $$PWD/sse/features/util.h \
+    $$PWD/sse/io/filelist.h \
+    $$PWD/sse/io/reader_writer.h \
+    $$PWD/sse/common/distance.h \
+    $$PWD/sse/vocabulary/kmeans.h \
+    $$PWD/sse/vocabulary/kmeans_init.h \
+    $$PWD/sse/quantize/quantizer.h \
+    $$PWD/sse/index/invertedindex.h \
+    $$PWD/sse/index/tfidf.h
 
 SOURCES += \
-    $$PWD/features/galif.cpp \
-    $$PWD/features/detector.cpp \
-    $$PWD/features/generator.cpp \
-    $$PWD/features/util.cpp \
-    $$PWD/io/filelist.cpp \
-    $$PWD/io/reader_writer.cpp \
-    $$PWD/quantize/quantizer.cpp \
-    $$PWD/index/invertedindex.cpp \
-    $$PWD/index/tfidf.cpp \
-    $$PWD/recognize/sketchrecognizer.cpp
+    $$PWD/sse/features/galif.cpp \
+    $$PWD/sse/features/detector.cpp \
+    $$PWD/sse/features/generator.cpp \
+    $$PWD/sse/features/util.cpp \
+    $$PWD/sse/io/filelist.cpp \
+    $$PWD/sse/io/reader_writer.cpp \
+    $$PWD/sse/quantize/quantizer.cpp \
+    $$PWD/sse/index/invertedindex.cpp \
+    $$PWD/sse/index/tfidf.cpp
