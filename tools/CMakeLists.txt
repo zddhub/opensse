@@ -7,3 +7,4 @@ add_executable_cmd(generate_vocabulary)
 add_executable_cmd(quantize)
 add_executable_cmd(sketch_search)
 
+file(COPY ${PROJECT_SOURCE_DIR}/tools/generate_filelist/generate_filelist DESTINATION ${CMAKE_BINARY_DIR}/bin)
