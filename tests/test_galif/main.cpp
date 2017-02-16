@@ -19,7 +19,7 @@
 
 using namespace std;
 
-#include "features/galif.h"
+#include "opensse/features/galif.h"
 #include <boost/shared_ptr.hpp>
 
 void usage() {

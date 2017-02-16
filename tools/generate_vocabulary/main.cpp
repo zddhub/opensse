@@ -18,12 +18,8 @@
 
 using namespace std;
 
-#include "common/types.h"
-#include "vocabulary/kmeans.h"
-
+#include "opensse/opensse.h"
 #include <boost/lexical_cast.hpp>
-
-#include "io/reader_writer.h"
 
 using namespace sse;
 

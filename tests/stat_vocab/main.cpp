@@ -17,8 +17,7 @@
 #include <iostream>
 using namespace std;
 
-#include "common/types.h"
-#include "io/reader_writer.h"
+#include "opensse/opensse.h"
 #include <fstream>
 
 using namespace sse;

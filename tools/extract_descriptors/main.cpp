@@ -19,10 +19,7 @@
 
 using namespace std;
 
-#include "io/filelist.h"
-#include "io/reader_writer.h"
-
-#include "features/galif.h"
+#include "opensse/opensse.h"
 
 using namespace sse;
 

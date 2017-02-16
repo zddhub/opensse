@@ -18,8 +18,7 @@
 
 using namespace std;
 
-#include "io/reader_writer.h"
-#include "index/invertedindex.h"
+#include "opensse/opensse.h"
 
 int main()
 {

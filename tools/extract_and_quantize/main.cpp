@@ -18,12 +18,7 @@
 #include <fstream>
 using namespace std;
 
-#include "common/types.h"
-#include "common/distance.h"
-#include "io/reader_writer.h"
-#include "io/filelist.h"
-#include "quantize/quantizer.h"
-#include "features/galif.h"
+#include "opensse/opensse.h"
 
 using namespace sse;
 

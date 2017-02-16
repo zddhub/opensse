@@ -8,5 +8,7 @@
 #include "opensse/io/filelist.h"
 #include "opensse/io/reader_writer.h"
 #include "opensse/quantize/quantizer.h"
+#include "opensse/vocabulary/kmeans_init.h"
+#include "opensse/vocabulary/kmeans.h"
 
 #endif

@@ -18,13 +18,7 @@
 
 using namespace std;
 
-#include "common/types.h"
-#include "common/distance.h"
-#include "features/galif.h"
-#include "quantize/quantizer.h"
-#include "index/invertedindex.h"
-#include "index/tfidf.h"
-#include "io/reader_writer.h"
+#include "opensse/opensse.h"
 
 #include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>

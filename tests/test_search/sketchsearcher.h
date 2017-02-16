@@ -19,13 +19,7 @@
 
 #include "searchengine.h"
 
-#include "common/types.h"
-#include "common/distance.h"
-#include "features/galif.h"
-#include "quantize/quantizer.h"
-#include "io/reader_writer.h"
-#include "index/invertedindex.h"
-#include "io/filelist.h"
+#include "opensse/opensse.h"
 
 class SketchSearcher : public SearchEngine
 {

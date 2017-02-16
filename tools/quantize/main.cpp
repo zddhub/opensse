@@ -18,10 +18,7 @@
 #include <fstream>
 using namespace std;
 
-#include "common/types.h"
-#include "common/distance.h"
-#include "io/reader_writer.h"
-#include "quantize/quantizer.h"
+#include "opensse/opensse.h"
 
 using namespace sse;
 

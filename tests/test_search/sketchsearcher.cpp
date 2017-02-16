@@ -15,7 +15,6 @@
  * limitations under the License.
 **************************************************************************/
 #include "sketchsearcher.h"
-#include "common/types.h"
 
 using namespace sse;
 

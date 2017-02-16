@@ -16,10 +16,16 @@
 #-------------------------------------------------------------------------
 TEMPLATE = app
 CONFIG += console
+CONFIG -= app_bundle
 
 DESTDIR = ../bin
 
-include(../../opensse.pri)
+INCLUDEPATH += $$PWD \
+    /usr/local/include
+
+LIBS += -L/usr/local/lib/ \
+            -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui -lopencv_features2d -lopencv_ml \
+            -lboost_thread -lboost_system -lopensse
 
 SOURCES += main.cpp
 

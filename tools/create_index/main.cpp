@@ -17,9 +17,7 @@
 #include <iostream>
 using namespace std;
 
-#include "common/types.h"
-#include "index/invertedindex.h"
-#include "io/reader_writer.h"
+#include "opensse/opensse.h"
 
 using namespace sse;
 
