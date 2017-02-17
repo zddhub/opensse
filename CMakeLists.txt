@@ -1,6 +1,6 @@
 project(opensse)
 
-cmake_minimum_required(VERSION 2.8.8)
+cmake_minimum_required(VERSION 2.8)
 cmake_policy(SET CMP0042 NEW)
 set(HAVE_LIBPTHREAD YES)
 
