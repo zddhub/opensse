@@ -1,13 +1,13 @@
 # https://travis-ci.org
 
 language: cpp
+os: osx
 
 install:
-  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-  - sudo add-apt-repository --yes ppa:lttng/daily
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq libboost-all-dev
-  - sudo apt-get install -qq libopencv-dev 
+  - brew update
+  - brew install homebrew/science/opencv
+  - brew install boost
+
 script:
   - mkdir release && cd release
   - cmake ..
