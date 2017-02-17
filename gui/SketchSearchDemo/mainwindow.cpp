@@ -29,14 +29,10 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    sse::PropertyTree_t params;
-//    boost::property_tree::read_json("/home/zdd/Database/suggestive/params.json", params);
- //   boost::property_tree::read_json("/home/zdd/DataSet/Watertight_dataset/params_all.json", params); //SHREC2012
- //   boost::property_tree::read_json("/home/zdd/DataSet/SHREC13_SBR_TARGET_MODELS/params.json", params); //SHREC2013
-//    boost::property_tree::read_json("/home/zdd/DataSet/2014/params.json", params); //SHREC2014
+    sse::PropertyTree_t config;
 
-    boost::property_tree::read_json("/Users/zdd/Database/SHREC12/params.json", params); //
-    searchEngine = new SketchSearcher(params);
+    boost::property_tree::read_json("/tmp/SketchSearchDemo/config.json", config); //
+    searchEngine = new SketchSearcher(config);
 
     setupMenuBar();
 

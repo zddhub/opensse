@@ -22,8 +22,8 @@
 #include <iostream>
 #include <set>
 
-#include "common/distance.h"
-#include "common/types.h"
+#include "../common/distance.h"
+#include "../common/types.h"
 
 #include <boost/random.hpp>
 #include <boost/thread/thread.hpp>

@@ -31,6 +31,10 @@ TEMPLATE = app
 
 DESTDIR = ../bin
 
+CONFIGDIR = /tmp/SketchSearchDemo
+
+QMAKE_POST_LINK = mkdir -p $$CONFIGDIR; cp $$PWD/config.json $$CONFIGDIR
+
 macx {
 INCLUDEPATH += $$PWD \
     /usr/local/include
