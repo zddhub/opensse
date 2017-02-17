@@ -33,7 +33,8 @@ DESTDIR = ../bin
 
 CONFIGDIR = /tmp/SketchSearchDemo
 
-QMAKE_POST_LINK = mkdir -p $$CONFIGDIR; cp $$PWD/config.json $$CONFIGDIR
+QMAKE_POST_LINK = mkdir -p $$CONFIGDIR; cp $$PWD/config.json $$CONFIGDIR; \
+                  mkdir -p $$CONFIGDIR/view; cp $$PWD/view/* $$CONFIGDIR/view
 
 macx {
 INCLUDEPATH += $$PWD \

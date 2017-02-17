@@ -126,7 +126,7 @@ void MainWindow::showLineDrawing(QTableWidgetItem *item)
 
 //    qDebug(fileName.toStdString().c_str());
 
-    QString xfFileName = fileName.right(fileName.length() - fileName.lastIndexOf("view"));
+    QString xfFileName = "/tmp/SketchSearchDemo/" + fileName.right(fileName.length() - fileName.lastIndexOf("view"));
 
     //std::cout << "xffilename:" << xfFileName.replace(".jpg", ".xf").toStdString()<<endl;
 
