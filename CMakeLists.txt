@@ -3,7 +3,7 @@ project(opensse)
 cmake_minimum_required(VERSION 2.8)
 
 if(POLICY CMP0042)
-        cmake_policy(SET CMP0042 NEW)
+    cmake_policy(SET CMP0042 NEW)
 endif()
 
 set(HAVE_LIBPTHREAD YES)
@@ -17,13 +17,15 @@ set(REQUIRED_LIB opencv_core opencv_imgproc opencv_imgcodecs opencv_highgui open
 
 add_subdirectory(sse)
 
-macro (add_executable_cmd arg)
-	add_executable(${arg} ${arg}/main.cpp)
-	target_link_libraries(${arg} ${REQUIRED_LIB} opensse)
+macro (add_executable_cmd exec project)
+	add_executable(${exec} ${project}/main.cpp)
+	target_link_libraries(${exec} ${REQUIRED_LIB} opensse)
 endmacro (add_executable_cmd)
 
 add_subdirectory(tools)
 add_subdirectory(tests)
+
+file(COPY ${PROJECT_SOURCE_DIR}/tools/sse DESTINATION ${CMAKE_BINARY_DIR}/bin/)
 
 # install include
 macro (install_head arg)
