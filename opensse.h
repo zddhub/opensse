@@ -1,14 +1,14 @@
 #ifndef OPENSSE_H
 #define OPENSSE_H
 
-#include "opensse/common/distance.h"
-#include "opensse/common/types.h"
-#include "opensse/features/galif.h"
-#include "opensse/index/invertedindex.h"
-#include "opensse/io/filelist.h"
-#include "opensse/io/reader_writer.h"
-#include "opensse/quantize/quantizer.h"
-#include "opensse/vocabulary/kmeans_init.h"
-#include "opensse/vocabulary/kmeans.h"
+#include "sse/common/distance.h"
+#include "sse/common/types.h"
+#include "sse/features/galif.h"
+#include "sse/index/invertedindex.h"
+#include "sse/io/filelist.h"
+#include "sse/io/reader_writer.h"
+#include "sse/quantize/quantizer.h"
+#include "sse/vocabulary/kmeans_init.h"
+#include "sse/vocabulary/kmeans.h"
 
 #endif
