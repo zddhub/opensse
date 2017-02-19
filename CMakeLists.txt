@@ -17,31 +17,5 @@ set(REQUIRED_LIB opencv_core opencv_imgproc opencv_imgcodecs opencv_highgui open
 
 add_subdirectory(sse)
 
-macro (make_exec arg)
-    add_executable(${arg} ${arg}.cpp)
-    target_link_libraries(${arg} ${REQUIRED_LIB} opensse)
-endmacro (make_exec)
-
 add_subdirectory(tools)
-
-macro (add_executable_cmd exec project)
-    add_executable(${exec} ${project}/main.cpp)
-    target_link_libraries(${exec} ${REQUIRED_LIB} opensse)
-endmacro (add_executable_cmd)
-
 add_subdirectory(tests)
-
-# install include
-macro (install_head arg)
-    file(GLOB HEADS sse/${arg}/*.h)
-    install(FILES ${HEADS} DESTINATION /usr/local/include/opensse/${arg})
-endmacro (install_head)
-
-install_head(common)
-install_head(io)
-install_head(features)
-install_head(quantize)
-install_head(index)
-install_head(search)
-install_head(vocabulary)
-install_head(.)

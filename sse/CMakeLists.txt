@@ -16,3 +16,18 @@ target_link_libraries(opensse ${REQUIRED_LIB})
 set(LIBRARY_OUTPUT_PATH ${opensse_BINARY_DIR}/lib)
 
 install (TARGETS opensse LIBRARY DESTINATION /usr/local/lib)
+
+# install include
+macro (install_head arg)
+    file(GLOB HEADS ${arg}/*.h)
+    install(FILES ${HEADS} DESTINATION /usr/local/include/opensse/${arg})
+endmacro (install_head)
+
+install_head(common)
+install_head(io)
+install_head(features)
+install_head(quantize)
+install_head(index)
+install_head(search)
+install_head(vocabulary)
+install_head(.)
