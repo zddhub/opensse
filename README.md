@@ -1,72 +1,60 @@
 OpenSSE: Open Sketch Search Engine [![Build Status](https://travis-ci.org/zddhub/opensse.svg?branch=zdd)](https://travis-ci.org/zddhub/opensse)
 ==================================
 
-Hello, everybody! 
+Hello, everybody!
 
 I'm very interested in [Mathias Eitz's works](http://cybertron.cg.tu-berlin.de/eitz/projects/sbsr/) on SIGGRAPH 2012, so I developed OpenSSE, Just for fun.
 
-This is an open source sketch search engine for 3D object retrieval based on sketch image as input. In fact, it can retrieve more, such as images, videos, point cloud models and volume models, you just need get their line drawing images than I know you can. 
+This is an open source sketch search engine for 3D object retrieval based on sketch image as input. In fact, it can retrieve more, such as images, videos, point cloud models and volume models, you just need get their line drawing images than I know you can.
 
-In order to clearly show how to work, I used single thread and ascii encoding for file storage. 
+In order to clearly show how to work, I used single thread and ascii encoding for file storage.
 
 Zhang Dongdong
 
-Demo - SketchSearchDemo
-=======================
 
-This demo deals with mesh models. See more search results, click [demo videos](http://opensse.com).
+Powered by OpenSSE
+==================
 
-![Sketch search demo](http://img.blog.csdn.net/20140515204902125 "Sketch search demo")
+* Open Sketch Search
+
+This demo deals with 3D mesh models. See more search results, click [demo videos](http://opensse.com).
+
+![Sketch search demo](data/opensse.gif "Sketch search demo")
+
+* Open Sketch Recognize
+
+Recognize input sketch image, you can try it via [web version](http://online.opensse.com/). See more search results, click [demo videos](http://sr.opensse.com/).
+
+![Sketch recognize demo](http://img.blog.csdn.net/20140520195606468 "Sketch recognize demo")
+
 
 How to compile
 ==============
 
-### Use Qt Creator
+OpenSSE core library uses [OpenCV 3.0.0+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library. 
 
-OpenSSE uses [Qt 5.1+](http://qt-project.org/), [OpenCV 3.0.0+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library. 
-
-You need config `INCLUDEPATH` and `LIBS` in `../opensse/opensse.pri` file related your path. 
-
-Now compile it, so easy!
-
-### Use cmake tools
-
-compile and install OpenSSE core library:
+You can compile and install it like below:
 
 ```sh
-mkdir release
-cd release
+mkdir release && cd release
 cmake ..
 make
 make install
 ```
 
-compile gui demo:
+
+How to compile SketchSearchDemo
+===============================
+
+SketchSearchDemo is wroten by [Qt 5.1+](http://qt-project.org/), please install it first, and then compile our gui demo:
 
 ```sh
 cd gui/SketchSearchDemo
-mkdir release
+mkdir release && cd release
 qmake -o Makefile ../SketchSearchDemo.pro
 make
 ```
 
-How to use
-==========
-
-### Use OpenSSE library
-
-You just need include one line in your `.pro` file.
-```cpp
-include(../../opensse.pri)
-```
-
-### Use tools
-
-There are a series of tools for you under `opensse/tools/`. When compiled, those tools are under `build-xxx-Release/bin`.
-
-### Use gui
-
-This is gui demo for you under `opensse/gui`.
 
 How to train data
 =================
@@ -169,6 +157,7 @@ Compiled and You will get [my demo](http://opensse.com). Good luck!
 
 Notice: To make sure line drawing images correspond to 3d models, please copy `../opensse/data/view/` to you execute file path.
 
+
 Evaluation
 ==========
 
@@ -180,6 +169,7 @@ Usage:
 test_search -p paramsfile -i searchfilelist -r searchfileroot -o resultdir
 ```
 
+
 Thanks
 ======
 - [Mathias Eitz](http://cybertron.cg.tu-berlin.de/eitz/)
@@ -187,10 +177,12 @@ Thanks
 - [SHREC 2012 - 2014](http://www.itl.nist.gov/iad/vug/sharp/contest/2014/Generic3D/index.html)
 - [Tilke Judd](http://people.csail.mit.edu/tjudd/)
 
+
 License
 =======
 
 Code is under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
 
 Donate
 ======
@@ -198,6 +190,7 @@ Donate
 I accept tips through [Alipay](http://img.blog.csdn.net/20140506233949640). Scan below qr code to donate:
 
 ![Alipay](http://img.blog.csdn.net/20140506233949640 "Donation").
+
 
 Contact me
 ==========
