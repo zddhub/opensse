@@ -1,12 +1,12 @@
 #!/bin/sh
 
 usage() {
-    echo "usage: $0 [--help] <command> [<args>]"
+    echo "usage: sse [--help] <command> [<args>]"
 }
 
 help() {
 cat << HELP
-usage: $0 [--help] <command> [<args>]
+usage: sse [--help] <command> [<args>]
 
 These are common sse commands used in various situations:
 
@@ -17,7 +17,7 @@ These are common sse commands used in various situations:
     index	Create inverted index file
     search	Sketch Search
 
-Run '$0 <command> --help' for more information on a command.
+Run 'sse <command> --help' for more information on a command.
 HELP
 }
 
