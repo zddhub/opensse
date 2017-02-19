@@ -28,10 +28,10 @@ Recognize input sketch image, you can try it via [web version](http://online.ope
 ![Sketch recognize demo](data/opensr.gif "Sketch recognize demo")
 
 
-How to compile
+How to install
 ==============
 
-OpenSSE library uses [OpenCV 3.0.0+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library. 
+OpenSSE library uses [OpenCV 3.0.0+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library.
 
 You can compile and install it like below:
 
@@ -62,16 +62,7 @@ License
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 
-Donate
-======
-
-I accept tips through [Alipay](http://img.blog.csdn.net/20140506233949640). Scan below qr code to donate:
-
-![Alipay](http://img.blog.csdn.net/20140506233949640 "Donation").
-
-
 Contact me
 ==========
 
 If you have any question or idea, please [email to me](mailto:zddhub@gmail.com).
-Or search 'zddhub' to find me in social networking platform.
