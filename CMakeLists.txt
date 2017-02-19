@@ -17,15 +17,19 @@ set(REQUIRED_LIB opencv_core opencv_imgproc opencv_imgcodecs opencv_highgui open
 
 add_subdirectory(sse)
 
-macro (add_executable_cmd exec project)
-	add_executable(${exec} ${project}/main.cpp)
-	target_link_libraries(${exec} ${REQUIRED_LIB} opensse)
-endmacro (add_executable_cmd)
+macro (make_exec arg)
+    add_executable(${arg} ${arg}.cpp)
+    target_link_libraries(${arg} ${REQUIRED_LIB} opensse)
+endmacro (make_exec)
 
 add_subdirectory(tools)
-add_subdirectory(tests)
 
-file(COPY ${PROJECT_SOURCE_DIR}/tools/sse DESTINATION ${CMAKE_BINARY_DIR}/bin/)
+macro (add_executable_cmd exec project)
+    add_executable(${exec} ${project}/main.cpp)
+    target_link_libraries(${exec} ${REQUIRED_LIB} opensse)
+endmacro (add_executable_cmd)
+
+add_subdirectory(tests)
 
 # install include
 macro (install_head arg)
