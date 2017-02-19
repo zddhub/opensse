@@ -15,18 +15,7 @@
 # limitations under the License.
 #-------------------------------------------------------------------------
 
-unix:!macx {
-# I use Ubuntu
-INCLUDEPATH += $$PWD \
-    /usr/local/include
-
-LIBS += -L/usr/local/lib/ \
-    -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_features2d -lopencv_ml \
-    -lboost_thread -lboost_system
-
-}
-
-macx {
+unix {
 
 INCLUDEPATH += $$PWD \
     /usr/local/include
@@ -34,12 +23,11 @@ INCLUDEPATH += $$PWD \
 LIBS += -L/usr/local/lib/ \
             -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui -lopencv_features2d -lopencv_ml \
             -lboost_thread -lboost_system
+}
 
+macx: {
 #for commind line
 CONFIG -= app_bundle
-
-#change clang version for you mac
-#message("QMAKE_MAC_SDK:" $$QMAKE_MAC_SDK)
 }
 
 

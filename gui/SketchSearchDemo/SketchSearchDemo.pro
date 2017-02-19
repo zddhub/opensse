@@ -36,7 +36,7 @@ CONFIGDIR = /tmp/SketchSearchDemo
 QMAKE_POST_LINK = mkdir -p $$CONFIGDIR; cp $$PWD/config.json $$CONFIGDIR; \
                   mkdir -p $$CONFIGDIR/view; cp $$PWD/view/* $$CONFIGDIR/view
 
-macx {
+unix {
 INCLUDEPATH += $$PWD \
     /usr/local/include
 
@@ -45,6 +45,8 @@ LIBS += -L/usr/local/lib/ \
             -lboost_thread -lboost_system \
             -lopensse
 }
+
+macx: CONFIG += app_bundle
 
 include(trimeshview/trimeshview.pri)
 
@@ -59,5 +61,3 @@ HEADERS  += mainwindow.h \
     searchengine.h \
     resultphotowidget.h \
     sketchsearcher.h \
-
-macx: CONFIG += app_bundle
