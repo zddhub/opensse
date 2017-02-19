@@ -1,4 +1,4 @@
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/tests)
 
 add_executable_cmd(stat_vocab stat_vocab)
 add_executable_cmd(test_galif test_galif)
