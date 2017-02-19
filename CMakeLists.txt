@@ -41,11 +41,3 @@ install_head(index)
 install_head(search)
 install_head(vocabulary)
 install_head(.)
-
-# install lib
-macro (install_lib)
-    file(GLOB LIBS ${opensse_BINARY_DIR}/lib/*)
-    install(FILES ${LIBS} DESTINATION /usr/local/lib)
-endmacro (install_lib)
-
-install_lib()

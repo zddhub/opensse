@@ -14,3 +14,5 @@ set(
 add_library(opensse SHARED ${SOURCES})
 target_link_libraries(opensse ${REQUIRED_LIB})
 set(LIBRARY_OUTPUT_PATH ${opensse_BINARY_DIR}/lib)
+
+install (TARGETS opensse LIBRARY DESTINATION /usr/local/lib)
