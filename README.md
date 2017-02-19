@@ -52,10 +52,10 @@ More detail info, go to [OpenSSE Wiki](https://github.com/zddhub/opensse/wiki)
 
 Todo List
 =========
-[] Docker support
-[] Remove boost library
-[] Support big image set
-[] Recognize sketch
+- [ ] Docker support
+- [ ] Remove boost library
+- [ ] Support big image set
+- [ ] Recognize sketch
 
 
 Thanks
