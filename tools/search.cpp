@@ -28,7 +28,7 @@ using namespace sse;
 void usages()
 {
     cout << "Usages: " <<endl
-         << "  sketch_search -i indexfile -v vocabulary -d rootdir -f filelist -n resultsnum -o output" <<endl
+         << "  sse search -i indexfile -v vocabulary -d rootdir -f filelist -n resultsnum -o output" <<endl
          << "  indexfile: \t inverted index file" <<endl
          << "  vocabulary: \t vocabulary file"<<endl
          << "  rootdir: \t rootdir path"<<endl

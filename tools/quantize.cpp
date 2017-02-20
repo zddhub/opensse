@@ -24,7 +24,7 @@ using namespace sse;
 
 void usages() {
     cout << "Usages: " <<endl
-         << "  quantize -v vocabulary -f features -o output" <<endl
+         << "  sse quantize -v vocabulary -f features -o output" <<endl
          << "  vocabulary: \t vocabulary file" <<endl
          << "  features: \t features file" <<endl
          << "  output: \t output file" <<endl;

@@ -23,7 +23,7 @@ using namespace sse;
 
 void usages() {
     cout << "Usages: " <<endl
-         << "  create_index -s samples -o output" <<endl
+         << "  sse index -s samples -o output" <<endl
          << "  samples: \t samples file that has been quantized" <<endl
          << "  output: \t output file" <<endl;
 }

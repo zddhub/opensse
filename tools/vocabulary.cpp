@@ -26,7 +26,7 @@ using namespace sse;
 void usages()
 {
     cout << "Usages: " <<endl
-         << "  generate_vocabulary -f features -n numclusters -o output" <<endl
+         << "  sse vocabulary -f features -n numclusters -o output" <<endl
          << "  features: \t features file" <<endl
          << "  numclusters: \t the number of cluster centers"<<endl
          << "  output: \t output file" <<endl;
