@@ -25,7 +25,7 @@ using namespace sse;
 
 void usages() {
     cout << "Usages: " <<endl
-         << "  extract_descriptors -d rootDir -f filelist -o output" <<endl
+         << "  sse extract -d rootDir -f filelist -o output" <<endl
          << "  rootDir: \t image root directory" <<endl
          << "  filelist: \t image file list" <<endl
          << "  output: \t output prefix" <<endl;

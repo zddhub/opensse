@@ -24,7 +24,7 @@ using namespace sse;
 
 void usages() {
     cout << "Usages: " <<endl
-         << "  extract_and_quantize -d rootDir -f filelist -v vocabulary -o output" <<endl
+         << "  sse extract_and_quantize -d rootDir -f filelist -v vocabulary -o output" <<endl
          << "  rootDir: \t image root directory" <<endl
          << "  filelist: \t image file list" <<endl
          << "  vocabulary: \t vocabulary" <<endl
