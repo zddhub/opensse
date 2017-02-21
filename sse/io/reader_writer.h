@@ -18,6 +18,7 @@
 #define READER_WRITER_H
 
 #include "../common/types.h"
+#include "../common/boost_related.h"
 
 #include <fstream>
 

@@ -18,6 +18,7 @@
 #define QUANTIZER_H
 
 #include "../common/types.h"
+#include "../common/boost_related.h"
 
 namespace sse {
 
