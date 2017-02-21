@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     index.load(argv[2]);
 
     Vocabularys_t vocabulary;
-    read(argv[4], vocabulary, boost::bind(&print, _1, _2, "read vocabulary"));
+    read(argv[4], vocabulary, print, "read vocabulary");
 
     PropertyTree_t params;
     boost::shared_ptr<Galif> galif = boost::make_shared<Galif>(params);

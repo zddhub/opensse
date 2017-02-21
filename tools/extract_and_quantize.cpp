@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     files.load(argv[4]);
 
     Vocabularys_t vocabulary;
-    read(argv[6], vocabulary, boost::bind(&print, _1, _2, "read vocabulary"));
+    read(argv[6], vocabulary, print, "read vocabulary");
 
     //QuantizerHard
     Quantizer_fn quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
@@ -75,7 +75,6 @@ int main(int argc, char *argv[])
     }
     cout << "quantize " << files.size() << "/" << files.size() <<"."<<endl;
 
-    //write(samples, argv[6], boost::bind(&print, _1, _2, "save representation"));
     fout.close();
     return 0;
 }

@@ -20,6 +20,8 @@
 #include <cmath>
 #include <limits>
 #include <iterator>
+#include <vector>
+#include <assert.h>
 
 namespace sse {
 
