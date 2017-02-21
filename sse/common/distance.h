@@ -234,7 +234,7 @@ struct Dist_frobenius
 
     // if you use this distance function, you will need to manually set the correct
     // mask to be used for the query image
-    const vector<bool>* mask;
+    const std::vector<bool>* mask;
 };
 
 /**
@@ -271,52 +271,6 @@ struct Dist_df
         return dist;
     }
 };
-
-/**
- * @brief 'Base' template factory class for generating a distance function
- * by name, we typically use the partially specialized version for vector<T>, though.
- */
-template <class T, class R = float>
-struct Distance_functions
-{
-    typedef boost::function<R (const T&, const T&)> distfn_t;
-
-    distfn_t make(const std::string& /*name*/)
-    {
-        return distfn_t();
-    }
-};
-
-/**
- * @brief Factory class that generates a distance function from its name.
- *
- * Note that this is a partial specialization of distance_functions
- * for data of type vector<T>. This makes constructing our typical
- * distance function that actually work on a vector<float> just
- * a little bit more convenient than if we would use the more general version.
- */
-template <class X, class R>
-struct Distance_functions<std::vector<X>, R>
-{
-    typedef std::vector<X> T;
-    typedef boost::function<R (const T&, const T&)> distfn_t;
-
-    distfn_t make(const std::string& name)
-    {
-        if (name == "l1norm") return L1norm<T>();
-        if (name == "l2norm") return L2norm<T>();
-        if (name == "l2norm_squared") return L2norm_squared<T>();
-        if (name == "jsd") return Jsd<T>();
-        if (name == "chi2") return Chi2<T>();
-        if (name == "one_minus_dot") return One_minus_dot<T>();
-        if (name == "df") return Dist_df<T>();
-        if (name == "frobenius") return Dist_frobenius<T>();
-
-        return distfn_t();
-    }
-};
-
-
 
 } //namespace sse
 
