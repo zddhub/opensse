@@ -21,8 +21,6 @@
 #include <limits>
 #include <iterator>
 
-#include "types.h"
-
 namespace sse {
 
 // ----------------------------------------------------------------

@@ -27,8 +27,6 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-#include "boost_related.h"
-
 namespace sse {
 
 using std::vector;

@@ -19,6 +19,7 @@
 
 #include "feature.h"
 #include "detector.h"
+#include "../common/boost_related.h"
 
 namespace sse {
 
