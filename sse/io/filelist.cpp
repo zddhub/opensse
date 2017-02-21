@@ -32,35 +32,6 @@ FileList::FileList(const std::string &rootDir)
     setRootDir(rootDir);
 }
 
-/*
-void FileList::lookupDir(const std::vector<std::string> &nameFilters, callback_fn callback)
-{
-    QStringList filters;
-    for(uint i = 0; i < nameFilters.size(); i++) {
-        filters.push_back(QString::fromStdString(nameFilters[i]));
-    }
-
-    std::vector<std::string> files;
-    QDir root(_rootDir.c_str());
-
-    QDirIterator it(root.absolutePath(),
-                    filters,
-                    QDir::Files | QDir::NoDotAndDotDot,
-                    QDirIterator::Subdirectories);
-
-    for(uint i = 0; it.hasNext(); i++) {
-        QString p = it.next();
-        QString r = root.relativeFilePath(p);
-        files.push_back(r.toStdString());
-        if(callback) {
-            callback(i, r.toStdString());
-        }
-    }
-
-    _files = files;
-}
-*/
-
 void FileList::randomSample(uint numOfSamples, uint seed)
 {
     if(numOfSamples >= _files.size())

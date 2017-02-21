@@ -18,23 +18,15 @@
 #define FILELIST_H
 
 #include "../common/types.h"
-#include "../common/boost_related.h"
 
 namespace sse {
 
 class FileList
 {
 public:
-    typedef boost::function<void (int, const std::string&)> callback_fn;
-
     // Constructor, pass in the desired root directory.
     // The directory passed in must be a valid, existing directory
     FileList(const std::string &rootDir = ".");
-
-    // This function will be replaced by script.
-    // List all files found in and below rootdir that have one of the file-endings specified
-    // in 'namefilter'. Each entry of the vector contains a string such as "*.png" or "*.jpg"
-    // void lookupDir(const std::vector<std::string> &nameFilters, callback_fn callback = callback_fn());
 
     // Subsample given filelist randomly
     void randomSample(uint numOfSamples, uint seed);
