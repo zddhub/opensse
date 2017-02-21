@@ -28,7 +28,8 @@ void print(int index, int total, const std::string& info)
         std::cout << info.c_str() << " " << index+1 << "/" << total <<"."<<std::endl;
 }
 
-void write(const std::vector<std::vector<Vec_f32_t> > &data, const std::string &filename, Callback_fn callback)
+void write(const std::vector<std::vector<Vec_f32_t> > &data, const std::string &filename,
+    Callback_fn callback, const std::string &info)
 {
     std::ofstream out(filename.c_str());
     out << data.size() <<std::endl;
@@ -44,12 +45,13 @@ void write(const std::vector<std::vector<Vec_f32_t> > &data, const std::string &
         }
 
         if(callback)
-            callback(n, data.size(), "");
+            callback(n, data.size(), info);
     }
     out.close();
 }
 
-void read(const std::string &filename, std::vector<std::vector<Vec_f32_t> > &data, Callback_fn callback)
+void read(const std::string &filename, std::vector<std::vector<Vec_f32_t> > &data,
+    Callback_fn callback, const std::string &info)
 {
     std::ifstream in(filename.c_str());
 
@@ -75,13 +77,14 @@ void read(const std::string &filename, std::vector<std::vector<Vec_f32_t> > &dat
         data.push_back(vv);
 
         if(callback)
-            callback(n, size, "");
+            callback(n, size, info);
     }
 
     in.close();
 }
 
-void readSamplesForCluster(const std::string &filename, Features_t &samples, Callback_fn callback)
+void readSamplesForCluster(const std::string &filename, Features_t &samples,
+    Callback_fn callback, const std::string &info)
 {
     std::ifstream in(filename.c_str());
 
@@ -112,13 +115,14 @@ void readSamplesForCluster(const std::string &filename, Features_t &samples, Cal
         }
 
         if(callback)
-            callback(n, size, "");
+            callback(n, size, info);
     }
 
     in.close();
 }
 
-void write(const std::vector<Vec_f32_t> &vv, const std::string &filename, Callback_fn callback)
+void write(const std::vector<Vec_f32_t> &vv, const std::string &filename,
+    Callback_fn callback, const std::string &info)
 {
     std::ofstream out(filename.c_str());
     out << vv.size() <<std::endl;
@@ -138,7 +142,8 @@ void write(const std::vector<Vec_f32_t> &vv, const std::string &filename, Callba
     out.close();
 }
 
-void read(const std::string &filename, std::vector<Vec_f32_t> &vv, Callback_fn callback)
+void read(const std::string &filename, std::vector<Vec_f32_t> &vv,
+    Callback_fn callback, const std::string &info)
 {
     std::ifstream in(filename.c_str());
     uint row = 0;
@@ -156,13 +161,14 @@ void read(const std::string &filename, std::vector<Vec_f32_t> &vv, Callback_fn c
         vv.push_back(vf);
 
         if(callback)
-            callback(i, row, "");
+            callback(i, row, info);
     }
 
     in.close();
 }
 
-void write(const std::vector<Vec_f32_t> &vv, std::ofstream &out, Callback_fn callback)
+void write(const std::vector<Vec_f32_t> &vv, std::ofstream &out,
+    Callback_fn callback, const std::string &info)
 {
     out << vv.size() <<std::endl;
     assert(vv.size() > 0);
@@ -180,7 +186,8 @@ void write(const std::vector<Vec_f32_t> &vv, std::ofstream &out, Callback_fn cal
     }
 }
 
-void read(std::ifstream &in, std::vector<Vec_f32_t> &vv, Callback_fn callback)
+void read(std::ifstream &in, std::vector<Vec_f32_t> &vv,
+    Callback_fn callback, const std::string &info)
 {
     uint row = 0;
     uint col = 0;
@@ -197,7 +204,7 @@ void read(std::ifstream &in, std::vector<Vec_f32_t> &vv, Callback_fn callback)
         vv.push_back(vf);
 
         if(callback)
-            callback(i, row, "");
+            callback(i, row, info);
     }
 }
 

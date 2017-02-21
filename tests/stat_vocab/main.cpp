@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
     }
 
     Samples_t samples;
-    read(argv[2], samples, boost::bind(&print, _1, _2, "read samples "));
+    read(argv[2], samples, print, "read samples ");
 
     assert(samples.size() > 0);
 
