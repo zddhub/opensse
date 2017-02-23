@@ -19,14 +19,13 @@
 
 #include "feature.h"
 #include "detector.h"
-#include "../common/boost_related.h"
 
 namespace sse {
 
 class Galif : public Feature
 {
 public:
-    Galif(const PropertyTree_t &parameters);
+    // Galif(const PropertyTree_t &parameters);
     Galif(uint width, uint numOrients, uint tiles,
           double peakFrequency, double lineWidth, double lambda,
           double featureSize, bool isSmoothHist,
@@ -53,7 +52,7 @@ private:
 
     cv::Size _filterSize;
     std::vector<cv::Mat_<std::complex<double> > > _gaborFilter;
-    boost::shared_ptr<Detector> _detector;
+    Detector *_detector;
 };
 
 } //namespace sse

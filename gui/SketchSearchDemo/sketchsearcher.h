@@ -30,7 +30,7 @@ public:
 
 private:
     boost::shared_ptr<sse::InvertedIndex> index;
-    boost::shared_ptr<sse::Galif> galif;
+    sse::Galif *galif;
     boost::shared_ptr<sse::FileList> files;
 
     sse::Vocabularys_t vocabulary;
