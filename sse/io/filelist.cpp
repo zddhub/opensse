@@ -17,7 +17,6 @@
 #include "filelist.h"
 
 #include <fstream>
-#include <random>
 #include <algorithm>
 
 namespace sse {
@@ -35,10 +34,7 @@ void FileList::randomSample(uint numOfSamples, uint seed)
     std::vector<size_t> indices(_files.size());
     for (size_t i = 0; i < indices.size(); i++) indices[i] = i;
 
-    std::random_device rd;
-    std::mt19937 random(rd());
-
-    std::shuffle(indices.begin(), indices.end(), random);
+    std::random_shuffle(indices.begin(), indices.end());
     indices.resize(numOfSamples);
     std::sort(indices.begin(), indices.end());
 
