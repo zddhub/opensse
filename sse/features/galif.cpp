@@ -68,7 +68,7 @@ Galif::Galif(uint width, uint numOrients, uint tiles,
     , _featureSize(featureSize), _isSmoothHist(isSmoothHist)
     , _normalizeHist(normalizeHist), _detectorName(detectorName)
 {
-    _detector = boost::make_shared<GridDetector>(numOfSamples);
+    _detector = new GridDetector(numOfSamples);
 
     double sigmaX = _lineWidth * _width;
     double sigmaY = _lambda * sigmaX;
@@ -109,75 +109,6 @@ Galif::Galif(uint width, uint numOrients, uint tiles,
             }
         }
         cv::imwrite(filename, mag);
-    }
-#endif
-}
-
-Galif::Galif(const PropertyTree_t &parameters)
-    : _width(parse<uint>(parameters, "feature.image_width", 256))
-    , _numOrients(parse<uint>(parameters, "feature.num_Orients", 4))
-    , _tiles(parse<uint>(parameters, "feature.tiles", 4))
-    , _peakFrequency(parse<double>(parameters, "feature.peak_frequency", 0.1))
-    , _lineWidth(parse<double>(parameters, "feature.line_width", 0.02))
-    , _lambda(parse<double>(parameters, "feature.lambda", 0.3))
-    , _featureSize(parse<double>(parameters, "feature.feature_size", 0.1))
-    , _isSmoothHist(parse<bool>(parameters, "feature.is_smooth_hist", true))
-    , _normalizeHist(parse<std::string>(parameters, "feature.normalize_hist", "l2"))
-    , _detectorName(parse<std::string>(parameters, "feature.detector.name", "grid"))
-{
-    uint numOfSamples = parse<uint>(parameters, "feature.detector.num_of_samples", 625);
-    _detector = boost::make_shared<GridDetector>(numOfSamples);
-
-    double sigmaX = _lineWidth * _width;
-    double sigmaY = _lambda * sigmaX;
-
-    // pad the image by 3*sigma_max, this avoids any boundary effects
-    // afterwards increase size to something that fft is working efficiently on
-    int paddedSize = cv::getOptimalDFTSize(_width + 3*std::max(sigmaX, sigmaY));
-    //std::cout << "galo padded size: " << paddedSize << std::endl;
-
-    _filterSize = cv::Size(paddedSize, paddedSize);
-
-    for(uint i = 0; i < _numOrients; i++) {
-        cv::Mat_<std::complex<double> > filter(_filterSize);
-        double theta = i * M_PI / _numOrients;
-
-        generate_gabor_filter(filter, _peakFrequency, theta, sigmaX, sigmaY);
-
-        filter(0, 0) = 0;
-        _gaborFilter.push_back(filter);
-    }
-
-#ifdef __DEBUG__
-    //output the filters
-    for(uint i = 0; i < _numOrients; i++) {
-        char filename[64];
-        sprintf(filename, "filter_%d.png", i);
-        const cv::Mat_<std::complex<double> >& filter = _gaborFilter[i];
-
-        //compute magnitude of response
-        cv::Mat mag(filter.size(), CV_32FC1);
-        cv::Mat mag_c3(filter.size(), CV_32FC3);
-        for(int r = 0; r < mag.rows; r++) {
-            for(int c = 0; c < mag.cols; c++) {
-                const std::complex<double>& v = filter(r, c);
-                float m = std::sqrt(v.real() * v.real() + v.imag() * v.imag());
-                mag.at<float>(r, c) = m * 255;
-
-                cv::Vec3f &bgr = mag_c3.at<cv::Vec3f>(r,c);
-                bgr.val[0] = 255-m*255;
-                bgr.val[1] = 255;
-                bgr.val[2] = 255-m*255;
-//                bgr.val[0] = m*255;
-//                bgr.val[1] = 255;
-//                bgr.val[2] = m*255;
-            }
-        }
-        cv::imwrite(filename, mag);
-
-        char filename_color[64];
-        sprintf(filename_color, "filter_%d_color.png", i);
-        cv::imwrite(filename_color, mag_c3);
     }
 #endif
 }

@@ -20,6 +20,9 @@
 using namespace std;
 
 #include "opensse/opensse.h"
+
+using namespace sse;
+
 #include <boost/shared_ptr.hpp>
 
 void usage() {
@@ -46,9 +49,21 @@ int main(int argc, char**argv)
         exit(1);
     }
 
-    sse::PropertyTree_t params;
-    boost::property_tree::read_json("params.json", params);
-    boost::shared_ptr<sse::Galif> galif = boost::make_shared<sse::Galif>(params);
+    sse::PropertyTree_t parameters;
+    boost::property_tree::read_json("params.json", parameters);
+    sse::Galif *galif = new sse::Galif(
+        parse<uint>(parameters, "feature.image_width", 256),
+        parse<uint>(parameters, "feature.num_Orients", 4),
+        parse<uint>(parameters, "feature.tiles", 4),
+        parse<double>(parameters, "feature.peak_frequency", 0.1),
+        parse<double>(parameters, "feature.line_width", 0.02),
+        parse<double>(parameters, "feature.lambda", 0.3),
+        parse<double>(parameters, "feature.feature_size", 0.1),
+        parse<bool>(parameters, "feature.is_smooth_hist", true),
+        parse<std::string>(parameters, "feature.normalize_hist", "l2"),
+        parse<std::string>(parameters, "feature.detector.name", "grid"),
+        parse<uint>(parameters, "feature.detector.num_of_samples", 625)
+    );
 
     sse::KeyPoints_t keypoints;
     sse::Features_t features;
