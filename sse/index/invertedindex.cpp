@@ -18,6 +18,7 @@
 
 #include <queue>
 #include <stack>
+#include <fstream>
 
 namespace sse {
 
