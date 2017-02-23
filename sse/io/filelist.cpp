@@ -17,13 +17,8 @@
 #include "filelist.h"
 
 #include <fstream>
-
-//#include <QDir>
-//#include <QDirIterator>
-
-#include <boost/random.hpp>
-
-
+#include <random>
+#include <algorithm>
 
 namespace sse {
 
@@ -40,12 +35,10 @@ void FileList::randomSample(uint numOfSamples, uint seed)
     std::vector<size_t> indices(_files.size());
     for (size_t i = 0; i < indices.size(); i++) indices[i] = i;
 
-    typedef boost::mt19937 rng_t;
-    typedef boost::uniform_int<size_t> uniform_t;
-    rng_t rng(seed);
-    boost::variate_generator<rng_t&, uniform_t> random(rng, uniform_t(0, indices.size() - 1));
+    std::random_device rd;
+    std::mt19937 random(rd());
 
-    std::random_shuffle(indices.begin(), indices.end(), random);
+    std::shuffle(indices.begin(), indices.end(), random);
     indices.resize(numOfSamples);
     std::sort(indices.begin(), indices.end());
 
@@ -83,13 +76,6 @@ const std::string& FileList::getRootDir() const
 
 void FileList::setRootDir(const std::string &rootDir)
 {
-    /*
-    QDir dir(QString::fromStdString(rootDir));
-    if(!dir.exists())
-    {
-        throw std::runtime_error("FileList rootdir <" + rootDir + "> does not exist.");
-    }
-    */
     _rootDir = rootDir;
 }
 
