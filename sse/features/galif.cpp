@@ -19,6 +19,7 @@
 #include "util.h"
 
 #include <limits>
+#include <stdexcept>
 
 namespace sse {
 
