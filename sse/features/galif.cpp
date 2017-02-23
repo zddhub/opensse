@@ -18,6 +18,8 @@
 
 #include "util.h"
 
+#include <limits>
+
 namespace sse {
 
 template <class T>
