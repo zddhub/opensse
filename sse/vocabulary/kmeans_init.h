@@ -20,7 +20,8 @@
 #include "../common/types.h"
 #include "../common/distance.h"
 
-#include <boost/random.hpp>
+#include <algorithm>
+#include <random>
 
 namespace sse {
 
@@ -41,19 +42,15 @@ void kmeans_init_plusplus(std::vector<index_t>& result, const collection_t& coll
     assert(numclusters > 0);
     assert(collection.size() >= numclusters);
 
-    typedef typename collection_t::value_type item_t;
-    typedef boost::mt19937                    rng_t;
-    typedef boost::uniform_real<double>       unirand_t;
-
-    rng_t rng;
-
-    boost::variate_generator<rng_t&, unirand_t> unirand(rng, unirand_t(0.0, 1.0));
+    std::random_device rd;  // will be used to obtain a seed for the random number engine
+    std::mt19937 generator(rd()); // standard mersenne_twister_engine seeded with rd()
+    std::uniform_real_distribution<> unirand(0.0, 1.0);
 
     std::size_t numtrials = 2 + std::log(numclusters);
 
     // add first cluster, randomly chosen
     std::set<index_t> centers;
-    index_t first = unirand() * collection.size();
+    index_t first = unirand(generator) * collection.size();
     centers.insert(first);
 
     // compute distance between first cluster center and all others
@@ -79,7 +76,7 @@ void kmeans_init_plusplus(std::vector<index_t>& result, const collection_t& coll
             std::size_t index;
 
             // get new center
-            double r = unirand() * potential;
+            double r = unirand(generator) * potential;
             for (index = 0; index < collection.size()-1 && r > dists[index]; index++)
             {
                 r -= dists[index];
