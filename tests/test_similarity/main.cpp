@@ -89,7 +89,7 @@ int main(int argc, char **argv)
     read(argv[9], vocabulary);
 
     //QuantizerHard
-    Quantizer_fn quantizer = sse::QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
+    sse::QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > quantizer = sse::QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
     Vec_f32_t hist1, hist2;
     quantize(features1, vocabulary, hist1, quantizer);

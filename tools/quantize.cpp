@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     read(argv[2], vocabulary, print, "read vocabulary");
 
     //QuantizerHard
-    Quantizer_fn quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
+    QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
     ofstream fout(argv[6]);
     fout << filesize <<endl;

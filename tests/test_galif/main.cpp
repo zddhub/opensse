@@ -20,6 +20,7 @@
 using namespace std;
 
 #include "opensse/opensse.h"
+#include "common/boost_related.h"
 
 using namespace sse;
 
