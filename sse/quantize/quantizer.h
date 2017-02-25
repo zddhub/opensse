@@ -18,15 +18,26 @@
 #define QUANTIZER_H
 
 #include "../common/types.h"
-#include "../common/boost_related.h"
+#include "../common/distance.h"
 
 namespace sse {
+
+/**
+ * @brief Based class for a quantization function.
+ *
+ * TODO: not used now
+ */
+template <class Sample_t, class Dist_fn>
+class Quantizer_fn {
+public:
+    void quantize(const Sample_t& sample, const std::vector<Sample_t>& vocabulary, Vec_f32_t& quantized_sample);
+};
 
 /**
  * @brief Functor performing hard quantization of a sample against a given codebook of samples
  */
 template <class Sample_t, class Dist_fn>
-class QuantizerHard
+class QuantizerHard : public Quantizer_fn<Sample_t, Dist_fn>
 {
 public:
     /**
@@ -43,7 +54,7 @@ public:
      * @param vocabulary Vocabulary
      * @param quantized_sample
      */
-    void operator () (const Sample_t& sample, const std::vector<Sample_t>& vocabulary, Vec_f32_t& quantized_sample)
+    void quantize(const Sample_t& sample, const std::vector<Sample_t>& vocabulary, Vec_f32_t& quantized_sample)
     {
         //quantized_sample.size() == vocabulary.size()
         quantized_sample.resize(vocabulary.size());
@@ -106,16 +117,6 @@ private:
     float _sigma;
 };
 
-
-/**
- * @brief 'Base-class' for a quantization function.
- *
- * Instead of creating a common base class we use a boost::function
- * that achieves the same effect, i.e. both quantize_hard
- * and quantize_fuzzy can be assigned to this function type
- */
-typedef boost::function<void (const Vec_f32_t&, const std::vector<Vec_f32_t>&, Vec_f32_t&)> Quantizer_fn;
-
 /**
  * @brief Convenience function that quantizes a vector of samples in parallel
  * @param samples Vector of samples to be quantized, each sample is of vector<float>
@@ -125,7 +126,7 @@ typedef boost::function<void (const Vec_f32_t&, const std::vector<Vec_f32_t>&, V
  * @param quantizer quantization function to be used
  */
 void quantize_samples_parallel(const Features_t &samples, const Vocabularys_t &vocabulary,
-                               Vocabularys_t &quantized_samples, Quantizer_fn& quantizer);
+                               Vocabularys_t &quantized_samples, QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > &quantizer);
 
 // Given a list of quantized samples and corresponding coordinates
 // compute the (spatialized) histogram of visual words out of that.
@@ -143,7 +144,7 @@ void build_histvw(const Vocabularys_t &quantized_samples, uint vocabulary_size, 
 
 //Quantize one image with some default parameters
 void quantize(const Features_t &features, const Vocabularys_t &vocabulary,
-              Vec_f32_t &vf, Quantizer_fn &quantizer);
+              Vec_f32_t &vf, QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > &quantizer);
 } //namespace sse
 
 

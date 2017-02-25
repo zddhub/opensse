@@ -20,7 +20,7 @@ using namespace std;
 #include <fstream>
 
 #include "opensse/opensse.h"
-
+#include "common/boost_related.h"
 #include <boost/lexical_cast.hpp>
 
 using namespace sse;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
         parse<uint>(parameters, "feature.detector.num_of_samples", 625)
     );
 
-    Quantizer_fn quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
+    QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
     TF_simple tf;
     IDF_simple idf;

@@ -20,6 +20,7 @@
 #include "searchengine.h"
 
 #include "opensse/opensse.h"
+#include "opensse/common/boost_related.h"
 
 class SketchSearcher : public SearchEngine
 {
@@ -34,7 +35,7 @@ private:
     boost::shared_ptr<sse::FileList> files;
 
     sse::Vocabularys_t vocabulary;
-    sse::Quantizer_fn quantizer;
+    sse::QuantizerHard<sse::Vec_f32_t, sse::L2norm_squared<sse::Vec_f32_t> > quantizer;
 
     const std::string _indexFile;
     const std::string _vocabularyFile;

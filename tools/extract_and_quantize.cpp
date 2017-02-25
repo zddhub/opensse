@@ -19,6 +19,7 @@
 using namespace std;
 
 #include "opensse/opensse.h"
+#include "common/boost_related.h"
 
 using namespace sse;
 
@@ -47,7 +48,7 @@ int main(int argc, char *argv[])
     read(argv[6], vocabulary, print, "read vocabulary");
 
     //QuantizerHard
-    Quantizer_fn quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
+    QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
     PropertyTree_t parameters;
     Galif *galif = new Galif(

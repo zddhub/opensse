@@ -20,7 +20,7 @@ namespace sse {
 
 //Quantize one image
 void quantize(const Features_t &features, const Vocabularys_t &vocabulary,
-              Vec_f32_t &vf, Quantizer_fn &quantizer)
+              Vec_f32_t &vf, QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > &quantizer)
 {
     Vocabularys_t quantized_samples;
     quantize_samples_parallel(features, vocabulary, quantized_samples, quantizer);
@@ -29,14 +29,14 @@ void quantize(const Features_t &features, const Vocabularys_t &vocabulary,
 }
 
 void quantize_samples_parallel(const Features_t &samples, const Vocabularys_t &vocabulary,
-                               Vocabularys_t &quantized_samples, Quantizer_fn &quantizer)
+                               Vocabularys_t &quantized_samples, QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > &quantizer)
 {
     quantized_samples.resize(samples.size());
 
     //for each word compute distances to each entry in the vocabulary ...
 #pragma omp parallel for
     for(uint i = 0; i < samples.size(); i++) {
-        quantizer(samples[i], vocabulary, quantized_samples[i]);
+        quantizer.quantize(samples[i], vocabulary, quantized_samples[i]);
     }
 }
 
