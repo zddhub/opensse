@@ -1,25 +1,23 @@
-FROM ubuntu:latest
+# How to use
+# docker build -t opensse .
+# docker run -it opensse /bin/bash
+
+FROM zddhub/opencv:3.2.0
 MAINTAINER zdd <zddhub@gmail.com>
 
-# shut up debconf messages (https://github.com/phusion/baseimage-docker/issues/58)
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+RUN apt-get update \
+	&& apt-get install g++ -y \
+	&& apt-get install cmake -y \
+	&& apt-get install libboost-all-dev -y
 
-RUN apt-get update && apt-get install software-properties-common -y --fix-missing
+RUN mkdir opensse
+COPY . opensse
 
-RUN add-apt-repository --yes ppa:ubuntu-sdk-team/ppa \
-	&& add-apt-repository --yes ppa:lttng/daily \
-	&& add-apt-repository ppa:amarburg/opencv3 -y \
-	&& apt-get update -qq \
-	&& apt-get install -qq libopencv3-dev \
-	&& sudo apt-get install -qq libboost-all-dev
-
-RUN mkdir /root/opensse
-COPY . /root/opensse
-
-RUN cd /root/opensse \
-	&& mkdir release && cd release \
+RUN cd opensse \
+	&& mkdir dist && cd dist \
 	&& cmake .. \
 	&& make \
-	&& make install
+	&& make install \
+	&& ldconfig
 
 CMD [ "sse" ]
