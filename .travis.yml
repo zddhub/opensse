@@ -2,6 +2,19 @@
 
 language: cpp
 
+script:
+  - mkdir release && cd release
+  - cmake ..
+  - make
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
+
 install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo add-apt-repository --yes ppa:lttng/daily
@@ -9,7 +22,4 @@ install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libopencv3-dev 
   - sudo apt-get install -qq libboost-all-dev
-script:
-  - mkdir release && cd release
-  - cmake ..
-  - make
+  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
