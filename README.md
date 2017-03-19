@@ -14,8 +14,8 @@ In order to clearly show how to work, I used single thread and ascii encoding fo
 Zhang Dongdong
 
 
-Demoes powered by OpenSSE
-=========================
+Demo powered by OpenSSE
+=======================
 
 * Open Sketch Search
 
