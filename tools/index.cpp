@@ -22,10 +22,11 @@ using namespace std;
 using namespace sse;
 
 void usages() {
-    cout << "Usages: " <<endl
-         << "  sse index -s samples -o output" <<endl
-         << "  samples: \t samples file that has been quantized" <<endl
-         << "  output: \t output file" <<endl;
+    cout << "Usages: sse index -s samples -o output" <<endl
+         << "  This command create index for \033[4msamples\033[0m" <<endl
+         << "  The options are as follows:" <<endl
+         << "  -s\t \033[4msamples\033[0m file that has been quantized" <<endl
+         << "  -o\t \033[4moutput\033[0m file" <<endl;
 }
 
 int main(int argc, char* argv[])
