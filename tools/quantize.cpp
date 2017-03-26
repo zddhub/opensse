@@ -23,11 +23,12 @@ using namespace std;
 using namespace sse;
 
 void usages() {
-    cout << "Usages: " <<endl
-         << "  sse quantize -v vocabulary -f features -o output" <<endl
-         << "  vocabulary: \t vocabulary file" <<endl
-         << "  features: \t features file" <<endl
-         << "  output: \t output file" <<endl;
+    cout << "Usages: sse quantize -v vocabulary -f features -o output" <<endl
+         << "  This command quantizes \033[4mfeatures\033[0m with \033[4mvocabulary\033[0m" <<endl
+         << "  The options are as follows:" <<endl
+         << "  -v\t \033[4mvocabulary\033[0m file" <<endl
+         << "  -f\t \033[4mfeatures\033[0m file" <<endl
+         << "  -o\t \033[4moutput\033[0m file" <<endl;
 }
 
 int main(int argc, char *argv[])

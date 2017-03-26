@@ -25,11 +25,12 @@ using namespace sse;
 
 void usages()
 {
-    cout << "Usages: " <<endl
-         << "  sse vocabulary -f features -n numclusters -o output" <<endl
-         << "  features: \t features file" <<endl
-         << "  numclusters: \t the number of cluster centers"<<endl
-         << "  output: \t output file" <<endl;
+    cout << "Usages: sse vocabulary -f features -n numclusters -o output" <<endl
+         << "  This command generates \033[4mnumclusters\033[0m vocabulary using \033[4mfeatures\033[0m" <<endl
+         << "  The options are as follows:" <<endl
+         << "  -f\t \033[4mfeatures\033[0m file" <<endl
+         << "  -n\t the number of cluster centers"<<endl
+         << "  -o\t \033[4moutput\033[0m file" <<endl;
 }
 
 int main(int argc, char* argv[])

@@ -25,11 +25,12 @@ using namespace std;
 using namespace sse;
 
 void usages() {
-    cout << "Usages: " <<endl
-         << "  sse extract -d rootDir -f filelist -o output" <<endl
-         << "  rootDir: \t image root directory" <<endl
-         << "  filelist: \t image file list" <<endl
-         << "  output: \t output prefix" <<endl;
+    cout << "Usages: sse extract -d rootDir -f filelist -o output" <<endl
+         << "  This command extracts Galif descriptors under \033[4mrootdir\033[0m" <<endl
+         << "  The options are as follows:" <<endl
+         << "  -d\t root directory" <<endl
+         << "  -f\t image file list" <<endl
+         << "  -o\t \033[4moutput\033[0m prefix" <<endl;
 }
 
 int main(int argc, char *argv[])

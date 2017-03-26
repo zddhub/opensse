@@ -24,12 +24,13 @@ using namespace std;
 using namespace sse;
 
 void usages() {
-    cout << "Usages: " <<endl
-         << "  sse extract_and_quantize -d rootDir -f filelist -v vocabulary -o output" <<endl
-         << "  rootDir: \t image root directory" <<endl
-         << "  filelist: \t image file list" <<endl
-         << "  vocabulary: \t vocabulary" <<endl
-         << "  output: \t output samples" <<endl;
+    cout << "Usages: sse extract_and_quantize -d rootDir -f filelist -v vocabulary -o output" <<endl
+         << "  This command extracts Galif descriptors under \033[4mrootdir\033[0m and quantizes it at the same time" <<endl
+         << "  The options are as follows:" <<endl
+         << "  -d\t image root directory" <<endl
+         << "  -f\t image file list" <<endl
+         << "  -v\t \033[4mvocabulary\033[0m" <<endl
+         << "  -o\t \033[4moutput\033[0m samples" <<endl;
 }
 
 int main(int argc, char *argv[])

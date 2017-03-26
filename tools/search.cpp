@@ -27,14 +27,15 @@ using namespace sse;
 
 void usages()
 {
-    cout << "Usages: " <<endl
-         << "  sse search -i indexfile -v vocabulary -d rootdir -f filelist -n resultsnum -o output" <<endl
-         << "  indexfile: \t inverted index file" <<endl
-         << "  vocabulary: \t vocabulary file"<<endl
-         << "  rootdir: \t rootdir path"<<endl
-         << "  filelist: \t filelist"<<endl
-         << "  resultsnum: \t the number of results"<<endl
-         << "  output: \t output file" <<endl;
+    cout << "Usages: sse search -i indexfile -v vocabulary -d rootdir -f filelist -n resultsnum -o output" <<endl
+         << "OpenSSE search tool in command line"
+         << "  The options are as follows:" <<endl
+         << "  -i\t inverted index file" <<endl
+         << "  -v\t \033[4mvocabulary\033[0m file"<<endl
+         << "  -d\t \033[4mrootdir\033[0m path"<<endl
+         << "  -f\t \033[4mfilelist\033[0m"<<endl
+         << "  -n\t the number of results"<<endl
+         << "  -o\t \033[4moutput\033[0m file" <<endl;
 }
 
 int main(int argc, char *argv[])
