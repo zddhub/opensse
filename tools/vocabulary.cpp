@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 
     typedef Kmeans<Features_t, L2norm_squared<Vec_f32_t> > Cluster;
 
-    cout << "cluster ..." << "\r";
+    cout << "cluster ..." <<endl;
     Vocabularys_t centers;
     Cluster cluster(samples, numclusters);
     cluster.run(maxiter, minChangesfraction);
