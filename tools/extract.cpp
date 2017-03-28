@@ -20,7 +20,6 @@
 using namespace std;
 
 #include "opensse/opensse.h"
-#include "common/boost_related.h"
 
 using namespace sse;
 
@@ -45,25 +44,24 @@ int main(int argc, char *argv[])
 
     files.load(argv[4]);
 
-    PropertyTree_t parameters;
     Galif *galif = new Galif(
-        parse<uint>(parameters, "feature.image_width", 256),
-        parse<uint>(parameters, "feature.num_Orients", 4),
-        parse<uint>(parameters, "feature.tiles", 4),
-        parse<double>(parameters, "feature.peak_frequency", 0.1),
-        parse<double>(parameters, "feature.line_width", 0.02),
-        parse<double>(parameters, "feature.lambda", 0.3),
-        parse<double>(parameters, "feature.feature_size", 0.1),
-        parse<bool>(parameters, "feature.is_smooth_hist", true),
-        parse<std::string>(parameters, "feature.normalize_hist", "l2"),
-        parse<std::string>(parameters, "feature.detector.name", "grid"),
-        parse<uint>(parameters, "feature.detector.num_of_samples", 625)
+        256, // width
+        4, // numOrients
+        4, // tiles
+        0.1, // peakFrequency
+        0.02, // lineWidth
+        0.3, // lambda
+        0.1, // featureSize
+        true, // isSmoothHist
+        "l2", // normalizeHist
+        "grid", // detectorName,
+        625 // numOfSamples
     );
 
     std::vector<KeyPoints_t> vecKeypoints;
     std::vector<Features_t> vecFeatures;
 
-    //Not keep keypoints and features, save memory.
+    // Not keep keypoints and features, save memory.
     std::string kp_file = std::string(argv[6]) + "keypoints";
     ofstream kp_out(kp_file.c_str());
     std::string ft_file = std::string(argv[6]) + "features";
@@ -76,8 +74,6 @@ int main(int argc, char *argv[])
         Features_t features;
         cv::Mat image = cv::imread(files.getFilename(i));
         galif->compute(image, keypoints, features);
-        //vecKeypoints.push_back(keypoints);
-        //vecFeatures.push_back(features);
         write(keypoints, kp_out);
         write(features, ft_out);
         cout << "Extract descriptors " << i+1 << "/" << files.size() <<"\r" << flush;
@@ -86,9 +82,6 @@ int main(int argc, char *argv[])
 
     kp_out.close();
     ft_out.close();
-
-    //write(vecKeypoints, std::string(argv[6]) + "keypoints", boost::bind(&print, _1, _2, "save keypoints"));
-    //write(vecFeatures, std::string(argv[6]) + "features", boost::bind(&print, _1, _2, "save features"));
 
     return 0;
 }
