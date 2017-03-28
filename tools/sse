@@ -26,7 +26,7 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-SUB_COMMANDS="filelist extract vocabulary quantize index search"
+SUB_COMMANDS="filelist extract vocabulary quantize index search extract_and_quantize"
 
 if [ "${SUB_COMMANDS/"$1"}" != "${SUB_COMMANDS}" ]; then
 	$*
