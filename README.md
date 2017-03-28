@@ -53,9 +53,10 @@ More detail info, go to [OpenSSE Wiki](https://github.com/zddhub/opensse/wiki)
 Todo List
 =========
 - [x] Docker support
-- [ ] Remove boost library, 83% done
-- [ ] Support big image set
+- [ ] Speed up train steps
+- [ ] Remove boost for core library, 83% done
 - [ ] Recognize sketch
+- [ ] Support big image set
 
 
 Thanks
