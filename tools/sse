@@ -29,7 +29,7 @@ fi
 SUB_COMMANDS="filelist extract vocabulary quantize index search"
 
 if [ "${SUB_COMMANDS/"$1"}" != "${SUB_COMMANDS}" ]; then
-	echo "`$*`"
+	$*
 elif [ "$1" == "-h" ]; then
 	usage
 elif [ "$1" == "--help" ]; then
