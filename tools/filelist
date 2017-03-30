@@ -27,7 +27,7 @@ while getopts "d:p:o:" arg; do
         d)
             rootdir=$OPTARG
             ;;
-        f)
+        p)
             pattern=$OPTARG
             ;;
         o)
