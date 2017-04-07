@@ -19,7 +19,6 @@
 using namespace std;
 
 #include "opensse/opensse.h"
-#include <boost/lexical_cast.hpp>
 
 using namespace sse;
 
@@ -43,12 +42,8 @@ int main(int argc, char* argv[])
     int maxiter = 20;
     double minChangesfraction = 0.01;
 
-    uint numclusters = 0;
-    try {
-        numclusters = boost::lexical_cast<uint>(argv[4]);
-    } catch (boost::bad_lexical_cast&) {
-        std::cerr << "bad parameter value: "<< argv[4] <<endl;
-    }
+    uint numclusters = atoi(argv[4]);
+    std::cout << numclusters <<endl;
 
     Features_t samples;
     readSamplesForCluster(argv[2], samples, print, "read samples");

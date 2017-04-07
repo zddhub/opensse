@@ -18,7 +18,6 @@
 using namespace std;
 
 #include "opensse/opensse.h"
-
 using namespace sse;
 
 void usages() {
@@ -35,21 +34,6 @@ int main(int argc, char* argv[])
         usages();
         exit(1);
     }
-
- //   Samples_t samples;
- //   read(argv[2], samples, boost::bind(&print, _1, _2, "read samples "));
-
-//    assert(samples.size() > 0);
-
-//    uint vocabularySize = samples[0].size();
-
- //   InvertedIndex index(vocabularySize);
-
-
-//    cout << "create index ..." << "\r" <<std::flush;
-//    for(uint i = 0; i < samples.size(); i++) {
-//        index.addSample(samples[i]);
-//    }
 
     ifstream samples_in(argv[2]);
     uint samplesize = 0;
