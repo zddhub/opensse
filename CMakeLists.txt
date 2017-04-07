@@ -20,4 +20,3 @@ set(REQUIRED_LIB opencv_core opencv_imgproc opencv_imgcodecs opencv_highgui open
 add_subdirectory(sse)
 
 add_subdirectory(tools)
-add_subdirectory(tests)
