@@ -29,7 +29,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    sse::PropertyTree_t config;
+    PropertyTree_t config;
 
     boost::property_tree::read_json("/tmp/SketchSearchDemo/config.json", config); //
     searchEngine = new SketchSearcher(config);

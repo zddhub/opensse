@@ -15,15 +15,8 @@
  * limitations under the License.
 **************************************************************************/
 #include "sketchsearcher.h"
-
 using namespace sse;
 
-//SketchSearcher::SketchSearcher(const PropertyTree_t &parameters)
-//    : _indexFile(parse<std::string>(parameters, "searcher.indexfile", "./data/indexfile"))
-//    , _vocabularyFile(parse<std::string>(parameters, "searcher.vocabulary", "./data/vocabulary"))
-//    , _rootdir(parse<std::string>(parameters, "searcher.rootdir", "/home/zdd/Database/sketches"))
-//    , _fileList(parse<std::string>(parameters, "searcher.filelist", "./data/filelist"))
-//    , _numOfResults(parse<uint>(parameters, "searcher.results_num", 25))
 SketchSearcher::SketchSearcher(const PropertyTree_t &parameters)
     : _indexFile(parse<std::string>(parameters, "searcher.indexfile", "/tmp/SketchSearchDemo/data/model_indexfile"))
     , _vocabularyFile(parse<std::string>(parameters, "searcher.vocabulary", "/tmp/SketchSearchDemo/data/vocabulary"))
@@ -32,32 +25,36 @@ SketchSearcher::SketchSearcher(const PropertyTree_t &parameters)
     , _numOfResults(parse<uint>(parameters, "searcher.results_num", 25))
     , _numOfViews(parse<uint>(parameters, "searcher.views_num", 1))
 {
-    index = boost::make_shared<InvertedIndex>();
+    index = new InvertedIndex();
     index->load(_indexFile);
 
     read(_vocabularyFile, vocabulary);
 
-    PropertyTree_t defaultParams;
-
     galif = new Galif(
-        parse<uint>(defaultParams, "feature.image_width", 256),
-        parse<uint>(defaultParams, "feature.num_Orients", 4),
-        parse<uint>(defaultParams, "feature.tiles", 4),
-        parse<double>(defaultParams, "feature.peak_frequency", 0.1),
-        parse<double>(defaultParams, "feature.line_width", 0.02),
-        parse<double>(defaultParams, "feature.lambda", 0.3),
-        parse<double>(defaultParams, "feature.feature_size", 0.1),
-        parse<bool>(defaultParams, "feature.is_smooth_hist", true),
-        parse<std::string>(defaultParams, "feature.normalize_hist", "l2"),
-        parse<std::string>(defaultParams, "feature.detector.name", "grid"),
-        parse<uint>(defaultParams, "feature.detector.num_of_samples", 625)
+        256, // width
+        4, // numOrients
+        4, // tiles
+        0.1, // peakFrequency
+        0.02, // lineWidth
+        0.3, // lambda
+        0.1, // featureSize
+        true, // isSmoothHist
+        "l2", // normalizeHist
+        "grid", // detectorName,
+        625 // numOfSamples
     );
 
     quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
-    files = boost::make_shared<FileList>(_rootdir);
+    files = new FileList(_rootdir);
     files->load(_fileList);
+}
 
+SketchSearcher::~SketchSearcher()
+{
+    delete index;
+    delete galif;
+    delete files;
 }
 
 void SketchSearcher::query(const std::string &fileName, QueryResults &results)
