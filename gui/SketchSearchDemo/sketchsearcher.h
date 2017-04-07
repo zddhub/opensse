@@ -20,19 +20,29 @@
 #include "searchengine.h"
 
 #include "opensse/opensse.h"
-#include "opensse/common/boost_related.h"
+
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+typedef boost::property_tree::ptree PropertyTree_t;
+template<class T>
+inline T parse(const PropertyTree_t &p, const std::string &path, const T &defaultValue)
+{
+    T value = p.get(path, defaultValue);
+    return value;
+}
 
 class SketchSearcher : public SearchEngine
 {
 public:
-    SketchSearcher(const sse::PropertyTree_t &parameters);
+    SketchSearcher(const PropertyTree_t &parameters);
+    virtual ~SketchSearcher();
 
     void query(const std::string &fileName, QueryResults &results);
 
 private:
-    boost::shared_ptr<sse::InvertedIndex> index;
+    sse::InvertedIndex *index;
     sse::Galif *galif;
-    boost::shared_ptr<sse::FileList> files;
+    sse::FileList *files;
 
     sse::Vocabularys_t vocabulary;
     sse::QuantizerHard<sse::Vec_f32_t, sse::L2norm_squared<sse::Vec_f32_t> > quantizer;
