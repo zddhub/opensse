@@ -20,9 +20,6 @@ using namespace std;
 #include <fstream>
 
 #include "opensse/opensse.h"
-#include "common/boost_related.h"
-#include <boost/lexical_cast.hpp>
-
 using namespace sse;
 
 void usages()
@@ -50,19 +47,18 @@ int main(int argc, char *argv[])
     Vocabularys_t vocabulary;
     read(argv[4], vocabulary, print, "read vocabulary");
 
-    PropertyTree_t parameters;
     Galif *galif = new Galif(
-        parse<uint>(parameters, "feature.image_width", 256),
-        parse<uint>(parameters, "feature.num_Orients", 4),
-        parse<uint>(parameters, "feature.tiles", 4),
-        parse<double>(parameters, "feature.peak_frequency", 0.1),
-        parse<double>(parameters, "feature.line_width", 0.02),
-        parse<double>(parameters, "feature.lambda", 0.3),
-        parse<double>(parameters, "feature.feature_size", 0.1),
-        parse<bool>(parameters, "feature.is_smooth_hist", true),
-        parse<std::string>(parameters, "feature.normalize_hist", "l2"),
-        parse<std::string>(parameters, "feature.detector.name", "grid"),
-        parse<uint>(parameters, "feature.detector.num_of_samples", 625)
+        256, // width
+        4, // numOrients
+        4, // tiles
+        0.1, // peakFrequency
+        0.02, // lineWidth
+        0.3, // lambda
+        0.1, // featureSize
+        true, // isSmoothHist
+        "l2", // normalizeHist
+        "grid", // detectorName,
+        625 // numOfSamples
     );
 
     QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
@@ -73,12 +69,7 @@ int main(int argc, char *argv[])
     FileList files(argv[6]);
     files.load(argv[8]);
 
-    uint numOfResults;
-    try {
-        numOfResults = boost::lexical_cast<uint>(argv[10]);
-    } catch (boost::bad_lexical_cast&) {
-        std::cerr << "bad parameter value: "<< argv[10] <<endl;
-    }
+    uint numOfResults = atoi(argv[10]);
 
     cout << ">> open sketch search :"<<endl;
     cout << ">> input absolute path, like \"/Users/zdd/zddhub.png\""<<endl;
@@ -106,14 +97,9 @@ int main(int argc, char *argv[])
         std::vector<ResultItem_t> results;
         index.query(query, tf, idf, numOfResults, results);
 
-        //cout << "results:"<<endl;
-
-        //ofstream out(argv[12]);
         for(uint i = 0; i < results.size(); i++) {
-            //out << results[i].first << " " << files.getFilename(results[i].second).c_str()<<endl;
             cout << results[i].first << " " << files.getFilename(results[i].second).c_str()<<endl;
         }
-        //out.close();
     }
     return 0;
 }

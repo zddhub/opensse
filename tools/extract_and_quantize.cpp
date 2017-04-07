@@ -19,7 +19,6 @@
 using namespace std;
 
 #include "opensse/opensse.h"
-#include "common/boost_related.h"
 
 using namespace sse;
 
@@ -51,29 +50,24 @@ int main(int argc, char *argv[])
     //QuantizerHard
     QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
-    PropertyTree_t parameters;
     Galif *galif = new Galif(
-        parse<uint>(parameters, "feature.image_width", 256),
-        parse<uint>(parameters, "feature.num_Orients", 4),
-        parse<uint>(parameters, "feature.tiles", 4),
-        parse<double>(parameters, "feature.peak_frequency", 0.1),
-        parse<double>(parameters, "feature.line_width", 0.02),
-        parse<double>(parameters, "feature.lambda", 0.3),
-        parse<double>(parameters, "feature.feature_size", 0.1),
-        parse<bool>(parameters, "feature.is_smooth_hist", true),
-        parse<std::string>(parameters, "feature.normalize_hist", "l2"),
-        parse<std::string>(parameters, "feature.detector.name", "grid"),
-        parse<uint>(parameters, "feature.detector.num_of_samples", 625)
+        256, // width
+        4, // numOrients
+        4, // tiles
+        0.1, // peakFrequency
+        0.02, // lineWidth
+        0.3, // lambda
+        0.1, // featureSize
+        true, // isSmoothHist
+        "l2", // normalizeHist
+        "grid", // detectorName,
+        625 // numOfSamples
     );
-
 
     ofstream fout(argv[8]);
     fout << files.size() <<endl;
     fout << vocabulary.size() <<endl;
-    //Vocabularys_t samples;
-    //samples.resize(vecFeatures.size());
     for(Index_t i = 0; i < files.size(); i++) {
-        //Vec_f32_t vf;
         Vec_f32_t sample;
         cv::Mat image = cv::imread(files.getFilename(i));
         KeyPoints_t keypoints;
@@ -84,7 +78,6 @@ int main(int argc, char *argv[])
             fout << sample[j] << " ";
         }
         fout << endl;
-        //quantize(vecFeatures[i], vocabulary, samples[i], quantizer);
         cout << "quantize " << i+1 << "/" << files.size() <<"\r"<<flush;
     }
     cout << "quantize " << files.size() << "/" << files.size() <<"."<<endl;
