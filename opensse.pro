@@ -18,10 +18,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     #opensse.pri \
-    tests/test_galif \
-    tests/test_reader_and_writer \
-    gui/SketchSearchDemo \
-    tests/test_similarity \
-    tests/stat_vocab \
-    tests/test_search
+    gui/SketchSearchDemo
 

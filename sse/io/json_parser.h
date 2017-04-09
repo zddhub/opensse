@@ -7,6 +7,20 @@
 #include <string>
 using namespace std;
 
+enum VALUE_TYPE {
+	UINT
+};
+
+template <class T>
+T convert(const string &value, VALUE_TYPE type)
+{
+	if (type == UINT) {
+		char *end;
+		return static_cast<T>(strtol(value.c_str(), &end, 10));
+	}
+	return T(0);
+};
+
 class Json {
 public:
 	Json(const string &filename);

@@ -17,13 +17,13 @@
 #include "sketchsearcher.h"
 using namespace sse;
 
-SketchSearcher::SketchSearcher(const PropertyTree_t &parameters)
-    : _indexFile(parse<std::string>(parameters, "searcher.indexfile", "/tmp/SketchSearchDemo/data/model_indexfile"))
-    , _vocabularyFile(parse<std::string>(parameters, "searcher.vocabulary", "/tmp/SketchSearchDemo/data/vocabulary"))
-    , _rootdir(parse<std::string>(parameters, "searcher.rootdir", "/tmp/SketchSearchDemo/"))
-    , _fileList(parse<std::string>(parameters, "searcher.filelist", "/tmp/SketchSearchDemo/data/model_filelist"))
-    , _numOfResults(parse<uint>(parameters, "searcher.results_num", 25))
-    , _numOfViews(parse<uint>(parameters, "searcher.views_num", 1))
+SketchSearcher::SketchSearcher(Json &config)
+    : _indexFile(config.getValue("searcher$indexfile", "/tmp/SketchSearchDemo/data/model_indexfile"))
+    , _vocabularyFile(config.getValue("searcher$vocabulary", "/tmp/SketchSearchDemo/data/vocabulary"))
+    , _rootdir(config.getValue("searcher$rootdir", "/tmp/SketchSearchDemo/"))
+    , _fileList(config.getValue("searcher$filelist", "/tmp/SketchSearchDemo/data/model_filelist"))
+    , _numOfResults(convert<uint>(config.getValue("searcher$results_num", "25"), UINT))
+    , _numOfViews(convert<uint>(config.getValue("searcher$views_num", "1"), UINT))
 {
     index = new InvertedIndex();
     index->load(_indexFile);

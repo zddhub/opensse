@@ -42,7 +42,6 @@ INCLUDEPATH += $$PWD \
 
 LIBS += -L/usr/local/lib/ \
             -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui -lopencv_features2d -lopencv_ml \
-            -lboost_thread -lboost_system \
             -lopensse
 }
 

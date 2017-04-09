@@ -29,9 +29,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    PropertyTree_t config;
-
-    boost::property_tree::read_json("/tmp/SketchSearchDemo/config.json", config); //
+    Json config = Json("/tmp/SketchSearchDemo/config.json"); //
     searchEngine = new SketchSearcher(config);
 
     setupMenuBar();

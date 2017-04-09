@@ -21,20 +21,10 @@
 
 #include "opensse/opensse.h"
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-typedef boost::property_tree::ptree PropertyTree_t;
-template<class T>
-inline T parse(const PropertyTree_t &p, const std::string &path, const T &defaultValue)
-{
-    T value = p.get(path, defaultValue);
-    return value;
-}
-
 class SketchSearcher : public SearchEngine
 {
 public:
-    SketchSearcher(const PropertyTree_t &parameters);
+    SketchSearcher(Json &config);
     virtual ~SketchSearcher();
 
     void query(const std::string &fileName, QueryResults &results);
