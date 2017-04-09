@@ -2,6 +2,7 @@ set(
     SOURCES
     io/filelist.cpp
     io/reader_writer.cpp
+    io/json_parser.cpp
     features/util.cpp
     features/generator.cpp
     features/detector.cpp
