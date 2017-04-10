@@ -10,6 +10,6 @@
 #include "opensse/io/json_parser.h"
 #include "opensse/quantize/quantizer.h"
 #include "opensse/vocabulary/kmeans_init.h"
-// #include "opensse/vocabulary/kmeans.h"
+#include "opensse/vocabulary/kmeans.h"
 
 #endif

@@ -7,8 +7,7 @@ MAINTAINER zdd <zddhub@gmail.com>
 
 RUN apt-get update \
 	&& apt-get install g++ -y \
-	&& apt-get install cmake -y \
-	&& apt-get install libboost-all-dev -y
+	&& apt-get install cmake -y
 
 RUN mkdir opensse
 COPY . opensse

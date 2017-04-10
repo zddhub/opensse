@@ -16,7 +16,7 @@ include_directories(..)
 include_directories(${PROJECT_SOURCE_DIR}/sse)
 
 link_directories(/usr/local/lib)
-set(REQUIRED_LIB opencv_core opencv_imgproc opencv_imgcodecs opencv_highgui opencv_features2d opencv_ml boost_thread boost_system)
+set(REQUIRED_LIB opencv_core opencv_imgproc opencv_imgcodecs opencv_highgui opencv_features2d opencv_ml)
 
 add_subdirectory(sse)
 

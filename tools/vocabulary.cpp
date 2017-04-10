@@ -19,7 +19,6 @@
 using namespace std;
 
 #include "opensse/opensse.h"
-#include "vocabulary/kmeans.h"
 
 using namespace sse;
 

@@ -21,14 +21,11 @@
 #include <algorithm>
 #include <iostream>
 #include <set>
+#include <thread>
+#include <mutex>
 
 #include "../common/distance.h"
 #include "../common/types.h"
-
-#include <boost/random.hpp>
-#include <boost/thread/thread.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/locks.hpp>
 
 #include "kmeans_init.h"
 
@@ -40,8 +37,8 @@ namespace sse {
 template <class collection_t, class dist_fn>
 class Kmeans
 {
-    typedef boost::mutex               mutex_t;
-    typedef boost::lock_guard<mutex_t> locker_t;
+    typedef std::mutex               mutex_t;
+    typedef std::lock_guard<mutex_t> locker_t;
 
     typedef typename collection_t::value_type sample_t;
 
@@ -83,8 +80,6 @@ public:
      */
     void run(std::size_t maxiteration, double minchangesfraction)
     {
-        using namespace boost;
-
         // main iteration
         std::size_t iteration = 0;
         for (;;)
@@ -94,14 +89,20 @@ public:
             std::size_t changes = 0;
 
             // distribute items on clusters in parallel
-            thread_group pool;
+            // thread_group pool;
+            std::vector<std::thread> pools(std::thread::hardware_concurrency());
+            // pools.emplace_back(functor); // pass in the argument of std::thread()
+
             std::size_t idx = 0;
             mutex_t mtx;
-            for (std::size_t i = 0; i < thread::hardware_concurrency(); i++)
+            for (std::size_t i = 0; i < std::thread::hardware_concurrency(); i++)
             {
-                pool.create_thread(bind(&Kmeans::distribute_samples, this, boost::ref(idx), boost::ref(changes), boost::ref(mtx)));
+                pools[i] = std::thread(&Kmeans::distribute_samples, this, std::ref(idx), std::ref(changes), std::ref(mtx));
             }
-            pool.join_all();
+            for (std::size_t i = 0; i < std::thread::hardware_concurrency(); i++)
+            {
+                pools[i].join();
+            }
 
             iteration++;
 
@@ -135,14 +136,13 @@ public:
                 {
                     invalid.push_back(i);
                 }
-                //std::cout << "clustersize " << i << ": " << clustersize[i] << std::endl;
             }
 
             // fix invalid centers, i.e. those with no members
             while (!invalid.empty() && !valid.empty())
             {
                 std::size_t current = invalid.back();
-std::cout << "handle invalid clusters: " << invalid.size() << std::endl;
+                std::cout << "handle invalid clusters: " << invalid.size() << std::endl;
                 // compute for each valid cluster the variance
                 // of distances to all members and get the
                 // most distant member
@@ -176,16 +176,16 @@ std::cout << "handle invalid clusters: " << invalid.size() << std::endl;
                 _centers[current] = _collection[farthest[c]];
                 _clusters[farthest[c]] = current;
 
-std::cout << "reassign " << current << " to sample " << farthest[c] << " of cluster " << c << std::endl;
+                std::cout << "reassign " << current << " to sample " << farthest[c] << " of cluster " << c << std::endl;
 
                 valid.pop_back();
                 invalid.pop_back();
             }
 
-std::cout << "iteration " << iteration << std::endl;
+            std::cout << "iteration " << iteration << std::endl;
         }
 
-std::cout << "kmeans iterations: " << iteration << std::endl;
+        std::cout << "kmeans iterations: " << iteration << std::endl;
     }
 
 
@@ -231,7 +231,7 @@ std::cout << "kmeans iterations: " << iteration << std::endl;
         for (std::size_t i = 0; i < lhs.size(); i++) lhs[i] /= rhs;
     }
 
-    private:
+private:
 
     void distribute_samples(std::size_t& index, std::size_t& changes, mutex_t& mutex)
     {
@@ -249,7 +249,9 @@ std::cout << "kmeans iterations: " << iteration << std::endl;
             }
 
             // compute distance of current point to every center
-            std::transform(_centers.begin(), _centers.end(), dists.begin(), boost::bind(_distfn, boost::ref(_collection[i]), boost::arg<1>()));
+            // std::cout <<endl << "collection[" << i << "]=" << _collection[i].size() << " " << _centers.size() <<endl;
+            std::vector<Vec_f32_t> collections(_centers.size(), _collection[i]);
+            std::transform(_centers.begin(), _centers.end(), collections.begin(), dists.begin(), _distfn);
 
             // find the minimum distance, i.e. the nearest center
             std::size_t c = std::distance(dists.begin(), std::min_element(dists.begin(), dists.end()));
@@ -263,7 +265,6 @@ std::cout << "kmeans iterations: " << iteration << std::endl;
                     _clusters[i] = c;
                     currentchanges++;
                 }
-//if (i % 1000 == 0) std::cout << "kmeans distribute: " << i << std::endl;
             }
         }
 
@@ -279,7 +280,7 @@ std::cout << "kmeans iterations: " << iteration << std::endl;
     std::vector<sample_t>    _centers;
     std::vector<std::size_t> _clusters;
 
-    boost::mutex        _mutex;
+    mutex_t        _mutex;
 };
 
 } //namespace sse
