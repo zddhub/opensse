@@ -89,9 +89,7 @@ public:
             std::size_t changes = 0;
 
             // distribute items on clusters in parallel
-            // thread_group pool;
             std::vector<std::thread> pools(std::thread::hardware_concurrency());
-            // pools.emplace_back(functor); // pass in the argument of std::thread()
 
             std::size_t idx = 0;
             mutex_t mtx;
