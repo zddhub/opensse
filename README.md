@@ -33,7 +33,7 @@ Recognize input sketch image, you can try it via [web version](http://online.ope
 How to install
 ==============
 
-OpenSSE library uses [OpenCV 3.0.0+](http://opencv.org/) and [boost 1.55.0](http://www.boost.org/), it's a cross-platform library.
+OpenSSE core library only depends on [OpenCV 3.0.0+](http://opencv.org/), it's a cross-platform library.
 
 You can compile and install it like below:
 
@@ -53,8 +53,8 @@ More detail info, go to [OpenSSE Wiki](https://github.com/zddhub/opensse/wiki)
 Todo List
 =========
 - [x] Docker support
+- [x] Remove boost for core library, done
 - [ ] Speed up train steps
-- [ ] Remove boost for core library, 83% done
 - [ ] Recognize sketch
 - [ ] Support big image set
 
