@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
     }
 
     FileList files;
-    files.setRootDir(argv[2]);
 
     files.load(argv[4]);
 

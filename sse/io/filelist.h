@@ -24,10 +24,6 @@ namespace sse {
 class FileList
 {
 public:
-    // Constructor, pass in the desired root directory.
-    // The directory passed in must be a valid, existing directory
-    FileList(const std::string &rootDir = ".");
-
     // Subsample given filelist randomly
     void randomSample(uint numOfSamples, uint seed);
 
@@ -41,10 +37,6 @@ public:
     //Access 'absolute' filename of file i
     //index: [0, size()-1]
     std::string getFilename(uint index) const;
-
-    //get and set rootDir
-    const std::string& getRootDir() const;
-    void setRootDir(const std::string &rootDir);
 
     //Load a FileList
     //Note that you Must setRootDir

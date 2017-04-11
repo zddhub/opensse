@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     TF_simple tf;
     IDF_simple idf;
 
-    FileList files(argv[6]);
+    FileList files;
     files.load(argv[8]);
 
     uint numOfResults = atoi(argv[10]);
