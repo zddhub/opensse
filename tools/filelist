@@ -40,4 +40,4 @@ while getopts "d:p:o:" arg; do
 done
 
 cd $rootdir
-find . -name $pattern | sed 's/^\.\///' > $filelist
+find $(pwd) -name $pattern | sed 's/^\.\///' > $filelist
