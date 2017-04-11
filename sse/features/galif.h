@@ -26,12 +26,14 @@ class Galif : public Feature
 {
 public:
     // Galif(const PropertyTree_t &parameters);
-    Galif(uint width, uint numOrients, uint tiles,
-          double peakFrequency, double lineWidth, double lambda,
-          double featureSize, bool isSmoothHist,
-          const std::string& normalizeHist,
-          const std::string& detectorName,
-          uint numOfSamples);
+    Galif(uint width = 256, uint numOrients = 4, uint tiles = 4,
+          double peakFrequency = 0.1, double lineWidth = 0.02,
+          double lambda = 0.3,
+          double featureSize = 0.1,
+          bool isSmoothHist = true,
+          const std::string& normalizeHist = "l2",
+          const std::string& detectorName = "grid",
+          uint numOfSamples = 625);
     void compute(const cv::Mat &image, KeyPoints_t &keypoints, Features_t &features) const;
     double scale(const cv::Mat &image, cv::Mat &scaled) const;
     void detect(const cv::Mat &image, KeyPoints_t &keypoints) const;

@@ -41,19 +41,7 @@ int main(int argc, char *argv[])
     FileList files;
     files.load(argv[2]);
 
-    Galif *galif = new Galif(
-        256, // width
-        4, // numOrients
-        4, // tiles
-        0.1, // peakFrequency
-        0.02, // lineWidth
-        0.3, // lambda
-        0.1, // featureSize
-        true, // isSmoothHist
-        "l2", // normalizeHist
-        "grid", // detectorName,
-        625 // numOfSamples
-    );
+    Galif *galif = new Galif();
 
     std::vector<KeyPoints_t> vecKeypoints;
     std::vector<Features_t> vecFeatures;

@@ -49,19 +49,7 @@ int main(int argc, char *argv[])
     //QuantizerHard
     QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
-    Galif *galif = new Galif(
-        256, // width
-        4, // numOrients
-        4, // tiles
-        0.1, // peakFrequency
-        0.02, // lineWidth
-        0.3, // lambda
-        0.1, // featureSize
-        true, // isSmoothHist
-        "l2", // normalizeHist
-        "grid", // detectorName,
-        625 // numOfSamples
-    );
+    Galif *galif = new Galif();
 
     ofstream fout(argv[8]);
     fout << files.size() <<endl;
