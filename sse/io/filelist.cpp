@@ -21,11 +21,6 @@
 
 namespace sse {
 
-FileList::FileList(const std::string &rootDir)
-{
-    setRootDir(rootDir);
-}
-
 void FileList::randomSample(uint numOfSamples, uint seed)
 {
     if(numOfSamples >= _files.size())
@@ -61,20 +56,8 @@ const std::string& FileList::getRelativeFilename(uint index) const
 
 std::string FileList::getFilename(uint index) const
 {
-    return _rootDir + "/" + getRelativeFilename(index);
+    return getRelativeFilename(index);
 }
-
-const std::string& FileList::getRootDir() const
-{
-    return _rootDir;
-}
-
-
-void FileList::setRootDir(const std::string &rootDir)
-{
-    _rootDir = rootDir;
-}
-
 
 void FileList::load(const std::string &filename)
 {

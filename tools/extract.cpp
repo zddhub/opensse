@@ -24,25 +24,22 @@ using namespace std;
 using namespace sse;
 
 void usages() {
-    cout << "Usages: sse extract -d rootDir -f filelist -o output" <<endl
-         << "  This command extracts Galif descriptors under \033[4mrootdir\033[0m" <<endl
+    cout << "Usages: sse extract -f filelist -o output" <<endl
+         << "  This command extracts feature descriptors of images" <<endl
          << "  The options are as follows:" <<endl
-         << "  -d\t root directory" <<endl
-         << "  -f\t image file list" <<endl
-         << "  -o\t \033[4moutput\033[0m prefix" <<endl;
+         << "  -f\t image \033[4mfilelist\033[0m" <<endl
+         << "  -o\t \033[4moutput\033[0m" <<endl;
 }
 
 int main(int argc, char *argv[])
 {
-    if(argc != 7) {
+    if(argc != 5) {
         usages();
         exit(1);
     }
 
     FileList files;
-    files.setRootDir(argv[2]);
-
-    files.load(argv[4]);
+    files.load(argv[2]);
 
     Galif *galif = new Galif(
         256, // width
