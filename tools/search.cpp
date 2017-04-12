@@ -24,20 +24,18 @@ using namespace sse;
 
 void usages()
 {
-    cout << "Usages: sse search -i indexfile -v vocabulary -d rootdir -f filelist -n resultsnum -o output" <<endl
+    cout << "Usages: sse search -i indexfile -v vocabulary -f filelist -n resultsnum" <<endl
          << "OpenSSE search tool in command line"
          << "  The options are as follows:" <<endl
          << "  -i\t inverted index file" <<endl
          << "  -v\t \033[4mvocabulary\033[0m file"<<endl
-         << "  -d\t \033[4mrootdir\033[0m path"<<endl
          << "  -f\t \033[4mfilelist\033[0m"<<endl
-         << "  -n\t the number of results"<<endl
-         << "  -o\t \033[4moutput\033[0m file" <<endl;
+         << "  -n\t the number of results"<<endl;
 }
 
 int main(int argc, char *argv[])
 {
-    if(argc != 13) {
+    if(argc != 9) {
         usages();
         exit(1);
     }
@@ -55,20 +53,20 @@ int main(int argc, char *argv[])
     IDF_simple idf;
 
     FileList files;
-    files.load(argv[8]);
+    files.load(argv[6]);
 
-    uint numOfResults = atoi(argv[10]);
+    uint numOfResults = atoi(argv[8]);
 
-    cout << ">> open sketch search :"<<endl;
+    cout << ">> sketch search :"<<endl;
     cout << ">> input absolute path, like \"/Users/zdd/zddhub.png\""<<endl;
-    cout << ">> input q exit"<<endl;
+    cout << ">> type q exit"<<endl;
     cout << ">> good luck!"<<endl;
     char filename[100];
     while(true) {
         cout << ">> ";
         cin >> filename;
 
-        if(filename[0] == 'q' && filename[1] == '\0')
+        if(filename[0] == 'q' || filename[0] != '/')
             break;
 
         //extract features
