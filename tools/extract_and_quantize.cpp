@@ -23,10 +23,9 @@ using namespace std;
 using namespace sse;
 
 void usages() {
-    cout << "Usages: sse extract_and_quantize -d rootDir -f filelist -v vocabulary -o output" <<endl
+    cout << "Usages: sse extract_and_quantize -f filelist -v vocabulary -o output" <<endl
          << "  This command extracts Galif descriptors under \033[4mrootdir\033[0m and quantizes it at the same time" <<endl
          << "  The options are as follows:" <<endl
-         << "  -d\t image root directory" <<endl
          << "  -f\t image file list" <<endl
          << "  -v\t \033[4mvocabulary\033[0m" <<endl
          << "  -o\t \033[4moutput\033[0m samples" <<endl;
@@ -34,24 +33,24 @@ void usages() {
 
 int main(int argc, char *argv[])
 {
-    if(argc != 9) {
+    if(argc != 7) {
         usages();
         exit(1);
     }
 
     FileList files;
 
-    files.load(argv[4]);
+    files.load(argv[2]);
 
     Vocabularys_t vocabulary;
-    read(argv[6], vocabulary, print, "read vocabulary");
+    read(argv[4], vocabulary, print, "read vocabulary");
 
     //QuantizerHard
     QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> > quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
     Galif *galif = new Galif();
 
-    ofstream fout(argv[8]);
+    ofstream fout(argv[6]);
     fout << files.size() <<endl;
     fout << vocabulary.size() <<endl;
     for(Index_t i = 0; i < files.size(); i++) {
