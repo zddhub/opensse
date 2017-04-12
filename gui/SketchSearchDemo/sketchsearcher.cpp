@@ -20,7 +20,6 @@ using namespace sse;
 SketchSearcher::SketchSearcher(Json &config)
     : _indexFile(config.getValue("searcher$indexfile", "/tmp/SketchSearchDemo/data/model_indexfile"))
     , _vocabularyFile(config.getValue("searcher$vocabulary", "/tmp/SketchSearchDemo/data/vocabulary"))
-    , _rootdir(config.getValue("searcher$rootdir", "/tmp/SketchSearchDemo/"))
     , _fileList(config.getValue("searcher$filelist", "/tmp/SketchSearchDemo/data/model_filelist"))
     , _numOfResults(convert<uint>(config.getValue("searcher$results_num", "25"), UINT))
     , _numOfViews(convert<uint>(config.getValue("searcher$views_num", "1"), UINT))
@@ -34,7 +33,7 @@ SketchSearcher::SketchSearcher(Json &config)
 
     quantizer = QuantizerHard<Vec_f32_t, L2norm_squared<Vec_f32_t> >();
 
-    files = new FileList(_rootdir);
+    files = new FileList;
     files->load(_fileList);
 }
 
