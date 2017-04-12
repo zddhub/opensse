@@ -30,6 +30,15 @@ Recognize input sketch image, you can try it via [web version](http://online.ope
 ![Sketch recognize demo](data/opensr.gif "Sketch recognize demo")
 
 
+Interesting demo
+================
+
+*Note:* The below demos are *NOT* supported by OpenSSE, but I think there are in the same field. And I am very interested them, so list here:
+
+- [AutoDraw](https://www.autodraw.com/)
+- [QuickDraw](https://quickdraw.withgoogle.com/)
+
+
 How to install
 ==============
 
@@ -50,8 +59,8 @@ More detail info, go to [OpenSSE Wiki](https://github.com/zddhub/opensse/wiki)
 
 Todo List
 =========
-- [ ] Speed up train steps
 - [ ] Recognize sketch
+- [ ] Speed up train steps
 - [ ] Support big image set
 
 
