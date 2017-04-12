@@ -33,7 +33,7 @@ Recognize input sketch image, you can try it via [web version](http://online.ope
 Interesting demo
 ================
 
-*Note:* The below demos are *NOT* supported by OpenSSE, but I think there are in the same field. And I am very interested them, so list here:
+*Note:* The below demos are **NOT** powered by OpenSSE, but I think they share the same field. And also I am very interested in them, so list here:
 
 - [AutoDraw](https://www.autodraw.com/)
 - [QuickDraw](https://quickdraw.withgoogle.com/)
