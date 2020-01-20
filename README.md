@@ -17,17 +17,17 @@ Zhang Dongdong
 Demo powered by OpenSSE
 =======================
 
-* Open Sketch Search
+* [Open Sketch Search](https://www.opensse.com/)
 
-This demo deals with 3D mesh models. See more search results, click [demo videos](http://opensse.com).
+This demo deals with 3D mesh models. See more search results, click [demo videos](https://www.opensse.com/).
 
-![Sketch search demo](data/opensse.gif "Sketch search demo")
+[![Sketch search demo](data/opensse.gif "Sketch search demo")](https://www.opensse.com/)
 
-* Open Sketch Recognize
+* [Open Sketch Recognize](https://sr.opensse.com/)
 
-Recognize input sketch image, you can try it via [web version](http://online.opensse.com/). See more search results, click [demo videos](http://sr.opensse.com/).
+Recognize input sketch image, you can try it via [web version](http://online.opensse.com/). See more search results, click [demo videos](https://sr.opensse.com/).
 
-![Sketch recognize demo](data/opensr.gif "Sketch recognize demo")
+[![Sketch recognize demo](data/opensr.gif "Sketch recognize demo")](https://sr.opensse.com/)
 
 
 Interesting demo
