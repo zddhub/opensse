@@ -5,7 +5,7 @@ language: cpp
 install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo add-apt-repository --yes ppa:lttng/daily
-  - sudo add-apt-repository ppa:amarburg/opencv3 -y # opencv3 ppa
+  - sudo add-apt-repository ppa:lkoppel/opencv -y # opencv3 ppa
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
   - sudo apt-get install -qq libopencv3-dev 
